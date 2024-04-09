@@ -48,7 +48,7 @@ const CatergoryList = () => {
     item.attributes.Name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  console.log("Render Catergory List:", catergoryList); // Log the state before rendering
+  // console.log("Render Catergory List:", catergoryList); // Log the state before rendering
 
   return (
     <div className="h-screen mt-5 flex flex-col ">

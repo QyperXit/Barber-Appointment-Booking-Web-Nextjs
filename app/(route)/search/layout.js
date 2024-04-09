@@ -8,7 +8,7 @@ const layout = ({ children }) => {
         <CatergoryList />
       </div>
 
-      <div className=" col-span-3">{children}</div>
+      <div className=" ml-5 mt-[-7px] col-span-4 md:col-span-3">{children}</div>
     </div>
   );
 };
