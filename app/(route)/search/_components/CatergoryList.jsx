@@ -51,7 +51,7 @@ const CatergoryList = () => {
   console.log("Render Catergory List:", catergoryList); // Log the state before rendering
 
   return (
-    <div className="h-screen mt-5 flex flex-col">
+    <div className="h-screen mt-5 flex flex-col ">
       <input
         type="text"
         placeholder="Type a command or search..."
