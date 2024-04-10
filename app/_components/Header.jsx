@@ -1,7 +1,18 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
+
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 const Header = () => {
   const Menu = [
@@ -22,6 +33,12 @@ const Header = () => {
     },
   ];
 
+  const { user } = useKindeBrowserClient();
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
   return (
     <div className="flex items-center justify-between p-4 shadow-sm">
       <div className="flex items-center gap-10">
@@ -39,7 +56,41 @@ const Header = () => {
           ))}
         </ul>
       </div>
-      <Button>Get Started</Button>
+      {user ? (
+        <Popover>
+          <PopoverTrigger>
+            {user.picture ? (
+              <Image
+                src={user.picture}
+                alt="profile-img"
+                width={50}
+                height={50}
+              />
+            ) : (
+              <div className="w-12 h-12 flex items-center justify-center bg-gray-200 rounded-full shadow-sm  font-semibold">
+                <span className="text-gray-600 text-[7px]">No Image</span>
+              </div>
+            )}
+          </PopoverTrigger>
+          <PopoverContent className="w-44">
+            <ul className="flex flex-col gap-2">
+              <li className="  cursor-pointer hover:bg-slate-200 p-2 rounded-md">
+                Profile
+              </li>
+              <li className="  cursor-pointer hover:bg-slate-200 p-2 rounded-md">
+                My Booking
+              </li>
+              <li className="  cursor-pointer hover:bg-slate-200 p-2 rounded-md">
+                <LogoutLink>LogOut</LogoutLink>
+              </li>
+            </ul>
+          </PopoverContent>
+        </Popover>
+      ) : (
+        <LoginLink>
+          <Button>Get Started</Button>
+        </LoginLink>
+      )}
     </div>
   );
 };
