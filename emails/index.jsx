@@ -16,7 +16,7 @@ const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000"; // Removed redundant "https://"
 
-export const KoalaWelcomeEmail = ({ userFirstname = "NEW USER" }) => (
+export const EmailTemplate = ({ userFirstname = "NEW USER" }) => (
   <Html>
     <Head />
     <Preview>
@@ -55,7 +55,7 @@ export const KoalaWelcomeEmail = ({ userFirstname = "NEW USER" }) => (
   </Html>
 );
 
-export default KoalaWelcomeEmail; // Export KoalaWelcomeEmail as default
+export default EmailTemplate; // Export EmailTemplate as default
 
 const main = {
   backgroundColor: "#ffffff",

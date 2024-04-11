@@ -15,6 +15,7 @@ const getDoctorByCategory = (category) =>
   axiosClient.get(
     `/doctors?filters[catergories][Name][$in]=${category}&populate=*`
   );
+
 const bookApointment = async (data) => {
   try {
     const response = await axiosClient.post("/appointments", data);
@@ -26,7 +27,7 @@ const bookApointment = async (data) => {
   }
 };
 
-console.log(bookApointment());
+// console.log(bookApointment());
 
 const doctorId = 3; // Replace with the actual doctor ID
 const getDoctorById = async (id) => {
@@ -39,8 +40,23 @@ const getDoctorById = async (id) => {
   }
 };
 
-// console.log(getDoctorByCategory());
-// console.log(getDoctorById(doctorId));
+// const sendEmail = (data) => axios.post("/api/sendEmail", data);
+
+const sendEmail = async (data) => {
+  try {
+    const response = await axios.post("/api/sendEmail", data);
+    console.log("Email sent successfully:", response.data); // Handle success
+  } catch (error) {
+    console.error("Error sending email:", error); // Handle errors
+  }
+};
+
+// const getUserBookingList = (userEmail) =>
+//   axios.get("/appointments?[filters][Email][$eq]=" + userEmail + "&populate=*");
+const getUserBookingList = (userEmail) =>
+  axios.get(`/appointments?[filters][Email][$eq]=${userEmail}&populate=*`);
+
+console.log(`test,${sendEmail()}`);
 
 export default {
   getCatergory,
@@ -48,4 +64,6 @@ export default {
   getDoctorByCategory,
   getDoctorById,
   bookApointment,
+  sendEmail,
+  getUserBookingList,
 };

@@ -74,12 +74,12 @@ const Header = () => {
           </PopoverTrigger>
           <PopoverContent className="w-44">
             <ul className="flex flex-col gap-2">
-              <li className="  cursor-pointer hover:bg-slate-200 p-2 rounded-md">
-                Profile
-              </li>
-              <li className="  cursor-pointer hover:bg-slate-200 p-2 rounded-md">
+              <Link
+                href={"/my-booking"}
+                className="  cursor-pointer hover:bg-slate-200 p-2 rounded-md"
+              >
                 My Booking
-              </li>
+              </Link>
               <li className="  cursor-pointer hover:bg-slate-200 p-2 rounded-md">
                 <LogoutLink>LogOut</LogoutLink>
               </li>
