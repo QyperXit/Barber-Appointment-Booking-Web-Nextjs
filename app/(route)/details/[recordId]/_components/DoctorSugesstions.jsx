@@ -1,5 +1,6 @@
 import GlobalApi from "@/app/_utils/GlobalApi";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const DoctorSugesstions = ({ doctor }) => {
@@ -20,7 +21,8 @@ const DoctorSugesstions = ({ doctor }) => {
       <h2 className=" font-bold text-[18px]">Sugesstions</h2>
 
       {doctorList.map((item, index) => (
-        <div
+        <Link
+          href={"/details/" + item.id}
           className="flex gap-5 items-center mt-5  hover:bg-slate-100  cursor-pointer p-5 rounded-lg "
           key={index}
         >
@@ -42,7 +44,7 @@ const DoctorSugesstions = ({ doctor }) => {
               {item.attributes?.Years_of_experience}
             </h2>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

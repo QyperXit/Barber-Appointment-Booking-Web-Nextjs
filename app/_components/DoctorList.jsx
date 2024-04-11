@@ -32,7 +32,7 @@ const DoctorList = ({ doctorList, heading = "Popular Doctors" }) => {
                   <h2 className="text-sm text-gray-500">
                     {doctor.attributes?.Address}
                   </h2>
-                  <Link href={"details" + doctor?.id} className=" w-full">
+                  <Link href={"/details/" + doctor?.id} className=" w-full">
                     <h2 className=" p-2 px-3 border-[1px] border-primary  text-primary rounded-full w-full text-center text-[11px] mt-2  cursor-pointer hover:bg-primary  hover:text-white ransition-all ease-in-out">
                       Book Now
                     </h2>
