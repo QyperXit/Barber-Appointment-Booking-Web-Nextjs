@@ -4,16 +4,19 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { DialogClose } from "@radix-ui/react-dialog";
 import { CalendarDays, Clock } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 const BookAppointment = () => {
   const [date, setDate] = useState(new Date());
-  const [timeSlot, SetTimeSlot] = useState();
+  const [timeSlot, SetTimeSlot] = useState([]);
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState();
 
   useEffect(() => {
     getTime();
@@ -41,6 +44,10 @@ const BookAppointment = () => {
     SetTimeSlot(timeList);
   };
 
+  const isPastDay = (day) => {
+    return day < new Date();
+  };
+
   return (
     <Dialog>
       <DialogTrigger className="flex">
@@ -63,6 +70,7 @@ const BookAppointment = () => {
                     mode="single"
                     selected={date}
                     onSelect={setDate}
+                    disabled={isPastDay}
                     className="rounded-md border"
                   />
                 </div>
@@ -73,9 +81,15 @@ const BookAppointment = () => {
                     Select Time Slot
                   </h2>
                   <div className="grid grid-cols-3 gap-2 border rounded-lg p-5">
-                    {timeSlot.map((item, index) => {
+                    {timeSlot?.map((item, index) => {
                       return (
-                        <h2 className=" p-2 border rounded-full text-center hover:bg-primary hover:text-white cursor-pointer">
+                        <h2
+                          className={` p-2 border rounded-full text-center hover:bg-primary hover:text-white cursor-pointer ${
+                            item.time == selectedTimeSlot &&
+                            "bg-primary text-white"
+                          }`}
+                          onClick={() => setSelectedTimeSlot(item.time)}
+                        >
                           {item.time}
                         </h2>
                       );
@@ -86,6 +100,22 @@ const BookAppointment = () => {
             </div>
           </DialogDescription>
         </DialogHeader>
+        <DialogFooter className="sm:justify-end">
+          <DialogClose asChild>
+            <>
+              <Button
+                type="button"
+                className=" border text-gray-600"
+                variant="outline"
+              >
+                Close
+              </Button>
+              <Button type="button" disabled={!(date && selectedTimeSlot)}>
+                Submit
+              </Button>
+            </>
+          </DialogClose>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
