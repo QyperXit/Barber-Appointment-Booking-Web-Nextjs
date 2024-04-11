@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const DoctorList = ({ doctorList, heading = "Popular Doctors" }) => {
@@ -31,13 +32,16 @@ const DoctorList = ({ doctorList, heading = "Popular Doctors" }) => {
                   <h2 className="text-sm text-gray-500">
                     {doctor.attributes?.Address}
                   </h2>
-                  <h2 className=" p-2 px-3 border-[1px] border-primary  text-primary rounded-full w-full text-center text-[11px] mt-2  cursor-pointer hover:bg-primary  hover:text-white ransition-all ease-in-out">
-                    Book Now
-                  </h2>
+                  <Link href={"details" + doctor?.id} className=" w-full">
+                    <h2 className=" p-2 px-3 border-[1px] border-primary  text-primary rounded-full w-full text-center text-[11px] mt-2  cursor-pointer hover:bg-primary  hover:text-white ransition-all ease-in-out">
+                      Book Now
+                    </h2>
+                  </Link>
                 </div>
               </div>
             ))
-          : [1, 2, 3, 4, 5, 6].map((item, index) => (
+          : // skeleton
+            [1, 2, 3, 4, 5, 6].map((item, index) => (
               // placeholder
               <div className=" h-[220px] bg-slate-200 w-full rounded-lg animate-pulse"></div>
             ))}

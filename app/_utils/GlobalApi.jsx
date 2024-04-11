@@ -16,6 +16,25 @@ const getDoctorByCategory = (category) =>
     `/doctors?filters[catergories][Name][$in]=${category}&populate=*`
   );
 
-console.log(getDoctorByCategory());
+// const getDoctorById = (id) => axiosClient.get(`/doctors/${id}`);
 
-export default { getCatergory, getDoctorList, getDoctorByCategory };
+const doctorId = 3; // Replace with the actual doctor ID
+const getDoctorById = async (id) => {
+  try {
+    const response = await axiosClient.get(`/doctors/${id}?populate=*`);
+    return response.data; // Return doctor data
+  } catch (error) {
+    console.error("Error fetching doctor:", error);
+    // Handle error (e.g., display an error message to the user)
+  }
+};
+
+// console.log(getDoctorByCategory());
+// console.log(getDoctorById(doctorId));
+
+export default {
+  getCatergory,
+  getDoctorList,
+  getDoctorByCategory,
+  getDoctorById,
+};
