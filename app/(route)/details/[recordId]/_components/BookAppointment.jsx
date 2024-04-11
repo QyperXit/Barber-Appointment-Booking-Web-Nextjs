@@ -8,12 +8,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { CalendarDays } from "lucide-react";
-import React, { useState } from "react";
+import { CalendarDays, Clock } from "lucide-react";
+import React, { useEffect, useState } from "react";
 
 const BookAppointment = () => {
   const [date, setDate] = useState(new Date());
   const [timeSlot, SetTimeSlot] = useState();
+
+  useEffect(() => {
+    getTime();
+  }, []);
 
   const getTime = () => {
     const timeList = [];
@@ -63,7 +67,21 @@ const BookAppointment = () => {
                   />
                 </div>
                 {/* timeslot */}
-                <div></div>
+                <div className=" mt-3 md:mt-0">
+                  <h2 className=" flex  gap-2 items-center mb-3">
+                    <Clock className=" text-primary h-5 w-5" />
+                    Select Time Slot
+                  </h2>
+                  <div className="grid grid-cols-3 gap-2 border rounded-lg p-5">
+                    {timeSlot.map((item, index) => {
+                      return (
+                        <h2 className=" p-2 border rounded-full text-center hover:bg-primary hover:text-white cursor-pointer">
+                          {item.time}
+                        </h2>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             </div>
           </DialogDescription>
