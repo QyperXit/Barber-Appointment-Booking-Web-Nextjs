@@ -1,3 +1,4 @@
+import GlobalApi from "@/app/_utils/GlobalApi";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -9,14 +10,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Toaster } from "@/components/ui/sonner";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { CalendarDays, Clock } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import { toast } from "sonner";
 
-const BookAppointment = () => {
+const BookAppointment = ({ doctor }) => {
   const [date, setDate] = useState(new Date());
   const [timeSlot, SetTimeSlot] = useState([]);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState();
+  //gets user data from kinde
+  const { user } = useKindeBrowserClient();
 
   useEffect(() => {
     getTime();
@@ -42,6 +48,25 @@ const BookAppointment = () => {
       });
     }
     SetTimeSlot(timeList);
+  };
+
+  const saveBooking = () => {
+    const data = {
+      data: {
+        Username: user.given_name + " " + user.family_name,
+        Email: user.email,
+        Time: selectedTimeSlot,
+        Date: date,
+        doctor: doctor.id,
+        // Note: note,
+      },
+    };
+
+    GlobalApi.bookApointment(data).then((res) => {
+      if (res) {
+        toast("Booking Confirmation Email sent!");
+      }
+    });
   };
 
   const isPastDay = (day) => {
@@ -110,7 +135,11 @@ const BookAppointment = () => {
               >
                 Close
               </Button>
-              <Button type="button" disabled={!(date && selectedTimeSlot)}>
+              <Button
+                type="button"
+                disabled={!(date && selectedTimeSlot)}
+                onClick={() => saveBooking()}
+              >
                 Submit
               </Button>
             </>

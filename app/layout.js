@@ -1,4 +1,5 @@
 import { Inter } from "next/font/google";
+import { Toaster } from "sonner";
 import Footer from "./_components/Footer";
 import Header from "./_components/Header";
 import "./globals.css";
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
         <div className="md:px-20  lg:mx-auto max">
           <Header />
           {children}
+          <Toaster />
         </div>
         <Footer />
       </body>
