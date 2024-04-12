@@ -10,7 +10,6 @@ import CancelAppointment from "./CancelAppointment";
 const BookingList = ({ bookingList, expired, updateRecord }) => {
   const onDeleteBooking = (item) => {
     GlobalApi.DeleteBooking(item.id).then((res) => {
-      console.log(res);
       if (res) {
         toast("Appointment Cancelled Successfully!");
         updateRecord();
@@ -18,10 +17,12 @@ const BookingList = ({ bookingList, expired, updateRecord }) => {
     });
   };
 
+  const limitedBookingList = bookingList.slice(0, 7);
+
   return (
-    <div className=" p-5 m-3 flex flex-col gap-3 rounded-lg  h-lvh">
-      {bookingList &&
-        bookingList.map((item, index) => (
+    <div className=" p-5 m-3 flex flex-col gap-3 rounded-lg  h-lvh  overflow-y-auto">
+      {limitedBookingList &&
+        limitedBookingList.map((item, index) => (
           <div
             key={index}
             className="flex border p-5 rounded-lg gap-4 items-center"

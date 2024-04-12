@@ -35,9 +35,7 @@ const Header = () => {
 
   const { user } = useKindeBrowserClient();
 
-  useEffect(() => {
-    // console.log(user);
-  }, [user]);
+  useEffect(() => {}, [user]);
 
   return (
     <div className="flex items-center justify-between p-4 shadow-sm">
@@ -48,7 +46,7 @@ const Header = () => {
             <Link href={item.path}>
               <li
                 className="hover:text-primary cursor-pointer hover:scale-150 transition-all ease-in-out"
-                key={item.id}
+                key={index}
               >
                 {item.name}
               </li>

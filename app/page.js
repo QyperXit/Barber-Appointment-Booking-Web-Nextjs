@@ -16,7 +16,6 @@ export default function Home() {
 
   const getDoctorList = () => {
     GlobalApi.getDoctorList().then((res) => {
-      // console.log(res.data.data);
       setDoctorList(res.data.data);
     });
   };

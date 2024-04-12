@@ -31,9 +31,7 @@ const CatergoryList = () => {
   const getCatergoryList = () => {
     GlobalApi.getCatergory()
       .then((res) => {
-        // const names = res.data.data.map((item) => item.attributes.Name);
         setCatergoryList(res.data.data);
-        // console.log(names);
       })
       .catch((error) => {
         console.error("Error fetching category list:", error);
@@ -47,8 +45,6 @@ const CatergoryList = () => {
   const filteredCategoryList = catergoryList.filter((item) =>
     item.attributes.Name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  // console.log("Render Catergory List:", catergoryList); // Log the state before rendering
 
   return (
     <div className="h-screen mt-5 flex flex-col ">
@@ -65,7 +61,7 @@ const CatergoryList = () => {
         ) : (
           <ul>
             {filteredCategoryList.map((item, index) => (
-              <li key={index}>
+              <li key={item.id}>
                 <Link href={"/search/" + item?.attributes?.Name}>
                   <div
                     className={`flex items-center gap-2 text-[14px] text-blue-600 cursor-pointer rounded-md p-2 hover:bg-gray-100 ${

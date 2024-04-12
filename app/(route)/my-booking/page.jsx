@@ -18,7 +18,6 @@ const MyBooking = () => {
 
   const getUserBookingList = () => {
     GlobalApi.getUserBookingList(user?.email).then((res) => {
-      //   console.log(res.data.data);
       setBookigList(res.data.data);
     });
   };

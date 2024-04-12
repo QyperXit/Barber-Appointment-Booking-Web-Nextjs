@@ -21,9 +21,6 @@ const CatergorySearch = () => {
 
   const getCatergoryList = () => {
     GlobalApi.getCatergory().then((res) => {
-      //   console.log(
-      //     res.data.data[0].attributes.Icon.data.attributes.formats.thumbnail.url
-      //   );
       setCatergoryList(res.data.data);
     });
   };

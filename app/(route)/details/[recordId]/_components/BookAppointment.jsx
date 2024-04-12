@@ -63,10 +63,9 @@ const BookAppointment = ({ doctor }) => {
     };
 
     GlobalApi.bookApointment(data).then((res) => {
+      console.log(res);
       if (res) {
-        GlobalApi.sendEmail(data).then((res) => {
-          // console.log(`test, ${res}`);
-        });
+        GlobalApi.sendEmail(data).then((res) => {});
         toast("Booking Confirmation Email sent!");
       }
     });
@@ -112,6 +111,7 @@ const BookAppointment = ({ doctor }) => {
                     {timeSlot?.map((item, index) => {
                       return (
                         <h2
+                          key={item.id}
                           className={` p-2 border rounded-full text-center hover:bg-primary hover:text-white cursor-pointer ${
                             item.time == selectedTimeSlot &&
                             "bg-primary text-white"

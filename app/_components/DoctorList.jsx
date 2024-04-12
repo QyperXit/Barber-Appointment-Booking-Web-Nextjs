@@ -11,7 +11,7 @@ const DoctorList = ({ doctorList, heading = "Popular Doctors" }) => {
         {doctorList.length > 0
           ? doctorList.map((doctor, index) => (
               <div
-                key={index}
+                key={doctor.id}
                 className="border-[1px]  rounded-lg  p-3 cursor-pointer hover:border-primary hover:shadow-sm transition-all ease-in-out"
               >
                 <Image
@@ -43,7 +43,10 @@ const DoctorList = ({ doctorList, heading = "Popular Doctors" }) => {
           : // skeleton
             [1, 2, 3, 4, 5, 6].map((item, index) => (
               // placeholder
-              <div className=" h-[220px] bg-slate-200 w-full rounded-lg animate-pulse"></div>
+              <div
+                key={index}
+                className=" h-[220px] bg-slate-200 w-full rounded-lg animate-pulse"
+              ></div>
             ))}
       </div>
     </div>

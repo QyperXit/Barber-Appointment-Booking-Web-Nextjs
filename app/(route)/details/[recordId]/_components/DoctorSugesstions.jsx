@@ -6,7 +6,6 @@ import React, { useEffect, useState } from "react";
 const DoctorSugesstions = ({ doctor }) => {
   const [doctorList, setDoctorList] = useState([]);
   useEffect(() => {
-    // console.log(params);
     getDoctorsList();
   }, []);
 
@@ -24,7 +23,7 @@ const DoctorSugesstions = ({ doctor }) => {
         <Link
           href={"/details/" + item.id}
           className="flex gap-5 items-center mt-5  hover:bg-slate-100  cursor-pointer p-5 rounded-lg "
-          key={index}
+          key={item.id}
         >
           <div>
             <Image

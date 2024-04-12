@@ -40,16 +40,15 @@ const getDoctorById = async (id) => {
   }
 };
 
-// const sendEmail = (data) => axios.post("/api/sendEmail", data);
-
-const sendEmail = async (data) => {
-  try {
-    const response = await axios.post("/api/sendEmail", data);
-    console.log("Email sent successfully:", response.data); // Handle success
-  } catch (error) {
-    console.error("Error sending email:", error); // Handle errors
-  }
-};
+const sendEmail = (data) => axios.post("/api/sendEmail", data);
+// const sendEmail = async (data) => {
+//   try {
+//     const response = await axios.post("/api/sendEmail", data);
+//     console.log("Email sent successfully:", response.data); // Handle success
+//   } catch (error) {
+//     console.error("Error sending email:", error); // Handle errors
+//   }
+// };
 
 const getUserBookingList = (userEmail) => {
   const params = new URLSearchParams({
