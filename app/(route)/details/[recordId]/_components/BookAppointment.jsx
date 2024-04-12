@@ -128,13 +128,14 @@ const BookAppointment = ({ doctor }) => {
             </div>
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter className="sm:justify-end">
+        <DialogFooter className="sm:justify-end sm:flex  flex-col-reverse gap-3">
           <DialogClose asChild>
-            <>
+            <div className=" flex gap-3">
               <Button
                 type="button"
                 className=" border text-gray-600"
                 variant="outline"
+                onClick={close}
               >
                 Close
               </Button>
@@ -145,7 +146,7 @@ const BookAppointment = ({ doctor }) => {
               >
                 Submit
               </Button>
-            </>
+            </div>
           </DialogClose>
         </DialogFooter>
       </DialogContent>
