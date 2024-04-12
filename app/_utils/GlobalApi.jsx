@@ -40,7 +40,7 @@ const getDoctorById = async (id) => {
   }
 };
 
-const sendEmail = (data) => axios.post("/api/sendEmail", data);
+// const sendEmail = (data) => axios.post("/api/sendEmail", data);
 // const sendEmail = async (data) => {
 //   try {
 //     const response = await axios.post("/api/sendEmail", data);
@@ -68,7 +68,7 @@ export default {
   getDoctorByCategory,
   getDoctorById,
   bookApointment,
-  sendEmail,
+  // sendEmail,
   getUserBookingList,
   DeleteBooking,
 };
