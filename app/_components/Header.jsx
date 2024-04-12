@@ -43,7 +43,7 @@ const Header = () => {
         {/* <Image src="/barber.png" alt="logo" width={90} height={80} /> */}
         <i className=" text-5xl font-bold  text-amber-400 text-shadow-xl relative">
           G
-          <span className="absolute text-gray-500  inset-7 after:content-[hello] text-[10px] text-shadow-custom">
+          <span className="absolute text-gray-600  inset-7 after:content-[hello] text-[10px] text-shadow-custom inset-x-3.5">
             Barbers
           </span>
         </i>
