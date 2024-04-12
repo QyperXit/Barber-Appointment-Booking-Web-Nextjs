@@ -78,3 +78,7 @@
 .max {
   width: min(100% - 0rem, 90em);
 }
+
+body {
+  height: 100vh;
+}

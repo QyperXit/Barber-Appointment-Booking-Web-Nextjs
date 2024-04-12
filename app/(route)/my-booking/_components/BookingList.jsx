@@ -6,7 +6,7 @@ import React from "react";
 
 const BookingList = ({ bookingList, expired }) => {
   return (
-    <div className=" p-5 m-3 flex flex-col gap-3 rounded-lg">
+    <div className=" p-5 m-3 flex flex-col gap-3 rounded-lg  h-lvh">
       {bookingList &&
         bookingList.map((item, index) => (
           <div
