@@ -51,17 +51,6 @@ const sendEmail = async (data) => {
   }
 };
 
-// const getUserBookingList = (userEmail) =>
-//   axios.get("/appointments?[filters][Email][$eq]=" + userEmail + "&populate=*");
-// const getUserBookingList = (userEmail) => {
-//   const params = new URLSearchParams({
-//     "filters[Email][$eq]": userEmail,
-//     populate: "*",
-//   });
-
-//   return axiosClient.get(`/appointments?${params.toString()}`);
-// };
-
 const getUserBookingList = (userEmail) => {
   const params = new URLSearchParams({
     "filters[Email][$eq]": userEmail,
@@ -72,8 +61,7 @@ const getUserBookingList = (userEmail) => {
   return axiosClient.get(`/appointments?${params}`);
 };
 
-// console.log(`test,${sendEmail()}`);
-console.log(getUserBookingList());
+const DeleteBooking = (id) => axiosClient.delete(`/appointments/${id}`);
 
 export default {
   getCatergory,
@@ -83,4 +71,5 @@ export default {
   bookApointment,
   sendEmail,
   getUserBookingList,
+  DeleteBooking,
 };

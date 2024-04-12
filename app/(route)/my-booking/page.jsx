@@ -34,7 +34,7 @@ const MyBooking = () => {
         ? new Date(item.attributes.Date) >= new Date()
         : new Date(item.attributes.Date) <= new Date()
     );
-    console.log(result);
+
     return result;
   };
   return (
@@ -48,12 +48,14 @@ const MyBooking = () => {
         <TabsContent value="upcoming">
           <BookingList
             bookingList={filterUserBooking("upcoming")}
+            updateRecord={() => getUserBookingList()}
             expired={false}
           />
         </TabsContent>
         <TabsContent value="expired">
           <BookingList
             bookingList={filterUserBooking("expired")}
+            updateRecord={() => getUserBookingList()}
             expired={true}
           />
         </TabsContent>
