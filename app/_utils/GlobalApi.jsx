@@ -53,10 +53,27 @@ const sendEmail = async (data) => {
 
 // const getUserBookingList = (userEmail) =>
 //   axios.get("/appointments?[filters][Email][$eq]=" + userEmail + "&populate=*");
-const getUserBookingList = (userEmail) =>
-  axios.get(`/appointments?[filters][Email][$eq]=${userEmail}&populate=*`);
+// const getUserBookingList = (userEmail) => {
+//   const params = new URLSearchParams({
+//     "filters[Email][$eq]": userEmail,
+//     populate: "*",
+//   });
 
-console.log(`test,${sendEmail()}`);
+//   return axiosClient.get(`/appointments?${params.toString()}`);
+// };
+
+const getUserBookingList = (userEmail) => {
+  const params = new URLSearchParams({
+    "filters[Email][$eq]": userEmail,
+    "populate[doctor][populate][Image][populate][0]": "url",
+    populate: "*",
+  });
+
+  return axiosClient.get(`/appointments?${params}`);
+};
+
+// console.log(`test,${sendEmail()}`);
+console.log(getUserBookingList());
 
 export default {
   getCatergory,
