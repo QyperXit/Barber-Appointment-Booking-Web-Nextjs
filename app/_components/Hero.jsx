@@ -9,7 +9,7 @@ const Hero = () => {
         <div class="relative">
           <div class="lg:grid lg:grid-flow-row-dense lg:grid-cols-2 lg:gap-8 lg:items-center">
             <div class="ml-auto lg:col-start-2 lg:max-w-2xl">
-              <p class="text-base font-semibold leading-6 text-indigo-500 uppercase">
+              <p class="text-base font-semibold leading-6 text-amber-500 uppercase">
                 G Barber's
               </p>
               <h4 class="mt-2 text-2xl font-extrabold leading-8 text-gray-900 dark:text-white sm:text-3xl sm:leading-9">
@@ -22,7 +22,7 @@ const Hero = () => {
               <ul class="gap-6 mt-8 md:grid md:grid-cols-2">
                 <li class="mt-6 lg:mt-0">
                   <div class="flex">
-                    <span class="flex items-center justify-center flex-shrink-0 w-6 h-6 text-green-800 bg-green-100 rounded-full dark:text-green-500 drark:bg-transparent">
+                    <span class="flex items-center justify-center flex-shrink-0 w-6 h-6 text-amber-800 bg-amber-100 rounded-full dark:text-amber-500 drark:bg-transparent">
                       <svg
                         class="w-4 h-4"
                         viewBox="0 0 20 20"
@@ -42,7 +42,7 @@ const Hero = () => {
                 </li>
                 <li class="mt-6 lg:mt-0">
                   <div class="flex">
-                    <span class="flex items-center justify-center flex-shrink-0 w-6 h-6 text-green-800 bg-green-100 rounded-full dark:text-green-500 drark:bg-transparent">
+                    <span class="flex items-center justify-center flex-shrink-0 w-6 h-6 text-amber-800 bg-amber-100 rounded-full dark:text-amber-500 drark:bg-transparent">
                       <svg
                         class="w-4 h-4"
                         viewBox="0 0 20 20"
@@ -62,7 +62,7 @@ const Hero = () => {
                 </li>
                 <li class="mt-6 lg:mt-0">
                   <div class="flex">
-                    <span class="flex items-center justify-center flex-shrink-0 w-6 h-6 text-green-800 bg-green-100 rounded-full dark:text-green-500 drark:bg-transparent">
+                    <span class="flex items-center justify-center flex-shrink-0 w-6 h-6 text-amber-800 bg-amber-100 rounded-full dark:text-amber-500 drark:bg-transparent">
                       <svg
                         class="w-4 h-4"
                         viewBox="0 0 20 20"
@@ -82,7 +82,7 @@ const Hero = () => {
                 </li>
                 <li class="mt-6 lg:mt-0">
                   <div class="flex">
-                    <span class="flex items-center justify-center flex-shrink-0 w-6 h-6 text-green-800 bg-green-100 rounded-full dark:text-green-500 drark:bg-transparent">
+                    <span class="flex items-center justify-center flex-shrink-0 w-6 h-6 text-amber-800 bg-amber-100 rounded-full dark:text-amber-500 drark:bg-transparent">
                       <svg
                         class="w-4 h-4"
                         viewBox="0 0 20 20"

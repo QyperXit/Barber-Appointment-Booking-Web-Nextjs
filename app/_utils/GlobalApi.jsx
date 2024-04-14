@@ -61,6 +61,7 @@ const getUserBookingList = (userEmail) => {
 };
 
 const DeleteBooking = (id) => axiosClient.delete(`/appointments/${id}`);
+const GetIcons = (id) => axiosClient.get(`/icons/${id}/?populate=*`);
 
 export default {
   getCatergory,
@@ -69,6 +70,7 @@ export default {
   getDoctorById,
   bookApointment,
   // sendEmail,
+  GetIcons,
   getUserBookingList,
   DeleteBooking,
 };
