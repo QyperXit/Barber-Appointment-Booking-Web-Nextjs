@@ -107,7 +107,7 @@ const Header = () => {
             href="#"
             aria-label="Brand"
           >
-            G Barber's
+            G|Barber's
           </a>
           <div class="sm:hidden">
             <button
