@@ -21,11 +21,11 @@ export default function Home() {
     });
   };
   return (
-    <div>
+    <>
       <Hero />
       {/* <CatergorySearch /> */}
       {/* <DoctorList doctorList={doctorList} /> */}
-      <BarberList doctorList={doctorList} />
-    </div>
+      {/* <BarberList doctorList={doctorList} /> */}
+    </>
   );
 }

@@ -75,6 +75,9 @@ module.exports = {
         custom: "0px 5px 10px rgba(0, 0, 0, 1)",
       },
     },
+    fontFamily: {
+      times: ["Times New Roman", "serif"],
+    },
   },
   plugins: [require("tailwindcss-animate")],
 };

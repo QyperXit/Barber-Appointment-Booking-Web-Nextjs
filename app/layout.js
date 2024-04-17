@@ -15,7 +15,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="md:px-20  lg:mx-auto max">
+        {/* md:px-20 lg:mx-auto */}
+        <div className=" lg:mx-auto   max  min-h-screen">
           <Header />
           {children}
           <Toaster />

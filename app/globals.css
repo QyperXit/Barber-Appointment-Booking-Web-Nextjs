@@ -76,9 +76,10 @@
 }
 
 .max {
-  width: min(100% - 0rem, 90em);
+  width: min(100% - 0rem, 99%);
 }
 
 body {
   height: 100vh;
+  background: black;
 }
