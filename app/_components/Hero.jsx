@@ -178,11 +178,11 @@ const Hero = () => {
     <div className="relative w-full  h-screen mt-2">
       <div className="absolute inset-0 bg-gray-900 opacity-50 z-10  border-4 border-white"></div>
       <div className="relative bg-[url('https://plus.unsplash.com/premium_photo-1661964421770-6b60b1678d62?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center w-full h-full  border-4 border-white">
-        <div className="flex flex-col items-center justify-center h-full text-white z-20 font-medium font-times">
-          <h1 className=" text-lg md:text-3xl lg:text-5xl z-20  text-shadow-blue-700">
+        <div className="flex flex-col items-center justify-center h-full text-white z-20 font-medium font-times text-center">
+          <h1 className=" text-3xl md:text-4xl lg:text-5xl z-20  text-shadow-blue-700">
             Best Barber Shop in Town | Birmingham
           </h1>
-          <h1 className="z-20 mt-10 font-medium text-xl text-shadow-blue-700">
+          <h1 className="z-20 mt-10 fontse text-xl text-shadow-blue-700">
             Birmingham | BHX | Tesley
           </h1>
           <Button className=" z-20 mt-20 font-semibold border">

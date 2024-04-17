@@ -96,19 +96,19 @@ const Header = () => {
     //     </LoginLink>
     //   )}
     // </div>
-    <header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full  bg-transparent text-sm py-3 sm:py-0 border-4">
+    <header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full  bg-transparent text-sm py-3 sm:py-0 border-4 mt-1">
       <nav
-        class="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8"
+        class="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 "
         aria-label="Global"
       >
         <div class="flex items-center justify-between">
-          <a
+          <Link
             class="flex-none text-xl font-semibold text-white"
-            href="#"
+            href={"/"}
             aria-label="Brand"
           >
             G|Barber's
-          </a>
+          </Link>
           <div class="sm:hidden">
             <button
               type="button"
@@ -156,13 +156,13 @@ const Header = () => {
           class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block"
         >
           <div class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7">
-            <a
+            <Link
               class="font-medium text-white sm:py-6"
-              href="#"
+              href="/"
               aria-current="page"
             >
               Home
-            </a>
+            </Link>
             <a
               class="font-medium text-white/[.8] hover:text-white sm:py-6"
               href="#"
