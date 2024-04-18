@@ -16,7 +16,7 @@ const DoctorDetail = ({ doctor }) => {
 
   return (
     <>
-      <div className="  grid grid-cols-1 md:grid-cols-3 border-[1px]  p-5 mt-5 rounded-lg">
+      <div className="  grid grid-cols-1 md:grid-cols-3 border-[4px]  p-5 mt-5 ">
         {/* doc image */}
         <div>
           <Image
@@ -29,7 +29,9 @@ const DoctorDetail = ({ doctor }) => {
         </div>
         {/* doc info */}
         <div className=" col-span-2 mt-5 flex md:px-10 flex-col gap-3">
-          <h2 className=" font-bold text-2xl">{doctor.attributes?.Name}</h2>
+          <h2 className=" font-bold text-2xl  text-white">
+            {doctor.attributes?.Name}
+          </h2>
           <h2 className=" flex text-gray-500 gap-2 text-md">
             <GraduationCap />
             <span>{doctor.attributes?.Years_of_experience} of experience</span>
