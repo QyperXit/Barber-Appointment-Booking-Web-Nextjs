@@ -41,17 +41,17 @@ const Header = () => {
     // <div className="flex items-center justify-between p-4 shadow-sm">
     //   <div className="flex items-center gap-10">
     //     {/* <Image src="/barber.png" alt="logo" width={90} height={80} /> */}
-    //     <i className=" text-5xl font-bold  text-amber-400 text-shadow-xl relative">
+    //     <i className="relative text-5xl font-bold  text-amber-400 text-shadow-xl">
     //       G
     //       <span className="absolute text-gray-600  inset-7 after:content-[hello] text-[10px] text-shadow-custom inset-x-3.5">
     //         Barbers
     //       </span>
     //     </i>
-    //     <ul className=" md:flex gap-8 hidden">
+    //     <ul className="hidden gap-8  md:flex">
     //       {Menu.map((item, index) => (
     //         <Link href={item.path}>
     //           <li
-    //             className="hover:text-primary cursor-pointer hover:scale-150 transition-all ease-in-out"
+    //             className="transition-all ease-in-out cursor-pointer hover:text-primary hover:scale-150"
     //             key={index}
     //           >
     //             {item.name}
@@ -71,7 +71,7 @@ const Header = () => {
     //             height={50}
     //           />
     //         ) : (
-    //           <div className="w-12 h-12 flex items-center justify-center bg-gray-200 rounded-full shadow-sm  font-semibold">
+    //           <div className="flex items-center justify-center w-12 h-12 font-semibold bg-gray-200 rounded-full shadow-sm">
     //             <span className="text-gray-600 text-[7px]">No Image</span>
     //           </div>
     //         )}
@@ -80,11 +80,11 @@ const Header = () => {
     //         <ul className="flex flex-col gap-2">
     //           <Link
     //             href={"/my-booking"}
-    //             className="  cursor-pointer hover:bg-slate-200 p-2 rounded-md"
+    //             className="p-2 rounded-md cursor-pointer  hover:bg-slate-200"
     //           >
     //             My Booking
     //           </Link>
-    //           <li className="  cursor-pointer hover:bg-slate-200 p-2 rounded-md">
+    //           <li className="p-2 rounded-md cursor-pointer  hover:bg-slate-200">
     //             <LogoutLink>LogOut</LogoutLink>
     //           </li>
     //         </ul>
@@ -96,7 +96,7 @@ const Header = () => {
     //     </LoginLink>
     //   )}
     // </div>
-    <header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full  bg-transparent text-sm py-3 sm:py-0 border-4 mt-1">
+    <header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full  bg-transparent text-sm py-3 sm:py-0 border-4 mt-2">
       <nav
         class="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 "
         aria-label="Global"
@@ -206,7 +206,7 @@ const Header = () => {
                         height={50}
                       />
                     ) : (
-                      <div className="w-12 h-12 flex items-center justify-center bg-gray-200 rounded-full shadow-sm  font-semibold">
+                      <div className="flex items-center justify-center w-12 h-12 font-semibold bg-gray-200 rounded-full shadow-sm">
                         <span className="text-gray-600 text-[7px]">
                           No Image
                         </span>
@@ -217,11 +217,11 @@ const Header = () => {
                     <ul className="flex flex-col gap-2">
                       <Link
                         href={"/my-booking"}
-                        className="  cursor-pointer hover:bg-slate-200 p-2 rounded-md"
+                        className="p-2 rounded-md cursor-pointer  hover:bg-slate-200"
                       >
                         My Booking
                       </Link>
-                      <li className="  cursor-pointer hover:bg-slate-200 p-2 rounded-md">
+                      <li className="p-2 rounded-md cursor-pointer  hover:bg-slate-200">
                         <LogoutLink>LogOut</LogoutLink>
                       </li>
                     </ul>

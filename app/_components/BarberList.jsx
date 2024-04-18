@@ -220,7 +220,7 @@ const BarberList = ({ doctor }) => {
     //     </div>
     //   </div>
     // </div>
-    <div className="md:max-w-4xl md:mx-auto mt-20 mb-10">
+    <div className="md:max-w-4xl mx-auto mt-20 mb-10">
       <div className="grid grid-cols-2 sm:grid-cols-4  gap-2">
         <div className="space-y-2">
           <img
