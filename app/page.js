@@ -25,7 +25,7 @@ export default function Home() {
       <Hero />
       {/* <CatergorySearch /> */}
       {/* <DoctorList doctorList={doctorList} /> */}
-      {/* <BarberList doctorList={doctorList} /> */}
+      <BarberList doctorList={doctorList} />
     </>
   );
 }
