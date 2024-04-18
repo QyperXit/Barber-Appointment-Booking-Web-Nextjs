@@ -37,7 +37,7 @@ const MyBooking = () => {
     return result;
   };
   return (
-    <div className=" px-4 sm:px-10 mt-10 h-full">
+    <div className=" px-4 sm:px-10 mt-10 h-full max-w-[85rem] mx-auto">
       <h2 className=" font-bold text-2xl">My Booking</h2>
       <Tabs defaultValue="upcoming" className="w-full mt-5">
         <TabsList className=" w-full justify-start">
