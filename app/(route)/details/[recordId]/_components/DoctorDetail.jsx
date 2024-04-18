@@ -16,7 +16,7 @@ const DoctorDetail = ({ doctor }) => {
 
   return (
     <>
-      <div className="  grid grid-cols-1 md:grid-cols-3 border-[4px]  p-5 mt-5 ">
+      <div className="grid grid-cols-1 md:grid-cols-3 border-[4px] p-5 mt-5 ">
         {/* doc image */}
         <div>
           <Image

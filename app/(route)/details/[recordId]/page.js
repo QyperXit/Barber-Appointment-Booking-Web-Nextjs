@@ -17,7 +17,7 @@ const Details = ({ params }) => {
     });
   };
   return (
-    <div className=" p-5 h-full md:px-10">
+    <div className=" p-5 h-full md:px-10 max-w-[85rem] mx-auto">
       <h2 className=" font-bold text-[22px]">Details</h2>
       <div className="grid  grid-cols-1  xl:grid-cols-4">
         {/* Doc Details */}
