@@ -15,23 +15,23 @@ import {
 } from "@/components/ui/popover";
 
 const Header = () => {
-  const Menu = [
-    {
-      id: 1,
-      name: "Home",
-      path: "/",
-    },
-    {
-      id: 2,
-      name: "Explore",
-      path: "/",
-    },
-    {
-      id: 3,
-      name: "Contact Us",
-      path: "/",
-    },
-  ];
+  // const Menu = [
+  //   {
+  //     id: 1,
+  //     name: "Home",
+  //     path: "/",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Explore",
+  //     path: "/",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Contact Us",
+  //     path: "/",
+  //   },
+  // ];
 
   const { user } = useKindeBrowserClient();
 
