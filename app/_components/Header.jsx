@@ -158,28 +158,35 @@ const Header = () => {
               </PopoverTrigger>
               <PopoverContent className="mt-4 mr-6 w-44">
                 <ul className="flex flex-col gap-2 ">
-                  <Link
-                    className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
-                    href={"/"}
-                  >
-                    Home
-                  </Link>
-                  <Link
-                    href={"/my-booking"}
-                    className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
-                  >
-                    My Booking
-                  </Link>
-
-                  <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
-                    Contact
-                  </li>
-                  <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
-                    Location
-                  </li>
-                  <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
-                    <LogoutLink>LogOut</LogoutLink>
-                  </li>
+                  {user ? (
+                    <>
+                      <Link
+                        className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
+                        href={"/"}
+                      >
+                        Home
+                      </Link>
+                      <Link
+                        href={"/my-booking"}
+                        className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
+                      >
+                        My Booking
+                      </Link>
+                      <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
+                        Contact
+                      </li>
+                      <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
+                        Location
+                      </li>
+                      <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
+                        <LogoutLink>LogOut</LogoutLink>
+                      </li>
+                    </>
+                  ) : (
+                    <LoginLink>
+                      <Button>Get Started</Button>
+                    </LoginLink>
+                  )}
                 </ul>
               </PopoverContent>
             </Popover>
