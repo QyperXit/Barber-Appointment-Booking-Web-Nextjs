@@ -1,10 +1,10 @@
-# GBarbers: Streamlined Haircut Booking & Management | Next.js & TailwindCSS
+# G|Barbers: Streamlined Haircut Booking & Management | Next.js & TailwindCSS
 
-Welcome to GBarbers! This project is currently in the development stages and aims to provide a streamlined solution for booking and managing haircuts at barber shops. With GBarbers, clients can easily schedule appointments, while barbers can efficiently manage their schedules and client bookings.
+Welcome to G|Barbers! This project is currently in the development stages and aims to provide a streamlined solution for booking and managing haircuts at barber shops. With GBarbers, clients can easily schedule appointments, while barbers can efficiently manage their schedules and client bookings.
 
 ## Project Overview
 
-GBarbers is a web application built using Next.js and TailwindCSS to address the needs of barbershops. It focuses on simplifying the appointment booking process for clients and providing efficient schedule management tools for barbers.
+G|Barbers is a web application built using Next.js and TailwindCSS to address the needs of barbershops. It focuses on simplifying the appointment booking process for clients and providing efficient schedule management tools for barbers.
 
 ### Features:
 
@@ -40,10 +40,14 @@ As the project progresses, additional features and improvements will be implemen
 - Improved user interface and experience.
 - Dashboard for the barber to manage appointments.
 - Enhanced notification system for user interactions.
-- Integration with React to leverage its component-based architecture and efficiency.
+- Email notification
 
 Stay tuned for updates as we progress with the development of GBarbers!
 
-**[BETA DEMO -Link]**
+## Future Plans
+
+coming.....
+
+<!-- **[BETA DEMO -Link]** -->
 
 Note: This project is currently under development. Any feedback or suggestions are highly appreciated. Thank you.
