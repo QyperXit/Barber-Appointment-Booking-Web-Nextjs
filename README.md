@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# GBarbers: Streamlined Haircut Booking & Management | Next.js & TailwindCSS
 
-## Getting Started
+Welcome to GBarbers! This project is currently in the development stages and aims to provide a streamlined solution for booking and managing haircuts at barber shops. With GBarbers, clients can easily schedule appointments, while barbers can efficiently manage their schedules and client bookings.
 
-First, run the development server:
+## Project Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+GBarbers is a web application built using Next.js and TailwindCSS to address the needs of barbershops. It focuses on simplifying the appointment booking process for clients and providing efficient schedule management tools for barbers.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Features:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Client Appointment Booking:** Clients can easily log in and book available time slots for their haircuts.
+- **Authentication:** Secure user authentication process for clients to log in and book appointments.
+- **Kinde Authentication:** Utilizes Kinde for secure user authentication.
+- **Strapi Backend:** Strapi is used as the backend to store and manage booked slots, handle user authentication, and securely manage data.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## About the Project
 
-## Learn More
+This project is being developed for my own personal barber who owns a haircut shop. The primary goal is to create an application that allows clients to log in and book time slots for haircuts. Additionally, there will be features for the barber to manage their schedules effectively, including the ability to add or remove booked slots in case of emergencies.
 
-To learn more about Next.js, take a look at the following resources:
+### Technologies Used:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Next.js & TailwindCSS:** Next.js is used for building the frontend, and TailwindCSS is used for styling.
+- **Kinde Authentication:** Kinde is used for secure user authentication.
+- **Strapi Backend:** Strapi is used as the backend to handle user authentication and store/manage data.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Testing the Application
 
-## Deploy on Vercel
+To test the application, follow these steps:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Sign Up or Log In:** Use the provided credentials or sign up for a new account.
+2. **Select Time Slots:** Navigate to the booking section and select available time slots for booking.
+3. **Manage Bookings:** After booking an appointment, manage bookings by clicking on the booked time slot.
+4. **Navigate Calendar Days:** Use the calendar interface to navigate between different days and book appointments for future dates.
+5. **View Notifications:** The application provides notifications for various actions, such as successfully booking an appointment or encountering errors.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Future Plans
+
+As the project progresses, additional features and improvements will be implemented, including:
+
+- Improved user interface and experience.
+- Dashboard for the barber to manage appointments.
+- Enhanced notification system for user interactions.
+- Integration with React to leverage its component-based architecture and efficiency.
+
+Stay tuned for updates as we progress with the development of GBarbers!
+
+**[BETA DEMO -Link]**
+
+Note: This project is currently under development. Any feedback or suggestions are highly appreciated. Thank you.
