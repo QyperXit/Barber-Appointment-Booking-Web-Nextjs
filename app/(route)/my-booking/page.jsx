@@ -29,13 +29,11 @@ const MyBooking = () => {
    */
   const filterUserBooking = (type) => {
     const currentDate = new Date();
-    currentDate.setHours(0, 0, 0, 0); // Set current time to midnight
     const result = bookingList.filter((item) => {
       const bookingDate = new Date(item.attributes.Date);
-      bookingDate.setHours(0, 0, 0, 0); // Set booking date time to midnight
       return type === "upcoming"
-        ? bookingDate >= currentDate
-        : bookingDate < currentDate;
+        ? bookingDate.getTime() > currentDate.getTime() // Compare booking time with current time
+        : bookingDate.getTime() <= currentDate.getTime(); // Compare booking time with current time
     });
 
     return result;
