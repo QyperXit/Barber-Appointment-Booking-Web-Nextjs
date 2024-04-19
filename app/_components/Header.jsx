@@ -118,8 +118,7 @@ const Header = () => {
               <PopoverTrigger>
                 <button
                   type="button"
-                  class="hs-collapse-toggle size-9 flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-white/20 text-white hover:border-white/40 disabled:opacity-50 disabled:pointer-events-none"
-                  data-hs-collapse="#navbar-collapse-with-animation"
+                  class=" size-9 flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-white/20 text-white hover:border-white/40 disabled:opacity-50 disabled:pointer-events-none"
                   aria-controls="navbar-collapse-with-animation"
                   aria-label="Toggle navigation"
                   onClick={toggleNavbarCollapse}
@@ -159,9 +158,12 @@ const Header = () => {
               </PopoverTrigger>
               <PopoverContent className="mt-4 mr-6 w-44">
                 <ul className="flex flex-col gap-2 ">
-                  <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
+                  <Link
+                    className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
+                    href={"/"}
+                  >
                     Home
-                  </li>
+                  </Link>
                   <Link
                     href={"/my-booking"}
                     className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
@@ -254,15 +256,6 @@ const Header = () => {
                         My Booking
                       </Link>
 
-                      {/* <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
-                        Home
-                      </li>
-                      <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
-                        Contact
-                      </li>
-                      <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
-                        Location
-                      </li> */}
                       <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
                         <LogoutLink>LogOut</LogoutLink>
                       </li>
