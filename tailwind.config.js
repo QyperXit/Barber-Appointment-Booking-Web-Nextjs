@@ -71,6 +71,12 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      textShadow: {
+        custom: "0px 5px 10px rgba(0, 0, 0, 1)",
+      },
+    },
+    fontFamily: {
+      times: ["Times New Roman", "serif"],
     },
   },
   plugins: [require("tailwindcss-animate")],

@@ -28,19 +28,23 @@ const MyBooking = () => {
    * @returns
    */
   const filterUserBooking = (type) => {
-    const result = bookingList.filter((item) =>
-      type == "upcoming"
-        ? new Date(item.attributes.Date) >= new Date()
-        : new Date(item.attributes.Date) <= new Date()
-    );
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0); // Set current time to midnight
+    const result = bookingList.filter((item) => {
+      const bookingDate = new Date(item.attributes.Date);
+      bookingDate.setHours(0, 0, 0, 0); // Set booking date time to midnight
+      return type === "upcoming"
+        ? bookingDate >= currentDate
+        : bookingDate < currentDate;
+    });
 
     return result;
   };
   return (
-    <div className=" px-4 sm:px-10 mt-10 h-full">
-      <h2 className=" font-bold text-2xl">My Booking</h2>
+    <div className=" px-4 sm:px-10 mt-10 h-full max-w-[85rem] mx-auto">
+      <h2 className="text-2xl font-bold ">My Booking</h2>
       <Tabs defaultValue="upcoming" className="w-full mt-5">
-        <TabsList className=" w-full justify-start">
+        <TabsList className="justify-start w-full ">
           <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
           <TabsTrigger value="expired">Expired</TabsTrigger>
         </TabsList>

@@ -39,7 +39,7 @@ const BookAppointment = ({ doctor }) => {
       });
     }
 
-    for (let i = 1; i <= 6; i++) {
+    for (let i = 1; i <= 8; i++) {
       timeList.push({
         time: i + ":00 PM",
       });
@@ -72,25 +72,39 @@ const BookAppointment = ({ doctor }) => {
   };
 
   const isPastDay = (day) => {
-    return day < new Date();
+    // return day < new Date();
+    const today = new Date();
+    // Set the time to midnight for both the current day and the provided day
+    const todayMidnight = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate()
+    );
+    const providedDayMidnight = new Date(
+      day.getFullYear(),
+      day.getMonth(),
+      day.getDate()
+    );
+    // Check if the provided day is before today's midnight time
+    return providedDayMidnight < todayMidnight;
   };
 
   return (
     <Dialog>
       <DialogTrigger className="flex">
         {" "}
-        <Button className=" mt-3 rounded-full w-fit">Book Appointment</Button>
+        <Button className="mt-3 rounded-full w-fit">Book Appointment</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Book Appointment</DialogTitle>
           <DialogDescription>
             <div>
-              <div className=" grid grid-cols-1 mt-5 md:grid-cols-2">
+              <div className="grid grid-cols-1 mt-5 md:grid-cols-2">
                 {/* Calender */}
-                <div className="flex flex-col gap-3 items-baseline">
-                  <h2 className=" flex gap-2 items-center">
-                    <CalendarDays className=" text-primary h-5 w-5" />
+                <div className="flex flex-col items-baseline gap-3">
+                  <h2 className="flex items-center gap-2 ">
+                    <CalendarDays className="w-5 h-5 text-primary" />
                     Select Date
                   </h2>
                   <Calendar
@@ -98,16 +112,16 @@ const BookAppointment = ({ doctor }) => {
                     selected={date}
                     onSelect={setDate}
                     disabled={isPastDay}
-                    className="rounded-md border"
+                    className="border rounded-md"
                   />
                 </div>
                 {/* timeslot */}
-                <div className=" mt-3 md:mt-0">
-                  <h2 className=" flex  gap-2 items-center mb-3">
-                    <Clock className=" text-primary h-5 w-5" />
+                <div className="mt-3 md:mt-0">
+                  <h2 className="flex items-center gap-2 mb-3 ">
+                    <Clock className="w-5 h-5 text-primary" />
                     Select Time Slot
                   </h2>
-                  <div className="grid grid-cols-3 gap-2 border rounded-lg p-5">
+                  <div className="grid grid-cols-3 gap-2 p-5 border rounded-lg">
                     {timeSlot?.map((item, index) => {
                       return (
                         <h2
@@ -128,12 +142,12 @@ const BookAppointment = ({ doctor }) => {
             </div>
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter className="sm:justify-end sm:flex  flex-col-reverse gap-3">
+        <DialogFooter className="flex-col-reverse gap-3 sm:justify-end sm:flex">
           <DialogClose asChild>
-            <div className=" flex gap-3">
+            <div className="flex gap-3 ">
               <Button
                 type="button"
-                className=" border text-gray-600"
+                className="text-gray-600 border "
                 variant="outline"
                 onClick={close}
               >

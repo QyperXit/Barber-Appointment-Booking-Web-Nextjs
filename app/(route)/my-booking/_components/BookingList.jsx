@@ -17,16 +17,13 @@ const BookingList = ({ bookingList, expired, updateRecord }) => {
     });
   };
 
-  const limitedBookingList = bookingList.slice(0, 7);
+  const limitedBookingList = bookingList.slice(0, 5);
 
   return (
-    <div className=" p-5 m-3 flex flex-col gap-3 rounded-lg  h-lvh  overflow-y-auto">
+    <div className=" p-5 m-3 flex flex-col gap-3 rounded-lg  h-lvh  overflow-y-auto text-white">
       {limitedBookingList &&
         limitedBookingList.map((item, index) => (
-          <div
-            key={index}
-            className="flex border p-5 rounded-lg gap-4 items-center"
-          >
+          <div key={index} className="flex border p-5 gap-4 items-center">
             {item?.attributes?.doctor?.data?.attributes?.Image?.data?.attributes
               ?.url && (
               <>

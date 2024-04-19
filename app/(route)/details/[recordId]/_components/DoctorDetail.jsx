@@ -16,7 +16,7 @@ const DoctorDetail = ({ doctor }) => {
 
   return (
     <>
-      <div className="  grid grid-cols-1 md:grid-cols-3 border-[1px]  p-5 mt-5 rounded-lg">
+      <div className="grid grid-cols-1 md:grid-cols-3 border-[4px] p-5 mt-5 ">
         {/* doc image */}
         <div>
           <Image
@@ -24,12 +24,14 @@ const DoctorDetail = ({ doctor }) => {
             width={200}
             height={200}
             alt="doctor-image"
-            className="h-[280px]  w-full rounded-lg object-cover"
+            className="h-[280px]  w-full  object-cover"
           />
         </div>
         {/* doc info */}
         <div className=" col-span-2 mt-5 flex md:px-10 flex-col gap-3">
-          <h2 className=" font-bold text-2xl">{doctor.attributes?.Name}</h2>
+          <h2 className=" font-bold text-2xl text-white">
+            {doctor.attributes?.Name}
+          </h2>
           <h2 className=" flex text-gray-500 gap-2 text-md">
             <GraduationCap />
             <span>{doctor.attributes?.Years_of_experience} of experience</span>
@@ -38,7 +40,7 @@ const DoctorDetail = ({ doctor }) => {
             <MapPin />
             <span>{doctor.attributes.Address}</span>
           </h2>
-          <h2 className="text-[10px] font-bold bg-blue-100 p-1 rounded-full px-2 text-primary  w-fit">
+          <h2 className="text-[10px] font-bold bg-white p-1  px-2 text-black  w-fit">
             {doctor.attributes?.catergories?.data[0]?.attributes?.Name}
           </h2>
           <div className="flex gap-3">
@@ -52,8 +54,8 @@ const DoctorDetail = ({ doctor }) => {
 
         {/* about */}
       </div>
-      <div className=" p-3 border-[1px] rounded-lg mt-5">
-        <h2 className=" font-bold text-[20px]">About Me</h2>
+      <div className=" p-3 border-[4px] mt-5">
+        <h2 className=" font-bold text-[20px] text-white">About Me</h2>
         <p className=" text-gray-400 tracking-wider mt-2">
           {doctor.attributes.About}
         </p>

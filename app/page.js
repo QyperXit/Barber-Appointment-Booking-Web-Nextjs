@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import BarberList from "./_components/BarberList";
 import CatergorySearch from "./_components/CatergorySearch";
 import DoctorList from "./_components/DoctorList";
 import Hero from "./_components/Hero";
@@ -20,10 +21,11 @@ export default function Home() {
     });
   };
   return (
-    <div>
+    <>
       <Hero />
-      <CatergorySearch />
-      <DoctorList doctorList={doctorList} />
-    </div>
+      {/* <CatergorySearch /> */}
+      {/* <DoctorList doctorList={doctorList} /> */}
+      <BarberList doctorList={doctorList} />
+    </>
   );
 }

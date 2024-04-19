@@ -16,13 +16,13 @@ const DoctorSugesstions = ({ doctor }) => {
   };
 
   return (
-    <div className="border mt-5  xl:ml-5 rounded p-5 ">
-      <h2 className=" font-bold text-[18px]">Sugesstions</h2>
+    <div className="border-4 mt-5  xl:ml-5 p-5  lg:py-12 ">
+      <h2 className=" font-bold text-[18px] text-white">Sugesstions</h2>
 
-      {doctorList.map((item, index) => (
+      {doctorList.slice(0, 3).map((item, index) => (
         <Link
           href={"/details/" + item.id}
-          className="flex gap-5 items-center mt-5  hover:bg-slate-100  cursor-pointer p-5 rounded-lg "
+          className="flex gap-5 items-center mt-5  hover:bg-slate-600  cursor-pointer p-5 rounded-lg "
           key={item.id}
         >
           <div>
@@ -35,11 +35,13 @@ const DoctorSugesstions = ({ doctor }) => {
             />
           </div>
           <div className=" flex flex-col gap-2">
-            <h2 className="text-[10px] font-bold bg-blue-100 p-1 rounded-full px-2 text-primary  w-fit">
+            <h2 className="text-[10px] font-bold bg-white p-1  px-2 text-black  w-fit">
               {item.attributes?.catergories?.data[0]?.attributes?.Name}
             </h2>
-            <h2 className=" font-bold text-md">{item.attributes?.Name}</h2>
-            <h2 className=" flex text-primary  font-semibold gap-2 text-sm">
+            <h2 className=" font-bold text-white text-md">
+              {item.attributes?.Name}
+            </h2>
+            <h2 className=" flex  text-blue-200  font-semibold gap-2 text-sm">
               {item.attributes?.Years_of_experience}
             </h2>
           </div>

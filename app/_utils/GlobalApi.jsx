@@ -3,7 +3,7 @@ const { default: axios } = require("axios");
 const API_KEY = process.env.NEXT_PUBLIC_STRAPI_API_KEY;
 
 const axiosClient = axios.create({
-  baseURL: "http://localhost:1337/api/", // Note the correct spelling of baseURL
+  baseURL: "https://appointment-booking-backend-s6js.onrender.com/api", // Note the correct spelling of baseURL
   headers: {
     Authorization: `Bearer ${API_KEY}`,
   },
@@ -61,6 +61,7 @@ const getUserBookingList = (userEmail) => {
 };
 
 const DeleteBooking = (id) => axiosClient.delete(`/appointments/${id}`);
+const GetIcons = (id) => axiosClient.get(`/icons/${id}/?populate=*`);
 
 export default {
   getCatergory,
@@ -69,6 +70,7 @@ export default {
   getDoctorById,
   bookApointment,
   // sendEmail,
+  GetIcons,
   getUserBookingList,
   DeleteBooking,
 };
