@@ -221,7 +221,7 @@ const BarberList = ({ doctor }) => {
     //   </div>
     // </div>
     <div className="mx-auto mt-20 mb-10 md:max-w-4xl">
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+      <div className="grid grid-cols-1 gap-2 mx-auto sm:grid-cols-4 ">
         <div className="space-y-2">
           <img
             className="object-cover w-full border-4 sm:size-40 lg:size-60"

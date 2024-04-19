@@ -140,7 +140,9 @@ const Header = () => {
                     <line x1="3" x2="21" y1="18" y2="18" />
                   </svg>
                   <svg
-                    class={` flex-shrink-0 ${open ? "block" : "hidden"} size-4`}
+                    class={` flex-shrink-0 ${
+                      !open ? "hidden" : "block"
+                    } size-4`}
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
                     height="24"

@@ -20,10 +20,10 @@ const BookingList = ({ bookingList, expired, updateRecord }) => {
   const limitedBookingList = bookingList.slice(0, 5);
 
   return (
-    <div className=" p-5 m-3 flex flex-col gap-3 rounded-lg  h-lvh  overflow-y-auto text-white">
+    <div className="flex flex-col gap-3 p-5 m-3 overflow-y-auto text-white rounded-lg h-lvh">
       {limitedBookingList &&
         limitedBookingList.map((item, index) => (
-          <div key={index} className="flex border p-5 gap-4 items-center">
+          <div key={index} className="flex items-center gap-4 p-5 border">
             {item?.attributes?.doctor?.data?.attributes?.Image?.data?.attributes
               ?.url && (
               <>
@@ -37,8 +37,8 @@ const BookingList = ({ bookingList, expired, updateRecord }) => {
                   alt="doctor-image"
                   className="rounded-full h-[70px] w-[70px] object-cover"
                 />
-                <div className="flex flex-col gap-2 w-full">
-                  <h2 className="font-bold text-[18px] flex items-center justify-between">
+                <div className="flex flex-col w-full gap-2 ">
+                  <h2 className="font-bold text-[18px] flex items-center justify-between ">
                     {item.attributes.doctor.data.attributes.Name}
                     {!expired && (
                       <CancelAppointment
@@ -47,15 +47,15 @@ const BookingList = ({ bookingList, expired, updateRecord }) => {
                     )}
                   </h2>
                   <h2 className="flex gap-2 text-gray-500">
-                    <MapPin className="text-primary h-5 w-5" />{" "}
+                    <MapPin className="w-5 h-5 text-primary" />{" "}
                     {item.attributes.doctor.data.attributes.Address}
                   </h2>
                   <h2 className="flex gap-2">
-                    <Calendar className="text-primary h-5 w-5" /> Appoint On:{" "}
+                    <Calendar className="w-5 h-5 text-primary" /> Appoint On:{" "}
                     {moment(item.attributes.Date).format("DD-MMM-YYYY")}
                   </h2>
                   <h2 className="flex gap-2">
-                    <Clock className="text-primary h-5 w-5" /> At Time:{" "}
+                    <Clock className="w-5 h-5 text-primary" /> At Time:{" "}
                     {item.attributes.Time}{" "}
                   </h2>
                 </div>

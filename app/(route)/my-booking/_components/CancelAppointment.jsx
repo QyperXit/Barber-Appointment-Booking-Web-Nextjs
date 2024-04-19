@@ -16,9 +16,8 @@ const CancelAppointment = ({ onContinueClick }) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger>
-        {" "}
         <Button variant="outline" className=" text-primary border-primary">
-          Cancel Appointment
+          Cancel <span className="hidden sm:block">&nbsp;Appointment</span>
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
