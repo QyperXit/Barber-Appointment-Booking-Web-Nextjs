@@ -3,8 +3,7 @@ const { default: axios } = require("axios");
 const API_KEY = process.env.NEXT_PUBLIC_STRAPI_API_KEY;
 
 const axiosClient = axios.create({
-  baseURL:
-    "https://barber-appointment-booking-web-nextjs-hcxupzkkh-qypers-projects.vercel.app/api/", // Note the correct spelling of baseURL
+  baseURL: "https://appointment-booking-backend-s6js.onrender.com/api/", // Note the correct spelling of baseURL
   headers: {
     Authorization: `Bearer ${API_KEY}`,
   },
