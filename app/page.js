@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import BarberList from "./_components/BarberList";
@@ -20,12 +21,36 @@ export default function Home() {
       setDoctorList(res.data.data);
     });
   };
+
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+    },
+    in: {
+      opacity: 1,
+      transition: { duration: 0.5 }, // Adjust duration as needed
+    },
+    out: {
+      opacity: 0,
+      transition: { duration: 0.3 }, // Adjust duration as needed
+    },
+  };
   return (
     <>
-      <Hero />
-      {/* <CatergorySearch /> */}
-      {/* <DoctorList doctorList={doctorList} /> */}
-      <BarberList doctorList={doctorList} />
+      <AnimatePresence mode="wait">
+        <motion.div
+          // key={pageProps.url}
+          initial="initial"
+          animate="in"
+          exit="out"
+          variants={pageVariants}
+        >
+          <Hero />
+          {/* <CatergorySearch /> */}
+          {/* <DoctorList doctorList={doctorList} /> */}
+          <BarberList doctorList={doctorList} />
+        </motion.div>
+      </AnimatePresence>
     </>
   );
 }

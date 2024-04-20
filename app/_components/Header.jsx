@@ -6,7 +6,7 @@ import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Popover,
@@ -32,22 +32,26 @@ const Header = () => {
   //     path: "/",
   //   },
   // ];
-
+  const [open, setOpen] = useState(false);
   const { user } = useKindeBrowserClient();
 
   useEffect(() => {}, [user]);
+
+  function toggleNavbarCollapse() {
+    setOpen(!open);
+  }
 
   return (
     // <div className="flex items-center justify-between p-4 shadow-sm">
     //   <div className="flex items-center gap-10">
     //     {/* <Image src="/barber.png" alt="logo" width={90} height={80} /> */}
-    //     <i className="relative text-5xl font-bold  text-amber-400 text-shadow-xl">
+    //     <i className="relative text-5xl font-bold text-amber-400 text-shadow-xl">
     //       G
     //       <span className="absolute text-gray-600  inset-7 after:content-[hello] text-[10px] text-shadow-custom inset-x-3.5">
     //         Barbers
     //       </span>
     //     </i>
-    //     <ul className="hidden gap-8  md:flex">
+    //     <ul className="hidden gap-8 md:flex">
     //       {Menu.map((item, index) => (
     //         <Link href={item.path}>
     //           <li
@@ -80,11 +84,11 @@ const Header = () => {
     //         <ul className="flex flex-col gap-2">
     //           <Link
     //             href={"/my-booking"}
-    //             className="p-2 rounded-md cursor-pointer  hover:bg-slate-200"
+    //             className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
     //           >
     //             My Booking
     //           </Link>
-    //           <li className="p-2 rounded-md cursor-pointer  hover:bg-slate-200">
+    //           <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
     //             <LogoutLink>LogOut</LogoutLink>
     //           </li>
     //         </ul>
@@ -110,45 +114,84 @@ const Header = () => {
             G|Barber's
           </Link>
           <div class="sm:hidden">
-            <button
-              type="button"
-              class="hs-collapse-toggle size-9 flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-white/20 text-white hover:border-white/40 disabled:opacity-50 disabled:pointer-events-none"
-              data-hs-collapse="#navbar-collapse-with-animation"
-              aria-controls="navbar-collapse-with-animation"
-              aria-label="Toggle navigation"
-            >
-              <svg
-                class="hs-collapse-open:hidden flex-shrink-0 size-4"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <line x1="3" x2="21" y1="6" y2="6" />
-                <line x1="3" x2="21" y1="12" y2="12" />
-                <line x1="3" x2="21" y1="18" y2="18" />
-              </svg>
-              <svg
-                class="hs-collapse-open:block hidden flex-shrink-0 size-4"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M18 6 6 18" />
-                <path d="m6 6 12 12" />
-              </svg>
-            </button>
+            <Popover>
+              <PopoverTrigger>
+                <button
+                  type="button"
+                  class=" size-9 flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-white/20 text-white hover:border-white/40 disabled:opacity-50 disabled:pointer-events-none"
+                  aria-controls="navbar-collapse-with-animation"
+                  aria-label="Toggle navigation"
+                  onClick={toggleNavbarCollapse}
+                >
+                  <svg
+                    class={` ${open ? "hidden" : "block"} flex-shrink-0 size-4`}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <line x1="3" x2="21" y1="6" y2="6" />
+                    <line x1="3" x2="21" y1="12" y2="12" />
+                    <line x1="3" x2="21" y1="18" y2="18" />
+                  </svg>
+                  <svg
+                    class={` flex-shrink-0 ${
+                      !open ? "hidden" : "block"
+                    } size-4`}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M18 6 6 18" />
+                    <path d="m6 6 12 12" />
+                  </svg>
+                </button>
+              </PopoverTrigger>
+              <PopoverContent className="mt-4 mr-6 w-44">
+                <ul className="flex flex-col gap-2 ">
+                  {user ? (
+                    <>
+                      <Link
+                        className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
+                        href={"/"}
+                      >
+                        Home
+                      </Link>
+                      <Link
+                        href={"/my-booking"}
+                        className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
+                      >
+                        My Booking
+                      </Link>
+                      <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
+                        Contact
+                      </li>
+                      <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
+                        Location
+                      </li>
+                      <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
+                        <LogoutLink>LogOut</LogoutLink>
+                      </li>
+                    </>
+                  ) : (
+                    <LoginLink>
+                      <Button>Get Started</Button>
+                    </LoginLink>
+                  )}
+                </ul>
+              </PopoverContent>
+            </Popover>
           </div>
         </div>
         <div
@@ -204,6 +247,7 @@ const Header = () => {
                         alt="profile-img"
                         width={50}
                         height={50}
+                        className="w-12 h-12 transition-transform ease-in-out rounded-full shadow-md shadow-white/35 hover:scale-90 shad"
                       />
                     ) : (
                       <div className="flex items-center justify-center w-12 h-12 font-semibold bg-gray-200 rounded-full shadow-sm">
@@ -217,11 +261,12 @@ const Header = () => {
                     <ul className="flex flex-col gap-2">
                       <Link
                         href={"/my-booking"}
-                        className="p-2 rounded-md cursor-pointer  hover:bg-slate-200"
+                        className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
                       >
                         My Booking
                       </Link>
-                      <li className="p-2 rounded-md cursor-pointer  hover:bg-slate-200">
+
+                      <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
                         <LogoutLink>LogOut</LogoutLink>
                       </li>
                     </ul>
