@@ -247,6 +247,7 @@ const Header = () => {
                         alt="profile-img"
                         width={50}
                         height={50}
+                        className="w-12 h-12 transition-transform ease-in-out rounded-full shadow-md shadow-white/35 hover:scale-90 shad"
                       />
                     ) : (
                       <div className="flex items-center justify-center w-12 h-12 font-semibold bg-gray-200 rounded-full shadow-sm">
