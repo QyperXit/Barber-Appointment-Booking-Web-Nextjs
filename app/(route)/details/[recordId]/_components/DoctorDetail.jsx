@@ -11,7 +11,7 @@ const DoctorDetail = ({ doctor }) => {
 
     { id: 3, icon: "/linkedin.png", url: "" },
 
-    { id: 4, icon: "/x.svg", url: "" },
+    { id: 4, icon: "/x.png", url: "" },
   ];
 
   return (
@@ -28,15 +28,15 @@ const DoctorDetail = ({ doctor }) => {
           />
         </div>
         {/* doc info */}
-        <div className=" col-span-2 mt-5 flex md:px-10 flex-col gap-3">
-          <h2 className=" font-bold text-2xl text-white">
+        <div className="flex flex-col col-span-2 gap-3 mt-5 md:px-10">
+          <h2 className="text-2xl font-bold text-white ">
             {doctor.attributes?.Name}
           </h2>
-          <h2 className=" flex text-gray-500 gap-2 text-md">
+          <h2 className="flex gap-2 text-gray-500 text-md">
             <GraduationCap />
             <span>{doctor.attributes?.Years_of_experience} of experience</span>
           </h2>
-          <h2 className=" text-gray-400 text-md gap-2 flex">
+          <h2 className="flex gap-2 text-gray-400 text-md">
             <MapPin />
             <span>{doctor.attributes.Address}</span>
           </h2>
@@ -56,7 +56,7 @@ const DoctorDetail = ({ doctor }) => {
       </div>
       <div className=" p-3 border-[4px] mt-5">
         <h2 className=" font-bold text-[20px] text-white">About Me</h2>
-        <p className=" text-gray-400 tracking-wider mt-2">
+        <p className="mt-2 tracking-wider text-gray-400 ">
           {doctor.attributes.About}
         </p>
       </div>
