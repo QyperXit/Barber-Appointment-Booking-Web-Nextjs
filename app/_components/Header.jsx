@@ -6,7 +6,7 @@ import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import {
   Popover,
@@ -40,6 +40,28 @@ const Header = () => {
   function toggleNavbarCollapse() {
     setOpen(!open);
   }
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Check if the clicked element is a link or inside the opened div
+      if (
+        ref.current &&
+        !ref.current.contains(event.target) &&
+        !event.target.closest("a")
+      ) {
+        setOpen(false); // Close the div if clicked outside and not on a link
+      }
+    };
+
+    // Add event listener when the component mounts
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open]);
 
   return (
     // <div className="flex items-center justify-between p-4 shadow-sm">
@@ -122,40 +144,43 @@ const Header = () => {
                   aria-controls="navbar-collapse-with-animation"
                   aria-label="Toggle navigation"
                   onClick={toggleNavbarCollapse}
+                  ref={ref}
                 >
-                  <svg
-                    class={` ${open ? "hidden" : "block"} flex-shrink-0 size-4`}
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <line x1="3" x2="21" y1="6" y2="6" />
-                    <line x1="3" x2="21" y1="12" y2="12" />
-                    <line x1="3" x2="21" y1="18" y2="18" />
-                  </svg>
-                  <svg
-                    class={` flex-shrink-0 ${
-                      !open ? "hidden" : "block"
-                    } size-4`}
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M18 6 6 18" />
-                    <path d="m6 6 12 12" />
-                  </svg>
+                  {!open && (
+                    <svg
+                      className="flex-shrink-0 size-4"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <line x1="3" x2="21" y1="6" y2="6" />
+                      <line x1="3" x2="21" y1="12" y2="12" />
+                      <line x1="3" x2="21" y1="18" y2="18" />
+                    </svg>
+                  )}
+                  {open && (
+                    <svg
+                      className="flex-shrink-0 size-4"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M18 6 6 18" />
+                      <path d="m6 6 12 12" />
+                    </svg>
+                  )}
                 </button>
               </PopoverTrigger>
               <PopoverContent className="mt-4 mr-6 w-44">
@@ -185,7 +210,7 @@ const Header = () => {
                       </li>
                     </>
                   ) : (
-                    <LoginLink>
+                    <LoginLink className="mx-auto ">
                       <Button>Get Started</Button>
                     </LoginLink>
                   )}
@@ -198,7 +223,10 @@ const Header = () => {
           id="navbar-collapse-with-animation"
           class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block"
         >
-          <div class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7">
+          <div
+            class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7"
+            ref={ref}
+          >
             <Link
               class="font-medium text-white sm:py-6"
               href="/"
