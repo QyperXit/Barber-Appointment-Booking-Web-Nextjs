@@ -199,12 +199,13 @@ const Header = () => {
                       >
                         My Booking
                       </Link>
-                      <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
+                      <Link
+                        className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
+                        href="/contact"
+                      >
                         Contact
-                      </li>
-                      <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
-                        Location
-                      </li>
+                      </Link>
+
                       <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
                         <LogoutLink>LogOut</LogoutLink>
                       </li>
@@ -234,18 +235,12 @@ const Header = () => {
             >
               Home
             </Link>
-            <a
+            <Link
               class="font-medium text-white/[.8] hover:text-white sm:py-6"
-              href="#"
+              href="/contact"
             >
               Contact
-            </a>
-            <a
-              class="font-medium text-white/[.8] hover:text-white sm:py-6"
-              href="#"
-            >
-              Location
-            </a>
+            </Link>
 
             <a
               class="flex items-center gap-x-2 font-medium text-white/[.8] hover:text-white sm:border-s sm:border-white/[.3] sm:my-6 sm:ps-6"
@@ -275,7 +270,7 @@ const Header = () => {
                         alt="profile-img"
                         width={50}
                         height={50}
-                        className="w-12 h-12 transition-transform ease-in-out rounded-full shadow-md hover:scale-90 shad"
+                        className="w-12 h-12 transition-transform ease-in-out rounded-full shadow-md hover:scale-90"
                       />
                     ) : (
                       <div className="flex items-center justify-center w-12 h-12 font-semibold bg-gray-200 rounded-full shadow-sm">
