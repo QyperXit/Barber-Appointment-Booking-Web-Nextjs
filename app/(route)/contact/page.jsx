@@ -5,7 +5,7 @@ import { MapIcon, PhoneCallIcon } from "lucide-react";
 const Contact = () => {
   return (
     <section className="flex flex-col items-center mt-12 text-white gap-y-8">
-      <h1 className="text-5xl font-bold ">GET IN TOUCH</h1>
+      <h1 className="mt-6 text-4xl font-bold md:text-5xl ">GET IN TOUCH</h1>
 
       <div className="flex flex-col items-center justify-center gap-20 m-12 md:flex-row ">
         <iframe
