@@ -83,3 +83,7 @@ body {
   height: 100vh;
   background: black;
 }
+
+.active {
+  @apply text-white bg-gray-700;
+}

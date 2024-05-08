@@ -32,6 +32,7 @@ const Header = () => {
   //     path: "/",
   //   },
   // ];
+
   const [open, setOpen] = useState(false);
   const { user } = useKindeBrowserClient();
 
@@ -64,64 +65,6 @@ const Header = () => {
   }, [open]);
 
   return (
-    // <div className="flex items-center justify-between p-4 shadow-sm">
-    //   <div className="flex items-center gap-10">
-    //     {/* <Image src="/barber.png" alt="logo" width={90} height={80} /> */}
-    //     <i className="relative text-5xl font-bold text-amber-400 text-shadow-xl">
-    //       G
-    //       <span className="absolute text-gray-600  inset-7 after:content-[hello] text-[10px] text-shadow-custom inset-x-3.5">
-    //         Barbers
-    //       </span>
-    //     </i>
-    //     <ul className="hidden gap-8 md:flex">
-    //       {Menu.map((item, index) => (
-    //         <Link href={item.path}>
-    //           <li
-    //             className="transition-all ease-in-out cursor-pointer hover:text-primary hover:scale-150"
-    //             key={index}
-    //           >
-    //             {item.name}
-    //           </li>
-    //         </Link>
-    //       ))}
-    //     </ul>
-    //   </div>
-    //   {user ? (
-    //     <Popover>
-    //       <PopoverTrigger>
-    //         {user.picture ? (
-    //           <Image
-    //             src={user.picture}
-    //             alt="profile-img"
-    //             width={50}
-    //             height={50}
-    //           />
-    //         ) : (
-    //           <div className="flex items-center justify-center w-12 h-12 font-semibold bg-gray-200 rounded-full shadow-sm">
-    //             <span className="text-gray-600 text-[7px]">No Image</span>
-    //           </div>
-    //         )}
-    //       </PopoverTrigger>
-    //       <PopoverContent className="w-44">
-    //         <ul className="flex flex-col gap-2">
-    //           <Link
-    //             href={"/my-booking"}
-    //             className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
-    //           >
-    //             My Booking
-    //           </Link>
-    //           <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
-    //             <LogoutLink>LogOut</LogoutLink>
-    //           </li>
-    //         </ul>
-    //       </PopoverContent>
-    //     </Popover>
-    //   ) : (
-    //     <LoginLink>
-    //       <Button>Get Started</Button>
-    //     </LoginLink>
-    //   )}
-    // </div>
     <header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full  bg-transparent text-sm py-3 sm:py-0 border-4 mt-2">
       <nav
         class="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 "
@@ -138,9 +81,11 @@ const Header = () => {
           <div class="sm:hidden">
             <Popover>
               <PopoverTrigger>
+                {/*  */}
+                {/*  */}
                 <button
                   type="button"
-                  class=" size-9 flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-white/20 text-white hover:border-white/40 disabled:opacity-50 disabled:pointer-events-none"
+                  class=" size-9 flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-white/20  text-gray-100 hover:border-white/40 disabled:opacity-50 disabled:pointer-events-none"
                   aria-controls="navbar-collapse-with-animation"
                   aria-label="Toggle navigation"
                   onClick={toggleNavbarCollapse}
@@ -182,6 +127,8 @@ const Header = () => {
                     </svg>
                   )}
                 </button>
+                {/*  */}
+                {/*  */}
               </PopoverTrigger>
               <PopoverContent className="mt-4 mr-6 w-44">
                 <ul className="flex flex-col gap-2 ">
@@ -236,12 +183,13 @@ const Header = () => {
               Home
             </Link>
             <Link
-              class="font-medium text-white/[.8] hover:text-white sm:py-6"
+              class="font-medium text-white/[.99] hover:text-white sm:py-6"
               href="/contact"
             >
               Contact
             </Link>
-
+            {/*  */}
+            {/*  */}
             <a
               class="flex items-center gap-x-2 font-medium text-white/[.8] hover:text-white sm:border-s sm:border-white/[.3] sm:my-6 sm:ps-6"
               href="#"
@@ -254,9 +202,9 @@ const Header = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
@@ -298,9 +246,12 @@ const Header = () => {
               ) : (
                 <LoginLink>
                   <Button>Get Started</Button>
+                  //{" "}
                 </LoginLink>
               )}
             </a>
+            {/*  */}
+            {/*  */}
           </div>
         </div>
       </nav>

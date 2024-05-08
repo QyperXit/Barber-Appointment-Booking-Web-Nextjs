@@ -14,9 +14,9 @@ const Contact = () => {
           height="450"
           className="border-[8px] border-white object-contain md:w-[500px] sm:w-[300px] lg:w-[600px] "
           // style="border:0;"
-          allowfullscreen=""
+          allowFullScreen=""
           loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
+          referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
         <div className="flex justify-center md:flex-col gap-14">
           <div>
