@@ -54,10 +54,10 @@ const BookAppointment = ({ doctor }) => {
       nextAvailableTime.setSeconds(0);
       nextAvailableTime.setMilliseconds(0);
 
-      // Loop through each hour and minute until the end time
+      // Loop through each hour and minute until the end time, but only between 10:00 and 20:30
       for (
         let time = nextAvailableTime.getTime();
-        time <= endTime.getTime();
+        time <= endTime.getTime() && new Date(time).getHours() >= 10;
         time += 30 * 60 * 1000
       ) {
         const formattedTime = new Date(time);
