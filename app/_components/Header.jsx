@@ -15,42 +15,10 @@ import {
 } from "@/components/ui/popover";
 
 const Header = () => {
-  // const Menu = [
-  //   {
-  //     id: 1,
-  //     name: "Home",
-  //     path: "/",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Explore",
-  //     path: "/",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Contact Us",
-  //     path: "/",
-  //   },
-  // ];
-
   const [open, setOpen] = useState(false);
   const { user } = useKindeBrowserClient();
 
-  useEffect(() => {
-    // setUseId(user.id);
-    // const cookies = parseCookies(); // Note the correct import
-    // const storedUser = cookies.user;
-    // if (storedUser) {
-    //   try {
-    //     const parsedUser = JSON.parse(storedUser);
-    //     setUserId(parsedUser);
-    //     console.log(userID);
-    //   } catch (error) {
-    //     console.error("Error parsing user cookie:", error);
-    //     setUserId(null);
-    //   }
-    // }
-  }, [user]);
+  useEffect(() => {}, [user]);
 
   function toggleNavbarCollapse() {
     setOpen(!open);
