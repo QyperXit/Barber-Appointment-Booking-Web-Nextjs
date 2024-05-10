@@ -50,6 +50,15 @@ const getDoctorById = async (id) => {
 //   }
 // };
 
+const getAppointments = async () => {
+  try {
+    const response = await axiosClient.get("/appointments");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching appointments:", error);
+  }
+};
+
 const getUserBookingList = (userEmail) => {
   const params = new URLSearchParams({
     "filters[Email][$eq]": userEmail,
@@ -73,4 +82,5 @@ export default {
   GetIcons,
   getUserBookingList,
   DeleteBooking,
+  getAppointments,
 };

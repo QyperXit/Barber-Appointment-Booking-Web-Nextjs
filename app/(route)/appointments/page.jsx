@@ -1,8 +1,24 @@
+"use client";
+
+import GlobalApi from "@/app/_utils/GlobalApi";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import React from "react";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import React, { useEffect } from "react";
 import ScheduleList from "./_components/ScheduleList";
 
 const Appointments = () => {
+  const { user } = useKindeBrowserClient();
+
+  useEffect(() => {
+    user && getAppointments();
+  }, [user]);
+
+  const getAppointments = () => {
+    GlobalApi.getAppointments().then((res) => {
+      console.log(res.data);
+    });
+  };
+
   return (
     <div className="p-10 text-white ">
       <h2 className="text-2xl font-bold ">Up Coming Scheules</h2>
@@ -15,7 +31,9 @@ const Appointments = () => {
         <TabsContent value="upcoming">
           <ScheduleList />
         </TabsContent>
-        <TabsContent value="expired">Change your expired here.</TabsContent>
+        <TabsContent value="expired">
+          <ScheduleList />
+        </TabsContent>
       </Tabs>
     </div>
   );
