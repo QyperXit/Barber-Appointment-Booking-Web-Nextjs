@@ -36,7 +36,21 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const { user } = useKindeBrowserClient();
 
-  useEffect(() => {}, [user]);
+  useEffect(() => {
+    // setUseId(user.id);
+    // const cookies = parseCookies(); // Note the correct import
+    // const storedUser = cookies.user;
+    // if (storedUser) {
+    //   try {
+    //     const parsedUser = JSON.parse(storedUser);
+    //     setUserId(parsedUser);
+    //     console.log(userID);
+    //   } catch (error) {
+    //     console.error("Error parsing user cookie:", error);
+    //     setUserId(null);
+    //   }
+    // }
+  }, [user]);
 
   function toggleNavbarCollapse() {
     setOpen(!open);
@@ -140,12 +154,22 @@ const Header = () => {
                       >
                         Home
                       </Link>
-                      <Link
-                        href={"/my-booking"}
-                        className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
-                      >
-                        My Booking
-                      </Link>
+                      {user && user.id === process.env.NEXT_PUBLIC_ID ? (
+                        <Link
+                          className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
+                          href="/appointments"
+                        >
+                          My Schedules
+                        </Link>
+                      ) : (
+                        <Link
+                          href={"/my-booking"}
+                          className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
+                        >
+                          My Booking
+                        </Link>
+                      )}
+
                       <Link
                         className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
                         href="/contact"
@@ -176,18 +200,27 @@ const Header = () => {
             ref={ref}
           >
             <Link
-              class="font-medium text-white sm:py-6"
+              class="font-medium text-white hover:text-slate-400 hover:scale-110transition-all sm:py-6"
               href="/"
               aria-current="page"
             >
               Home
             </Link>
             <Link
-              class="font-medium text-white/[.99] hover:text-white sm:py-6"
+              class="font-medium text-white/[.99] hover:text-slate-400 hover:scale-110transition-all duration-300  sm:py-6"
               href="/contact"
             >
               Contact
             </Link>
+            {user && user.id === process.env.NEXT_PUBLIC_ID && (
+              <Link
+                class="font-medium text-white/[.99] hover:text-slate-400 hover:scale-110transition-all duration-300  sm:py-6"
+                href="/appointments"
+              >
+                My Schedules
+              </Link>
+            )}
+
             {/*  */}
             {/*  */}
             <a
@@ -230,12 +263,17 @@ const Header = () => {
                   </PopoverTrigger>
                   <PopoverContent className="w-44">
                     <ul className="flex flex-col gap-2">
-                      <Link
-                        href={"/my-booking"}
-                        className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
-                      >
-                        My Booking
-                      </Link>
+                      {user &&
+                        user.id !==
+                          process.env.NEXT_PUBLIC_ID >
+                          (
+                            <Link
+                              href={"/my-booking"}
+                              className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
+                            >
+                              My Booking
+                            </Link>
+                          )}
 
                       <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
                         <LogoutLink>LogOut</LogoutLink>

@@ -17,13 +17,13 @@ const Appointments = () => {
 
   const getAppointments = () => {
     GlobalApi.getAppointments().then((res) => {
-      console.log(res.data);
+      //   console.log(res.data);
       setBookingList(res.data);
     });
   };
 
   return (
-    <div className="p-10 text-white ">
+    <div className=" px-4 sm:px-10 mt-10 h-full max-w-[85rem] mx-auto">
       <h2 className="text-2xl font-bold ">Up Coming Scheules</h2>
       <hr className="my-5" />
       <Tabs defaultValue="upcoming" className="w-full mt-5 ">

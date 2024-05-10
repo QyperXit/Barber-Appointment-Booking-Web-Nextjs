@@ -15,7 +15,6 @@ const ScheduleList = ({ bookingList, updateRecord }) => {
         updateRecord();
       }
     });
-    console.log(item);
   };
 
   return (
