@@ -181,7 +181,7 @@ const BookAppointment = ({ doctor }) => {
                     Select Time Slot
                   </h2>
                   <div className="grid grid-cols-3 gap-2 p-5 border rounded-lg">
-                    {timeSlot?.map((item, index) => {
+                    {timeSlot?.map((item) => {
                       return (
                         <h2
                           key={item.id}

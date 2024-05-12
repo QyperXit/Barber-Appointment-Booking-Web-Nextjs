@@ -4,15 +4,15 @@ import React from "react";
 const Footer = () => {
   return (
     // <footer className="bg-gray-100">
-    //   <div className="mx-auto max-w-5xl justify-center text-center items-center flex flex-col px-4 py-16 sm:px-6 lg:px-8">
+    //   <div className="flex flex-col items-center justify-center max-w-5xl px-4 py-16 mx-auto text-center sm:px-6 lg:px-8">
     //     <Image alt="logo" width={100} height={100} src="/logo.svg" />
 
-    //     <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500">
+    //     <p className="max-w-md mx-auto mt-6 leading-relaxed text-center text-gray-500">
     //       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt
     //       consequuntur amet culpa cum itaque neque.
     //     </p>
 
-    //     <ul className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
+    //     <ul className="flex flex-wrap justify-center gap-6 mt-12 md:gap-8 lg:gap-12">
     //       <li>
     //         <a
     //           className="text-gray-700 transition hover:text-gray-700/75"
@@ -74,7 +74,7 @@ const Footer = () => {
     //       </li>
     //     </ul>
 
-    //     <ul className="mt-12 flex justify-center gap-6 md:gap-8">
+    //     <ul className="flex justify-center gap-6 mt-12 md:gap-8">
     //       <li>
     //         <a
     //           href="#"
@@ -84,7 +84,7 @@ const Footer = () => {
     //         >
     //           <span className="sr-only">Facebook</span>
     //           <svg
-    //             className="h-6 w-6"
+    //             className="w-6 h-6"
     //             fill="currentColor"
     //             viewBox="0 0 24 24"
     //             aria-hidden="true"
@@ -107,7 +107,7 @@ const Footer = () => {
     //         >
     //           <span className="sr-only">Instagram</span>
     //           <svg
-    //             className="h-6 w-6"
+    //             className="w-6 h-6"
     //             fill="currentColor"
     //             viewBox="0 0 24 24"
     //             aria-hidden="true"
@@ -130,7 +130,7 @@ const Footer = () => {
     //         >
     //           <span className="sr-only">Twitter</span>
     //           <svg
-    //             className="h-6 w-6"
+    //             className="w-6 h-6"
     //             fill="currentColor"
     //             viewBox="0 0 24 24"
     //             aria-hidden="true"
@@ -149,7 +149,7 @@ const Footer = () => {
     //         >
     //           <span className="sr-only">GitHub</span>
     //           <svg
-    //             className="h-6 w-6"
+    //             className="w-6 h-6"
     //             fill="currentColor"
     //             viewBox="0 0 24 24"
     //             aria-hidden="true"
@@ -172,7 +172,7 @@ const Footer = () => {
     //         >
     //           <span className="sr-only">Dribbble</span>
     //           <svg
-    //             className="h-6 w-6"
+    //             className="w-6 h-6"
     //             fill="currentColor"
     //             viewBox="0 0 24 24"
     //             aria-hidden="true"
@@ -190,40 +190,40 @@ const Footer = () => {
     // </footer>
 
     <footer className="text-gray-400 bg-black body-font">
-      <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
-        <a className="flex title-font font-medium items-center md:justify-start justify-center text-white">
+      <div className="container flex flex-col items-center px-5 py-8 mx-auto sm:flex-row">
+        <a className="flex items-center justify-center font-medium text-white title-font md:justify-start">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            className="w-10 h-10 p-2 text-white bg-indigo-500 rounded-full"
             viewBox="0 0 24 24"
           >
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
           </svg>
           <span className="ml-3 text-xl">G|Barber's</span>
         </a>
-        <p className="text-sm text-gray-400 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-800 sm:py-2 sm:mt-0 mt-4">
+        <p className="mt-4 text-sm text-gray-400 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-800 sm:py-2 sm:mt-0">
           © 2020 G|Barber's —
           <a
             href="https://twitter.com/knyttneve"
-            className="text-gray-500 ml-1"
+            className="ml-1 text-gray-500"
             target="_blank"
             rel="noopener noreferrer"
           >
             @knyttneve
           </a>
         </p>
-        <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+        <span className="inline-flex justify-center mt-4 sm:ml-auto sm:mt-0 sm:justify-start">
           <a className="text-gray-400">
             <svg
               fill="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               className="w-5 h-5"
               viewBox="0 0 24 24"
             >
@@ -233,9 +233,9 @@ const Footer = () => {
           <a className="ml-3 text-gray-400">
             <svg
               fill="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               className="w-5 h-5"
               viewBox="0 0 24 24"
             >
@@ -246,9 +246,9 @@ const Footer = () => {
             <svg
               fill="none"
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               className="w-5 h-5"
               viewBox="0 0 24 24"
             >
@@ -260,9 +260,9 @@ const Footer = () => {
             <svg
               fill="currentColor"
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0"
               className="w-5 h-5"
               viewBox="0 0 24 24"
             >
