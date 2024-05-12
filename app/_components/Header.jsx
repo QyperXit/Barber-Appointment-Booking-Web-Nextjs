@@ -231,17 +231,14 @@ const Header = () => {
                   </PopoverTrigger>
                   <PopoverContent className="w-44">
                     <ul className="flex flex-col gap-2">
-                      {user &&
-                        user.id !==
-                          process.env.NEXT_PUBLIC_ID >
-                          (
-                            <Link
-                              href={"/my-booking"}
-                              className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
-                            >
-                              My Booking
-                            </Link>
-                          )}
+                      {user && user.id !== process.env.NEXT_PUBLIC_ID && (
+                        <Link
+                          href="/my-booking"
+                          className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
+                        >
+                          My Booking
+                        </Link>
+                      )}
 
                       <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
                         <LogoutLink>LogOut</LogoutLink>
@@ -251,8 +248,7 @@ const Header = () => {
                 </Popover>
               ) : (
                 <LoginLink>
-                  <Button>Get Started</Button>
-                  //{" "}
+                  <Button>Get Started</Button>{" "}
                 </LoginLink>
               )}
             </a>

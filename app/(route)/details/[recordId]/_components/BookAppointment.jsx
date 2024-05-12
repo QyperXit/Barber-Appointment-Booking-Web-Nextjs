@@ -21,6 +21,8 @@ const BookAppointment = ({ doctor }) => {
   const [date, setDate] = useState(new Date());
   const [timeSlot, SetTimeSlot] = useState([]);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState();
+  const [bookingList, setBookingList] = useState([]);
+
   //gets user data from kinde
   const { user } = useKindeBrowserClient();
 
@@ -85,11 +87,45 @@ const BookAppointment = ({ doctor }) => {
       },
     };
 
-    GlobalApi.bookApointment(data).then((res) => {
-      console.log(res);
-      if (res) {
-        // GlobalApi.sendEmail(data).then((res) => {});
-        toast("Booking Confirmation Email sent!");
+    // Fetch appointments from the backend
+    GlobalApi.getAppointments().then((res) => {
+      const existingAppointments = res.data;
+
+      // Check if the selected date and time slot already exist in appointments
+      const isBookingTaken = existingAppointments.some((item) => {
+        // Extract the date portion from the existing appointment
+        const existingDate = new Date(item.attributes.Date);
+        const existingDateOnly = new Date(
+          existingDate.getFullYear(),
+          existingDate.getMonth(),
+          existingDate.getDate()
+        );
+
+        // Extract the date portion from the selected date
+        const selectedDateOnly = new Date(
+          date.getFullYear(),
+          date.getMonth(),
+          date.getDate()
+        );
+
+        // Compare the date portions
+        return (
+          existingDateOnly.getTime() === selectedDateOnly.getTime() &&
+          item.attributes.Time === selectedTimeSlot
+        );
+      });
+
+      if (isBookingTaken) {
+        // If booking is already taken, show toast message
+        toast("This time slot is already booked.");
+      } else {
+        // If booking is available, proceed with booking the appointment
+        GlobalApi.bookApointment(data).then((res) => {
+          if (res) {
+            // GlobalApi.sendEmail(data).then((res) => {});
+            toast("Booking Confirmation Email sent!");
+          }
+        });
       }
     });
   };

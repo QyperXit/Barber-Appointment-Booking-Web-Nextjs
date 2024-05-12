@@ -33,6 +33,7 @@ const doctorId = 3; // Replace with the actual doctor ID
 const getDoctorById = async (id) => {
   try {
     const response = await axiosClient.get(`/doctors/${id}?populate=*`);
+
     return response.data; // Return doctor data
   } catch (error) {
     console.error("Error fetching doctor:", error);
@@ -53,6 +54,7 @@ const getDoctorById = async (id) => {
 const getAppointments = async () => {
   try {
     const response = await axiosClient.get("/appointments");
+
     return response.data;
   } catch (error) {
     console.error("Error fetching appointments:", error);
@@ -72,6 +74,22 @@ const getUserBookingList = (userEmail) => {
 const DeleteBooking = (id) => axiosClient.delete(`/appointments/${id}`);
 const GetIcons = (id) => axiosClient.get(`/icons/${id}/?populate=*`);
 
+// const checkExistingBookings = async () => {
+//   try {
+//     const response = await axios.get(
+//       `/appointments?filters[Time][$eq]=${time}&filters[Date][$eq]=${date}`
+//     );
+//     console.log(response);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+
+// const checkExistingBookings = (Time) =>
+//   axiosClient.get(`/appointments?filters[Time][$eq]=${Time}`);
+
+// &filters[Date][$eq]=${Date}
+
 export default {
   getCatergory,
   getDoctorList,
@@ -83,4 +101,5 @@ export default {
   getUserBookingList,
   DeleteBooking,
   getAppointments,
+  // checkExistingBookings,
 };
