@@ -47,27 +47,27 @@ const Header = () => {
   }, [open]);
 
   return (
-    <header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full  bg-transparent text-sm py-3 sm:py-0 border-4 mt-2">
+    <header className="z-50 flex flex-wrap w-full py-3 mt-2 text-sm bg-transparent border-4 sm:justify-start sm:flex-nowrap sm:py-0">
       <nav
-        class="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 "
+        className="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 "
         aria-label="Global"
       >
-        <div class="flex items-center justify-between">
+        <div className="flex items-center justify-between">
           <Link
-            class="flex-none text-xl font-semibold text-white"
+            className="flex-none text-xl font-semibold text-white"
             href={"/"}
             aria-label="Brand"
           >
             G|Barber's
           </Link>
-          <div class="sm:hidden">
+          <div className="sm:hidden">
             <Popover>
               <PopoverTrigger>
                 {/*  */}
                 {/*  */}
                 <button
                   type="button"
-                  class=" size-9 flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-white/20  text-gray-100 hover:border-white/40 disabled:opacity-50 disabled:pointer-events-none"
+                  className="flex items-center justify-center text-sm font-semibold text-gray-100 border rounded-lg  size-9 gap-x-2 border-white/20 hover:border-white/40 disabled:opacity-50 disabled:pointer-events-none"
                   aria-controls="navbar-collapse-with-animation"
                   aria-label="Toggle navigation"
                   onClick={toggleNavbarCollapse}
@@ -161,28 +161,28 @@ const Header = () => {
         </div>
         <div
           id="navbar-collapse-with-animation"
-          class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block"
+          className="hidden overflow-hidden transition-all duration-300 hs-collapse basis-full grow sm:block"
         >
           <div
-            class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7"
+            className="flex flex-col mt-5 gap-y-4 gap-x-0 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7"
             ref={ref}
           >
             <Link
-              class="font-medium text-white hover:text-slate-400 hover:scale-110transition-all sm:py-6"
+              className="font-medium text-white hover:text-slate-400 hover:scale-110transition-all sm:py-6"
               href="/"
               aria-current="page"
             >
               Home
             </Link>
             <Link
-              class="font-medium text-white/[.99] hover:text-slate-400 hover:scale-110transition-all duration-300  sm:py-6"
+              className="font-medium text-white/[.99] hover:text-slate-400 hover:scale-110transition-all duration-300  sm:py-6"
               href="/contact"
             >
               Contact
             </Link>
             {user && user.id === process.env.NEXT_PUBLIC_ID && (
               <Link
-                class="font-medium text-white/[.99] hover:text-slate-400 hover:scale-110transition-all duration-300  sm:py-6"
+                className="font-medium text-white/[.99] hover:text-slate-400 hover:scale-110transition-all duration-300  sm:py-6"
                 href="/appointments"
               >
                 My Schedules
@@ -192,11 +192,11 @@ const Header = () => {
             {/*  */}
             {/*  */}
             <a
-              class="flex items-center gap-x-2 font-medium text-white/[.8] hover:text-white sm:border-s sm:border-white/[.3] sm:my-6 sm:ps-6"
+              className="flex items-center gap-x-2 font-medium text-white/[.8] hover:text-white sm:border-s sm:border-white/[.3] sm:my-6 sm:ps-6"
               href="#"
             >
               <svg
-                class="flex-shrink-0 size-4"
+                className="flex-shrink-0 size-4"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"

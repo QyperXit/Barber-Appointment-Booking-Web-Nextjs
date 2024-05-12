@@ -34,7 +34,7 @@ const BookingList = ({ bookingList, expired, updateRecord }) => {
                   }
                   width={100}
                   height={100}
-                  alt="doctor-image"
+                  alt="barber-image"
                   className="rounded-full h-[70px] w-[70px] object-cover"
                 />
                 <div className="flex flex-col w-full gap-2 ">

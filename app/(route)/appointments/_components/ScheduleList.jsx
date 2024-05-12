@@ -28,7 +28,7 @@ const ScheduleList = ({ bookingList, updateRecord }) => {
             <Image
               width={70}
               height={70}
-              //   alt="client-image"
+              // alt={"profile-img"}
               className=" bg-slate-400  border-[1px] border-white  rounded-full h-[70px] w-[70px] "
             />
 
