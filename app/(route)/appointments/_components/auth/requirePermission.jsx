@@ -6,7 +6,7 @@ export default async function RequirePermission({ children, permission }) {
   const reqPermission = await getPermission(permission);
 
   if (!reqPermission || !reqPermission.isGranted) {
-    redirect("/unauthorized");
+    redirect("/");
   } else {
     return children;
   }
