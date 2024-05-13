@@ -3,9 +3,7 @@ import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import BarberList from "./_components/BarberList";
-import CatergorySearch from "./_components/CatergorySearch";
-import DoctorList from "./_components/DoctorList";
+import BarberGallery from "./_components/BarberGallery";
 import Hero from "./_components/Hero";
 import GlobalApi from "./_utils/GlobalApi";
 
@@ -48,7 +46,7 @@ export default function Home() {
           <Hero />
           {/* <CatergorySearch /> */}
           {/* <DoctorList doctorList={doctorList} /> */}
-          <BarberList doctorList={doctorList} />
+          <BarberGallery doctorList={doctorList} />
         </motion.div>
       </AnimatePresence>
     </>

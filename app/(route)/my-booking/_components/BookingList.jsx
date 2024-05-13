@@ -34,7 +34,7 @@ const BookingList = ({ bookingList, expired, updateRecord }) => {
                   }
                   width={100}
                   height={100}
-                  alt="doctor-image"
+                  alt="barber-image"
                   className="rounded-full h-[70px] w-[70px] object-cover"
                 />
                 <div className="flex flex-col w-full gap-2 ">
@@ -56,7 +56,9 @@ const BookingList = ({ bookingList, expired, updateRecord }) => {
                   </h2>
                   <h2 className="flex gap-2">
                     <Clock className="w-5 h-5 text-primary" /> At Time:{" "}
-                    {item.attributes.Time}{" "}
+                    <span className="text-green-400">
+                      {item.attributes.Time}
+                    </span>
                   </h2>
                 </div>
               </>

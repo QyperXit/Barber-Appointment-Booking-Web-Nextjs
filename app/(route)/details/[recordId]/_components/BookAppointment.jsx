@@ -21,32 +21,57 @@ const BookAppointment = ({ doctor }) => {
   const [date, setDate] = useState(new Date());
   const [timeSlot, SetTimeSlot] = useState([]);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState();
+  const [bookingList, setBookingList] = useState([]);
+
   //gets user data from kinde
   const { user } = useKindeBrowserClient();
 
   useEffect(() => {
     getTime();
-  }, []);
+  }, [date]);
 
   const getTime = () => {
     const timeList = [];
-    for (let i = 10; i <= 12; i++) {
-      timeList.push({
-        time: i + ":00 AM",
-      });
-      timeList.push({
-        time: i + ":30 AM",
-      });
+    const currentTime = new Date();
+    const endTime = new Date();
+    endTime.setHours(20); // Set the end time to 8:00 PM
+    endTime.setMinutes(30); // Set the end time to 8:30 PM
+
+    const selectedDate = new Date(date);
+    const isNextDay = selectedDate > currentTime; // Check if selected date is after current date
+
+    // If it's the next day or a future date, use the original time slots from 10:00 AM to 8:30 PM
+    if (isNextDay) {
+      for (let i = 10; i <= 20; i++) {
+        timeList.push({ time: `${i.toString().padStart(2, "0")}:00` });
+        timeList.push({ time: `${i.toString().padStart(2, "0")}:30` });
+      }
+    } else {
+      // Find the next available time slot, starting from the next hour rounded up to the nearest half-hour mark
+      const nextAvailableTime = new Date(currentTime);
+      nextAvailableTime.setMinutes(
+        nextAvailableTime.getMinutes() +
+          (30 - (nextAvailableTime.getMinutes() % 30))
+      );
+      nextAvailableTime.setSeconds(0);
+      nextAvailableTime.setMilliseconds(0);
+
+      // Loop through each hour and minute until the end time, but only between 10:00 and 20:30
+      for (
+        let time = nextAvailableTime.getTime();
+        time <= endTime.getTime() && new Date(time).getHours() >= 10;
+        time += 30 * 60 * 1000
+      ) {
+        const formattedTime = new Date(time);
+        timeList.push({
+          time: formattedTime.toLocaleTimeString([], {
+            hour: "numeric",
+            minute: "2-digit",
+          }),
+        });
+      }
     }
 
-    for (let i = 1; i <= 8; i++) {
-      timeList.push({
-        time: i + ":00 PM",
-      });
-      timeList.push({
-        time: i + ":30 PM",
-      });
-    }
     SetTimeSlot(timeList);
   };
 
@@ -62,11 +87,45 @@ const BookAppointment = ({ doctor }) => {
       },
     };
 
-    GlobalApi.bookApointment(data).then((res) => {
-      console.log(res);
-      if (res) {
-        // GlobalApi.sendEmail(data).then((res) => {});
-        toast("Booking Confirmation Email sent!");
+    // Fetch appointments from the backend
+    GlobalApi.getAppointments().then((res) => {
+      const existingAppointments = res.data;
+
+      // Check if the selected date and time slot already exist in appointments
+      const isBookingTaken = existingAppointments.some((item) => {
+        // Extract the date portion from the existing appointment
+        const existingDate = new Date(item.attributes.Date);
+        const existingDateOnly = new Date(
+          existingDate.getFullYear(),
+          existingDate.getMonth(),
+          existingDate.getDate()
+        );
+
+        // Extract the date portion from the selected date
+        const selectedDateOnly = new Date(
+          date.getFullYear(),
+          date.getMonth(),
+          date.getDate()
+        );
+
+        // Compare the date portions
+        return (
+          existingDateOnly.getTime() === selectedDateOnly.getTime() &&
+          item.attributes.Time === selectedTimeSlot
+        );
+      });
+
+      if (isBookingTaken) {
+        // If booking is already taken, show toast message
+        toast("This time slot is already booked.");
+      } else {
+        // If booking is available, proceed with booking the appointment
+        GlobalApi.bookApointment(data).then((res) => {
+          if (res) {
+            // GlobalApi.sendEmail(data).then((res) => {});
+            toast("Booking Confirmation Email sent!");
+          }
+        });
       }
     });
   };
@@ -122,11 +181,11 @@ const BookAppointment = ({ doctor }) => {
                     Select Time Slot
                   </h2>
                   <div className="grid grid-cols-3 gap-2 p-5 border rounded-lg">
-                    {timeSlot?.map((item, index) => {
+                    {timeSlot?.map((item) => {
                       return (
                         <h2
                           key={item.id}
-                          className={` p-2 border rounded-full text-center hover:bg-primary hover:text-white cursor-pointer ${
+                          className={` p-2  border rounded-full text-center hover:bg-primary hover:text-white cursor-pointer ${
                             item.time == selectedTimeSlot &&
                             "bg-primary text-white"
                           }`}
