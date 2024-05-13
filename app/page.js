@@ -44,8 +44,7 @@ export default function Home() {
           variants={pageVariants}
         >
           <Hero />
-          {/* <CatergorySearch /> */}
-          {/* <DoctorList doctorList={doctorList} /> */}
+
           <BarberGallery doctorList={doctorList} />
         </motion.div>
       </AnimatePresence>
