@@ -3,33 +3,23 @@
 import GlobalApi from "@/app/_utils/GlobalApi";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-// import { redirect } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 import ScheduleList from "./_components/ScheduleList";
 
 const Appointments = () => {
-  const { user, getPermissions } = useKindeBrowserClient();
+  const { user } = useKindeBrowserClient();
   const [bookingList, setBookingList] = useState([]);
-  // const { permissions } = getPermissions();
 
   useEffect(() => {
     user && getAppointments();
-    // userPermissions();
   }, [user]);
 
   const getAppointments = () => {
     GlobalApi.getAppointments().then((res) => {
-      //   console.log(res.data);
       setBookingList(res.data);
     });
   };
-
-  // const userPermissions = () => {
-  //   if (!permissions || !permissions.includes("admin:true")) {
-  //     redirect("/");
-  //   }
-  // };
 
   return (
     <div className=" px-4 sm:px-10 mt-10 h-full max-w-[85rem] mx-auto">
