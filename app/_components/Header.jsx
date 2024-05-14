@@ -67,7 +67,7 @@ const Header = () => {
                 {/*  */}
                 <button
                   type="button"
-                  className="flex items-center justify-center text-sm font-semibold text-gray-100 border rounded-lg  size-9 gap-x-2 border-white/20 hover:border-white/40 disabled:opacity-50 disabled:pointer-events-none"
+                  className="flex items-center justify-center text-sm font-semibold text-gray-100 border rounded-lg size-9 gap-x-2 border-white/20 hover:border-white/40 disabled:opacity-50 disabled:pointer-events-none"
                   aria-controls="navbar-collapse-with-animation"
                   aria-label="Toggle navigation"
                   onClick={toggleNavbarCollapse}

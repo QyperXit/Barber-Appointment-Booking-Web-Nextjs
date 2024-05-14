@@ -5,25 +5,37 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import React, { useEffect, useState } from "react";
 
+import { redirect, useRouter } from "next/navigation";
+
 import ScheduleList from "./_components/ScheduleList";
 
 const Appointments = () => {
   const { user } = useKindeBrowserClient();
   const [bookingList, setBookingList] = useState([]);
+  const router = useRouter();
+
+  console.log();
 
   useEffect(() => {
-    user && getAppointments();
-  }, [user]);
+    const fetchData = async () => {
+      if (user) {
+        if (user && user.id !== process.env.NEXT_PUBLIC_ID) {
+          router.push("/");
+        }
+        // Fetch data on server-side
+        const res = await GlobalApi.getAppointments();
+        setBookingList(res.data);
 
-  const getAppointments = () => {
-    GlobalApi.getAppointments().then((res) => {
-      setBookingList(res.data);
-    });
-  };
+        // Check permission on server-side (optional)
+      }
+    };
+
+    fetchData();
+  }, [user]);
 
   return (
     <div className=" px-4 sm:px-10 mt-10 h-full max-w-[85rem] mx-auto">
-      <h2 className="text-2xl font-bold ">Up Coming Scheules</h2>
+      <h2 className="text-2xl font-bold text-white ">Up Coming Schedule</h2>
       <hr className="my-5" />
       <Tabs defaultValue="upcoming" className="w-full mt-5 ">
         <TabsList>
