@@ -4,7 +4,7 @@ import Image from "next/image";
 import React from "react";
 import BookAppointment from "./BookAppointment";
 
-const DoctorDetail = ({ doctor }) => {
+const BarberDetail = ({ doctor }) => {
   const socialMedaList = [
     { id: 1, icon: "/youtube.png", url: "" },
     { id: 2, icon: "/facebook.png", url: "" },
@@ -64,4 +64,4 @@ const DoctorDetail = ({ doctor }) => {
   );
 };
 
-export default DoctorDetail;
+export default BarberDetail;
