@@ -47,7 +47,7 @@ const Header = () => {
             >
               <button
                 onClick={() => setOpen((pv) => !pv)}
-                className="flex items-center px-3 py-2 transition-colors rounded-md bg-primary text-indigo-50 hover:bg-primary"
+                className="flex items-center px-3 py-2 transition-colors rounded-md text-indigo-50 hover:bg-primary"
               >
                 {/* <span className="text-sm font-medium"></span> */}
                 <motion.span variants={iconVariants}>
