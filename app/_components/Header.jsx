@@ -4,47 +4,27 @@ import { Button } from "@/components/ui/button";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { CircleChevronDown } from "lucide-react";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
   const { user } = useKindeBrowserClient();
-
-  useEffect(() => {}, [user]);
-
-  function toggleNavbarCollapse() {
-    setOpen(!open);
-  }
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      // Check if the clicked element is a link or inside the opened div
-      if (
-        ref.current &&
-        !ref.current.contains(event.target) &&
-        !event.target.closest("a")
-      ) {
-        setOpen(false); // Close the div if clicked outside and not on a link
-      }
-    };
-
-    // Add event listener when the component mounts
-    document.addEventListener("mousedown", handleClickOutside);
-
-    // Clean up the event listener when the component unmounts
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [open]);
 
   return (
     <header className="z-50 flex flex-wrap w-full py-3 mt-2 text-sm bg-transparent border-4 sm:justify-start sm:flex-nowrap sm:py-0">
@@ -61,102 +41,57 @@ const Header = () => {
             G|Barber's
           </Link>
           <div className="sm:hidden">
-            <Popover>
-              <PopoverTrigger>
-                {/*  */}
-                {/*  */}
-                <button
-                  type="button"
-                  className="flex items-center justify-center text-sm font-semibold text-gray-100 border rounded-lg size-9 gap-x-2 border-white/20 hover:border-white/40 disabled:opacity-50 disabled:pointer-events-none"
-                  aria-controls="navbar-collapse-with-animation"
-                  aria-label="Toggle navigation"
-                  onClick={toggleNavbarCollapse}
-                  ref={ref}
-                >
-                  {!open && (
-                    <svg
-                      className="flex-shrink-0 size-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <line x1="3" x2="21" y1="6" y2="6" />
-                      <line x1="3" x2="21" y1="12" y2="12" />
-                      <line x1="3" x2="21" y1="18" y2="18" />
-                    </svg>
-                  )}
-                  {open && (
-                    <svg
-                      className="flex-shrink-0 size-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M18 6 6 18" />
-                      <path d="m6 6 12 12" />
-                    </svg>
-                  )}
-                </button>
-                {/*  */}
-                {/*  */}
-              </PopoverTrigger>
-              <PopoverContent className="mt-4 mr-6 w-44">
-                <ul className="flex flex-col gap-2 ">
-                  {user ? (
-                    <>
-                      <Link
-                        className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
-                        href={"/"}
-                      >
-                        Home
-                      </Link>
-                      {user && user.id === process.env.NEXT_PUBLIC_ID ? (
-                        <Link
-                          className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
-                          href="/appointments"
-                        >
-                          My Schedules
-                        </Link>
-                      ) : (
-                        <Link
-                          href={"/my-booking"}
-                          className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
-                        >
-                          My Booking
-                        </Link>
-                      )}
+            <motion.div
+              animate={open ? "open" : "closed"}
+              className="relative z-50"
+            >
+              <button
+                onClick={() => setOpen((pv) => !pv)}
+                className="flex items-center px-3 py-2 transition-colors rounded-md text-indigo-50 hover:bg-primary"
+              >
+                {/* <span className="text-sm font-medium"></span> */}
+                <motion.span variants={iconVariants}>
+                  {/* <FiChevronDown /> */}
+                  <CircleChevronDown className="scale-90 " />
+                </motion.span>
+              </button>
 
-                      <Link
-                        className="p-2 rounded-md cursor-pointer hover:bg-slate-200"
-                        href="/contact"
-                      >
-                        Contact
-                      </Link>
+              <motion.ul
+                initial={wrapperVariants.closed}
+                variants={wrapperVariants}
+                style={{ originY: "top", translateX: "-85.5%" }}
+                className="flex flex-col gap-2 p-2 rounded-lg bg-white shadow-xl absolute top-[120%] left-[50%] w-40 overflow-hidden"
+              >
+                {user ? (
+                  <>
+                    <Link href={"/"}>
+                      <Option setOpen={setOpen} href="/" text="Home" />
+                    </Link>
 
-                      <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
-                        <LogoutLink>LogOut</LogoutLink>
-                      </li>
-                    </>
-                  ) : (
-                    <LoginLink className="mx-auto ">
-                      <Button>Get Started</Button>
-                    </LoginLink>
-                  )}
-                </ul>
-              </PopoverContent>
-            </Popover>
+                    {user && user.id === process.env.NEXT_PUBLIC_ID ? (
+                      <Link href={"/appointments"}>
+                        <Option setOpen={setOpen} text="My Schedule" />
+                      </Link>
+                    ) : (
+                      <Link href={"/my-booking"}>
+                        <Option setOpen={setOpen} text="My Booking" />
+                      </Link>
+                    )}
+                    <Link href={"/contact"}>
+                      <Option setOpen={setOpen} text="Contact" />
+                    </Link>
+
+                    <LogoutLink>
+                      <Option setOpen={setOpen} text="LogOut" />
+                    </LogoutLink>
+                  </>
+                ) : (
+                  <LoginLink className="mx-auto ">
+                    <Button>Get Started</Button>{" "}
+                  </LoginLink>
+                )}
+              </motion.ul>
+            </motion.div>
           </div>
         </div>
         <div
@@ -165,7 +100,7 @@ const Header = () => {
         >
           <div
             className="flex flex-col mt-5 gap-y-4 gap-x-0 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7"
-            ref={ref}
+            // ref={ref}
           >
             <Link
               className="font-medium text-white hover:text-slate-400 hover:scale-110transition-all sm:py-6"
@@ -191,8 +126,8 @@ const Header = () => {
 
             {/*  */}
             {/*  */}
-            <a
-              className="flex items-center gap-x-2 font-medium text-white/[.8] hover:text-white sm:border-s sm:border-white/[.3] sm:my-6 sm:ps-6"
+            <div
+              className="flex items-center gap-x-5 font-medium text-white/[.8] hover:text-white sm:border-s sm:border-white/[.3] sm:my-6 sm:ps-6"
               href="#"
             >
               <svg
@@ -210,6 +145,7 @@ const Header = () => {
                 <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
+
               {user ? (
                 <Popover>
                   <PopoverTrigger>
@@ -251,7 +187,7 @@ const Header = () => {
                   <Button>Get Started</Button>{" "}
                 </LoginLink>
               )}
-            </a>
+            </div>
             {/*  */}
             {/*  */}
           </div>
@@ -261,4 +197,61 @@ const Header = () => {
   );
 };
 
+const Option = ({ text, Icon, setOpen }) => {
+  return (
+    <motion.li
+      variants={itemVariants}
+      onClick={() => setOpen(false)}
+      className="flex items-center w-full gap-2 p-2 text-sm font-medium transition-colors rounded-md cursor-pointer whitespace-nowrap hover:bg-indigo-100 text-slate-700 hover:text-primary"
+    >
+      <motion.span variants={actionIconVariants}>{/* <Icon /> */}</motion.span>
+      <span>{text}</span>
+    </motion.li>
+  );
+};
+
 export default Header;
+
+const wrapperVariants = {
+  open: {
+    scaleY: 1,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.1,
+    },
+  },
+  closed: {
+    scaleY: 0,
+    transition: {
+      when: "afterChildren",
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const iconVariants = {
+  open: { rotate: 180 },
+  closed: { rotate: 0 },
+};
+
+const itemVariants = {
+  open: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      when: "beforeChildren",
+    },
+  },
+  closed: {
+    opacity: 0,
+    y: -15,
+    transition: {
+      when: "afterChildren",
+    },
+  },
+};
+
+const actionIconVariants = {
+  open: { scale: 1, y: 0 },
+  closed: { scale: 0, y: -7 },
+};
