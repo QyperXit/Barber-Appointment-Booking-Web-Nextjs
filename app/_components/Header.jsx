@@ -26,34 +26,6 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const { user } = useKindeBrowserClient();
 
-  useEffect(() => {}, [user]);
-
-  function toggleNavbarCollapse() {
-    setOpen(!open);
-  }
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      // Check if the clicked element is a link or inside the opened div
-      if (
-        ref.current &&
-        !ref.current.contains(event.target) &&
-        !event.target.closest("a")
-      ) {
-        setOpen(false); // Close the div if clicked outside and not on a link
-      }
-    };
-
-    // Add event listener when the component mounts
-    document.addEventListener("mousedown", handleClickOutside);
-
-    // Clean up the event listener when the component unmounts
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [open]);
-
   return (
     <header className="z-50 flex flex-wrap w-full py-3 mt-2 text-sm bg-transparent border-4 sm:justify-start sm:flex-nowrap sm:py-0">
       <nav
@@ -120,7 +92,7 @@ const Header = () => {
         >
           <div
             className="flex flex-col mt-5 gap-y-4 gap-x-0 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7"
-            ref={ref}
+            // ref={ref}
           >
             <Link
               className="font-medium text-white hover:text-slate-400 hover:scale-110transition-all sm:py-6"
@@ -146,8 +118,8 @@ const Header = () => {
 
             {/*  */}
             {/*  */}
-            <a
-              className="flex items-center gap-x-2 font-medium text-white/[.8] hover:text-white sm:border-s sm:border-white/[.3] sm:my-6 sm:ps-6"
+            <div
+              className="flex items-center gap-x-5 font-medium text-white/[.8] hover:text-white sm:border-s sm:border-white/[.3] sm:my-6 sm:ps-6"
               href="#"
             >
               <svg
@@ -165,6 +137,7 @@ const Header = () => {
                 <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
+
               {user ? (
                 <Popover>
                   <PopoverTrigger>
@@ -206,7 +179,7 @@ const Header = () => {
                   <Button>Get Started</Button>{" "}
                 </LoginLink>
               )}
-            </a>
+            </div>
             {/*  */}
             {/*  */}
           </div>
