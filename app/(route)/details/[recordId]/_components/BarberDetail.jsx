@@ -23,7 +23,7 @@ const BarberDetail = ({ doctor }) => {
             src={doctor.attributes?.Image?.data?.attributes?.url}
             width={200}
             height={200}
-            alt="doctor-image"
+            alt="barber-image"
             className="h-[280px]  w-full  object-cover"
           />
         </div>
@@ -43,9 +43,15 @@ const BarberDetail = ({ doctor }) => {
           <h2 className="text-[10px] font-bold bg-white p-1  px-2 text-black  w-fit">
             {doctor.attributes?.catergories?.data[0]?.attributes?.Name}
           </h2>
-          <div className="flex gap-3 ">
+          <div className="flex gap-3">
             {socialMedaList.map((item, index) => (
-              <Image width={30} height={30} src={item.icon} key={index} />
+              <Image
+                width={30}
+                height={30}
+                alt="socials-icon"
+                src={item.icon}
+                key={index}
+              />
             ))}
           </div>
 

@@ -16,7 +16,7 @@ const BarberSugesstions = ({ doctor }) => {
   };
 
   return (
-    <div className="p-5 mt-5 border-4 xl:ml-5 lg:py-12 ">
+    <div className="p-5 mt-5 border-4 xl:ml-5 lg:py-[3.80rem] ">
       <h2 className=" font-bold text-[18px] text-white">Sugesstions</h2>
 
       {doctorList.slice(0, 3).map((item, index) => (

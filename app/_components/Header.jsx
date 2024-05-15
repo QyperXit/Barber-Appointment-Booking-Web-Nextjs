@@ -62,26 +62,34 @@ const Header = () => {
                 style={{ originY: "top", translateX: "-85.5%" }}
                 className="flex flex-col gap-2 p-2 rounded-lg bg-white shadow-xl absolute top-[120%] left-[50%] w-40 overflow-hidden"
               >
-                <Link href={"/"}>
-                  <Option setOpen={setOpen} href="/" text="Home" />
-                </Link>
+                {user ? (
+                  <>
+                    <Link href={"/"}>
+                      <Option setOpen={setOpen} href="/" text="Home" />
+                    </Link>
 
-                {user && user.id === process.env.NEXT_PUBLIC_ID ? (
-                  <Link href={"/appointments"}>
-                    <Option setOpen={setOpen} text="My Schedule" />
-                  </Link>
+                    {user && user.id === process.env.NEXT_PUBLIC_ID ? (
+                      <Link href={"/appointments"}>
+                        <Option setOpen={setOpen} text="My Schedule" />
+                      </Link>
+                    ) : (
+                      <Link href={"/my-booking"}>
+                        <Option setOpen={setOpen} text="My Booking" />
+                      </Link>
+                    )}
+                    <Link href={"/contact"}>
+                      <Option setOpen={setOpen} text="Contact" />
+                    </Link>
+
+                    <LogoutLink>
+                      <Option setOpen={setOpen} text="LogOut" />
+                    </LogoutLink>
+                  </>
                 ) : (
-                  <Link href={"/my-booking"}>
-                    <Option setOpen={setOpen} text="My Booking" />
-                  </Link>
+                  <LoginLink className="mx-auto ">
+                    <Button>Get Started</Button>{" "}
+                  </LoginLink>
                 )}
-                <Link href={"/contact"}>
-                  <Option setOpen={setOpen} text="Contact" />
-                </Link>
-
-                <LogoutLink>
-                  <Option setOpen={setOpen} text="LogOut" />
-                </LogoutLink>
               </motion.ul>
             </motion.div>
           </div>
@@ -194,7 +202,7 @@ const Option = ({ text, Icon, setOpen }) => {
     <motion.li
       variants={itemVariants}
       onClick={() => setOpen(false)}
-      className="flex items-center w-full gap-2 p-2 text-xs font-medium transition-colors rounded-md cursor-pointer whitespace-nowrap hover:bg-indigo-100 text-slate-700 hover:text-primary"
+      className="flex items-center w-full gap-2 p-2 text-sm font-medium transition-colors rounded-md cursor-pointer whitespace-nowrap hover:bg-indigo-100 text-slate-700 hover:text-primary"
     >
       <motion.span variants={actionIconVariants}>{/* <Icon /> */}</motion.span>
       <span>{text}</span>
