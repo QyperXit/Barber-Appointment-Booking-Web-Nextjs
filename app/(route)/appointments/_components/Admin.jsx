@@ -10,18 +10,22 @@ import GlobalApi from "@/app/_utils/GlobalApi";
 const Admin = () => {
   const { user } = useKindeBrowserClient();
   const [bookingList, setBookingList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (user) {
-        // Fetch data on server-side
-        const res = await GlobalApi.getAppointments();
-        setBookingList(res.data);
-      }
-    };
-
-    fetchData();
+    user && getAppointments();
   }, [user]);
+
+  const getAppointments = () => {
+    setIsLoading(true);
+    GlobalApi.getAppointments()
+      .then((res) => {
+        setBookingList(res.data);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
   return (
     <div className=" px-4 sm:px-10 mt-10 h-full max-w-[85rem] mx-auto">
@@ -29,19 +33,21 @@ const Admin = () => {
       <hr className="my-5" />
       <Tabs defaultValue="upcoming" className="w-full mt-5 ">
         <TabsList>
-          <TabsTrigger value="today">Today</TabsTrigger>
+          <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
           <TabsTrigger value="expired">Expired</TabsTrigger>
         </TabsList>
-        <TabsContent value="today">
+        <TabsContent value="upcoming">
           <ScheduleList
             bookingList={bookingList}
             updateRecord={() => getAppointments()}
+            isLoading={isLoading}
           />
         </TabsContent>
         <TabsContent value="expired">
           <ScheduleList
             updateRecord={() => getAppointments()}
             bookingList={bookingList}
+            isLoading={isLoading}
           />
         </TabsContent>
       </Tabs>

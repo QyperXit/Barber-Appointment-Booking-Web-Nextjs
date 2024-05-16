@@ -8,7 +8,7 @@ import React from "react";
 import { toast } from "sonner";
 import CancelAppointment from "./CancelAppointment";
 
-const BookingList = ({ bookingList, expired, updateRecord }) => {
+const BookingList = ({ bookingList, expired, updateRecord, isLoading }) => {
   const onDeleteBooking = (item) => {
     GlobalApi.DeleteBooking(item.id).then((res) => {
       if (res) {
@@ -20,9 +20,31 @@ const BookingList = ({ bookingList, expired, updateRecord }) => {
 
   const limitedBookingList = bookingList.slice(0, 5);
 
+  if (isLoading) {
+    return (
+      <div className="flex flex-col gap-3 p-5 m-3 overflow-y-auto text-white rounded-lg h-lvh">
+        <div className="flex items-center space-x-4">
+          <Skeleton className="w-12 h-12 rounded-full" />
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-[450px]" />
+            <Skeleton className="h-4 w-[300px]" />
+          </div>
+        </div>
+        {/* Add more Skeleton components as needed */}
+        <div className="flex items-center space-x-4">
+          <Skeleton className="w-12 h-12 rounded-full" />
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-[450px]" />
+            <Skeleton className="h-4 w-[300px]" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col gap-3 p-5 m-3 overflow-y-auto text-white rounded-lg h-lvh">
-      {limitedBookingList.length > 0 ? (
+      {limitedBookingList &&
         limitedBookingList.map((item, index) => (
           <div key={index} className="flex items-center gap-4 p-5 border">
             {item?.attributes?.doctor?.data?.attributes?.Image?.data?.attributes
@@ -65,17 +87,7 @@ const BookingList = ({ bookingList, expired, updateRecord }) => {
               </>
             )}
           </div>
-        ))
-      ) : (
-        // skeleton
-        <div className="flex items-center space-x-4">
-          <Skeleton className="w-12 h-12 rounded-full" />
-          <div className="space-y-2">
-            <Skeleton className="h-4 w-[450px]" />
-            <Skeleton className="h-4 w-[300px]" />
-          </div>
-        </div>
-      )}
+        ))}
     </div>
   );
 };

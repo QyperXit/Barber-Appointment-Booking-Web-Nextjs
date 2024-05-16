@@ -1,5 +1,4 @@
 import GlobalApi from "@/app/_utils/GlobalApi";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Calendar, Clock } from "lucide-react";
 import moment from "moment/moment";
 import Image from "next/image";
@@ -7,9 +6,10 @@ import React from "react";
 import { toast } from "sonner";
 import barber from "../../../../public/barber.png";
 
+import { Skeleton } from "@/components/ui/skeleton";
 import CancelAppointment from "./CancelAppointment";
 
-const ScheduleList = ({ bookingList, updateRecord }) => {
+const ScheduleList = ({ bookingList, updateRecord, isLoading }) => {
   const onDeleteBooking = (item) => {
     GlobalApi.DeleteBooking(item.id).then((res) => {
       if (res) {
@@ -19,9 +19,31 @@ const ScheduleList = ({ bookingList, updateRecord }) => {
     });
   };
 
+  if (isLoading) {
+    return (
+      <div className="flex flex-col gap-3 p-5 m-3 overflow-y-auto text-white rounded-lg h-lvh">
+        <div className="flex items-center space-x-4">
+          <Skeleton className="w-12 h-12 rounded-full" />
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-[450px]" />
+            <Skeleton className="h-4 w-[300px]" />
+          </div>
+        </div>
+        {/* Add more Skeleton components as needed */}
+        <div className="flex items-center space-x-4">
+          <Skeleton className="w-12 h-12 rounded-full" />
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-[450px]" />
+            <Skeleton className="h-4 w-[300px]" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col gap-3 p-5 m-3 overflow-y-auto text-white rounded-lg h-lvh">
-      {bookingList.length > 0 ? (
+      {bookingList &&
         bookingList.map((item, index) => (
           <div
             key={index}
@@ -55,17 +77,7 @@ const ScheduleList = ({ bookingList, updateRecord }) => {
               </h2>
             </div>
           </div>
-        ))
-      ) : (
-        // skeleton
-        <div className="flex items-center space-x-4">
-          <Skeleton className="w-12 h-12 rounded-full" />
-          <div className="space-y-2">
-            <Skeleton className="h-4 w-[450px]" />
-            <Skeleton className="h-4 w-[300px]" />
-          </div>
-        </div>
-      )}
+        ))}
     </div>
   );
 };
