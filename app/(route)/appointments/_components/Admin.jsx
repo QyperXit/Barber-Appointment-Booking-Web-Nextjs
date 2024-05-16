@@ -29,10 +29,10 @@ const Admin = () => {
       <hr className="my-5" />
       <Tabs defaultValue="upcoming" className="w-full mt-5 ">
         <TabsList>
-          <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
+          <TabsTrigger value="today">Today</TabsTrigger>
           <TabsTrigger value="expired">Expired</TabsTrigger>
         </TabsList>
-        <TabsContent value="upcoming">
+        <TabsContent value="today">
           <ScheduleList
             bookingList={bookingList}
             updateRecord={() => getAppointments()}
