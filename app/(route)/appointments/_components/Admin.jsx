@@ -2,6 +2,7 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import moment from "moment/moment";
 import React, { useEffect, useState } from "react";
 import ScheduleList from "./ScheduleList";
 
@@ -11,10 +12,15 @@ const Admin = () => {
   const { user } = useKindeBrowserClient();
   const [bookingList, setBookingList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentDateBookings, setCurrentDateBookings] = useState([]);
 
   useEffect(() => {
     user && getAppointments();
   }, [user]);
+
+  useEffect(() => {
+    filterCurrentDateBookings();
+  }, [bookingList]);
 
   const getAppointments = () => {
     setIsLoading(true);
@@ -25,6 +31,15 @@ const Admin = () => {
       .finally(() => {
         setIsLoading(false);
       });
+  };
+
+  const filterCurrentDateBookings = () => {
+    const currentDate = moment().format("YYYY-MM-DD");
+    const currentDateBookings = bookingList.filter(
+      (booking) =>
+        moment(booking.attributes.Date).format("YYYY-MM-DD") === currentDate
+    );
+    setCurrentDateBookings(currentDateBookings);
   };
 
   return (
@@ -38,7 +53,7 @@ const Admin = () => {
         </TabsList>
         <TabsContent value="upcoming">
           <ScheduleList
-            bookingList={bookingList}
+            bookingList={currentDateBookings}
             updateRecord={() => getAppointments()}
             isLoading={isLoading}
           />
