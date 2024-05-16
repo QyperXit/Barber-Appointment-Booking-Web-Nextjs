@@ -35,36 +35,39 @@ const Admin = () => {
 
   const filterCurrentDateBookings = () => {
     const currentDate = moment().format("YYYY-MM-DD");
-    const currentDateBookings = bookingList.filter(
-      (booking) =>
-        moment(booking.attributes.Date).format("YYYY-MM-DD") === currentDate
-    );
-    setCurrentDateBookings(currentDateBookings);
+    const currentWeekBookings = [];
+    for (let i = 0; i < 6; i++) {
+      const date = moment().add(i, "days").format("YYYY-MM-DD");
+      const bookingsForDate = bookingList.filter(
+        (booking) =>
+          moment(booking.attributes.Date).format("YYYY-MM-DD") === date
+      );
+      currentWeekBookings.push(bookingsForDate);
+    }
+    setCurrentDateBookings(currentWeekBookings);
   };
 
   return (
-    <div className=" px-4 sm:px-10 mt-10 h-full max-w-[85rem] mx-auto">
-      <h2 className="text-2xl font-bold text-white ">Up Coming Schedule</h2>
+    <div className="px-4 sm:px-10 mt-10 h-full max-w-[85rem] mx-auto">
+      <h2 className="text-2xl font-bold text-white">Upcoming Schedule</h2>
       <hr className="my-5" />
-      <Tabs defaultValue="upcoming" className="w-full mt-5 ">
+      <Tabs defaultValue="upcoming" className="w-full mt-5">
         <TabsList>
-          <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
-          <TabsTrigger value="expired">Expired</TabsTrigger>
+          {currentDateBookings.map((_, index) => (
+            <TabsTrigger key={index} value={`day${index}`}>
+              {moment().add(index, "days").format("ddd, MMM D")}
+            </TabsTrigger>
+          ))}
         </TabsList>
-        <TabsContent value="upcoming">
-          <ScheduleList
-            bookingList={currentDateBookings}
-            updateRecord={() => getAppointments()}
-            isLoading={isLoading}
-          />
-        </TabsContent>
-        <TabsContent value="expired">
-          <ScheduleList
-            updateRecord={() => getAppointments()}
-            bookingList={bookingList}
-            isLoading={isLoading}
-          />
-        </TabsContent>
+        {currentDateBookings.map((dayBookings, index) => (
+          <TabsContent key={index} value={`day${index}`}>
+            <ScheduleList
+              bookingList={dayBookings}
+              updateRecord={getAppointments}
+              isLoading={isLoading}
+            />
+          </TabsContent>
+        ))}
       </Tabs>
     </div>
   );
