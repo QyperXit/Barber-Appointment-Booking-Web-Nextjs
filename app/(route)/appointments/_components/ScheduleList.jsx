@@ -1,4 +1,5 @@
 import GlobalApi from "@/app/_utils/GlobalApi";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Calendar, Clock } from "lucide-react";
 import moment from "moment/moment";
 import Image from "next/image";
@@ -20,7 +21,7 @@ const ScheduleList = ({ bookingList, updateRecord }) => {
 
   return (
     <div className="flex flex-col gap-3 p-5 m-3 overflow-y-auto text-white rounded-lg h-lvh">
-      {bookingList &&
+      {bookingList.length > 0 ? (
         bookingList.map((item, index) => (
           <div
             key={index}
@@ -54,7 +55,17 @@ const ScheduleList = ({ bookingList, updateRecord }) => {
               </h2>
             </div>
           </div>
-        ))}
+        ))
+      ) : (
+        // skeleton
+        <div className="flex items-center space-x-4">
+          <Skeleton className="w-12 h-12 rounded-full" />
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-[450px]" />
+            <Skeleton className="h-4 w-[300px]" />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
