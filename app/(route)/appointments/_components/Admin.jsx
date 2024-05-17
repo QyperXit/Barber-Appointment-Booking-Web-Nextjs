@@ -51,7 +51,7 @@ const Admin = () => {
     <div className="px-4 sm:px-10 mt-10 h-full max-w-[85rem] mx-auto">
       <h2 className="text-2xl font-bold text-white">Upcoming Schedule</h2>
       <hr className="my-5" />
-      <Tabs defaultValue="upcoming" className="w-full mt-5">
+      <Tabs defaultValue={`day${0}`} className="w-full mt-5">
         <TabsList>
           {currentDateBookings.map((_, index) => (
             <TabsTrigger key={index} value={`day${index}`}>
