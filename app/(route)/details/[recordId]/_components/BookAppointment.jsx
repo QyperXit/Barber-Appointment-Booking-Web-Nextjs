@@ -185,7 +185,7 @@ const BookAppointment = ({ doctor }) => {
                       return (
                         <h2
                           key={item.id}
-                          className={` p-2  border rounded-full text-center hover:bg-primary hover:text-white cursor-pointer ${
+                          className={` p-1 md:p-2  border rounded-full text-center hover:bg-primary hover:text-white cursor-pointer ${
                             item.time == selectedTimeSlot &&
                             "bg-primary text-white"
                           }`}
