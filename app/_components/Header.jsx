@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
-import { motion } from "framer-motion";
+import { color, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import React, {
@@ -86,10 +86,16 @@ const Header = () => {
                     </LogoutLink>
                   </>
                 ) : (
-                  <LoginLink className="mx-auto ">
-                    <Button>Get Started</Button>{" "}
-                  </LoginLink>
+                  <Link href={"/"}>
+                    <Option setOpen={setOpen} href="/" text="Home" />
+                  </Link>
                 )}
+                <Link href={"/contact"}>
+                  <Option setOpen={setOpen} text="Contact" />
+                </Link>
+                <LoginLink className=" text-primary">
+                  <Option setOpen={setOpen} text="Get Started" />
+                </LoginLink>
               </motion.ul>
             </motion.div>
           </div>
