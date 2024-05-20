@@ -36,7 +36,7 @@ const Admin = () => {
   const filterCurrentDateBookings = () => {
     const currentDate = moment().format("YYYY-MM-DD");
     const currentWeekBookings = [];
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 7; i++) {
       const date = moment().add(i, "days").format("YYYY-MM-DD");
       const bookingsForDate = bookingList.filter(
         (booking) =>

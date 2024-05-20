@@ -42,7 +42,7 @@ const ScheduleList = ({ bookingList, updateRecord, isLoading }) => {
   }
 
   return (
-    <div className="flex flex-col gap-3 p-5 m-3 overflow-y-auto text-white rounded-lg h-lvh">
+    <div className="flex flex-col gap-3 p-1 m-3 overflow-y-auto text-white rounded-lg md:p-5 h-lvh">
       {bookingList &&
         bookingList.map((item, index) => (
           <div
@@ -58,7 +58,7 @@ const ScheduleList = ({ bookingList, updateRecord, isLoading }) => {
             />
 
             <div className="flex flex-col w-full gap-2">
-              <h2 className="font-bold text-[18px] flex items-center justify-between ">
+              <h2 className="font-bold text-[18px] flex  items-center justify-between ">
                 {item.attributes.Username}
                 <CancelAppointment
                   onContinueClick={() => onDeleteBooking(item)}
