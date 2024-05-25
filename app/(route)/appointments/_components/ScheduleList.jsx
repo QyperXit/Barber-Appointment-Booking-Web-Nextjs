@@ -43,6 +43,24 @@ const ScheduleList = ({ bookingList, updateRecord, isLoading }) => {
 
   return (
     <div className="flex flex-col gap-3 p-1 m-3 overflow-y-auto text-white rounded-lg md:p-5 h-lvh">
+      {/* <h2 className="mb-3 text-xl font-bold">
+        Slots Taken:&nbsp;
+        <span className="text-lg font-normal ">
+          {" "}
+          22 / {bookingList.length}{" "}
+        </span>
+      </h2> */}
+      {bookingList.length === 0 ? (
+        <h2 className="mb-3 text-xl font-bold">No Slots Available</h2>
+      ) : (
+        <h2 className="mb-3 text-xl font-bold">
+          Slots Taken:&nbsp;
+          <span className="text-lg font-normal">
+            {" "}
+            22 / {bookingList.length}
+          </span>
+        </h2>
+      )}
       {bookingList &&
         bookingList.map((item, index) => (
           <div
