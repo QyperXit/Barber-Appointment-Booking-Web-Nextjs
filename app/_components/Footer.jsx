@@ -24,7 +24,7 @@ const Footer = () => {
         <p className="mt-4 text-sm text-gray-400 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-800 sm:py-2 sm:mt-0">
           © 2024 G|Barber's —
           <Link href="/contact" className="ml-1 text-gray-500">
-            @Location
+            @contact
           </Link>
         </p>
         <span className="inline-flex justify-center mt-4 sm:ml-auto sm:mt-0 sm:justify-start">

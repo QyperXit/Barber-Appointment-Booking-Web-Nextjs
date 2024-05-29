@@ -55,10 +55,10 @@ const BookingList = ({ bookingList, expired, updateRecord, isLoading }) => {
                     item.attributes.doctor.data.attributes.Image.data.attributes
                       .url
                   }
-                  width={100}
-                  height={100}
+                  width={70}
+                  height={70}
                   alt="barber-image"
-                  className="rounded-full h-[70px] w-[70px] object-cover"
+                  className="object-cover rounded-full aspect-square"
                 />
                 <div className="flex flex-col w-full gap-2 ">
                   <h2 className="font-bold text-[18px] flex items-center justify-between ">

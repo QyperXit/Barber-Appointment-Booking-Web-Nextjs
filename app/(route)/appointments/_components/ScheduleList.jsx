@@ -54,7 +54,7 @@ const ScheduleList = ({ bookingList, updateRecord, isLoading }) => {
         <h2 className="mb-3 text-xl font-bold">No Slots Available</h2>
       ) : (
         <h2 className="mb-3 text-xl font-bold">
-          Slots Taken:&nbsp;
+          Slots Booked:&nbsp;
           <span className="text-lg font-normal">
             {" "}
             22 / {bookingList.length}
