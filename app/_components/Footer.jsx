@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
@@ -21,15 +22,10 @@ const Footer = () => {
           <span className="ml-3 text-xl">G|Barber's</span>
         </a>
         <p className="mt-4 text-sm text-gray-400 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-800 sm:py-2 sm:mt-0">
-          © 2020 G|Barber's —
-          <a
-            href="https://twitter.com/knyttneve"
-            className="ml-1 text-gray-500"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            @knyttneve
-          </a>
+          © 2024 G|Barber's —
+          <Link href="/contact" className="ml-1 text-gray-500">
+            @contact
+          </Link>
         </p>
         <span className="inline-flex justify-center mt-4 sm:ml-auto sm:mt-0 sm:justify-start">
           <a className="text-gray-400">

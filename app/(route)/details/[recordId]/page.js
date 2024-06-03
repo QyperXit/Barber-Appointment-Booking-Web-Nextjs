@@ -6,15 +6,24 @@ import BarberSugesstions from "./_components/BarberSugesstions";
 
 const Details = ({ params }) => {
   const [doctor, setDoctor] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getDoctorById();
   }, []);
 
   const getDoctorById = () => {
-    GlobalApi.getDoctorById(params.recordId).then((res) => {
-      setDoctor(res.data);
-    });
+    setIsLoading(true);
+    GlobalApi.getDoctorById(params.recordId)
+      .then((res) => {
+        setDoctor(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching doctor data:", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
   return (
     <div className=" p-5 h-full md:px-10 max-w-[85rem] mx-auto">
@@ -22,7 +31,11 @@ const Details = ({ params }) => {
       <div className="grid grid-cols-1 xl:grid-cols-4">
         {/* Doc Details */}
         <div className="col-span-3 ">
-          {doctor && <BarberDetail doctor={doctor} />}
+          {isLoading ? (
+            <p className="text-white animate-pulse">Loading...</p>
+          ) : (
+            doctor && <BarberDetail doctor={doctor} isLoading={isLoading} />
+          )}
         </div>
         {/* doc sugesstions */}
         {/* <div></div> */}

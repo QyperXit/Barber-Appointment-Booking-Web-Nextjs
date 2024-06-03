@@ -181,11 +181,11 @@ const BookAppointment = ({ doctor }) => {
                     Select Time Slot
                   </h2>
                   <div className="grid grid-cols-3 gap-2 p-5 border rounded-lg">
-                    {timeSlot?.map((item) => {
+                    {timeSlot?.map((item, index) => {
                       return (
                         <h2
-                          key={item.id}
-                          className={` p-2  border rounded-full text-center hover:bg-primary hover:text-white cursor-pointer ${
+                          key={index}
+                          className={` p-1 md:p-2  border rounded-full text-center hover:bg-primary hover:text-white cursor-pointer ${
                             item.time == selectedTimeSlot &&
                             "bg-primary text-white"
                           }`}

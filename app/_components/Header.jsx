@@ -52,7 +52,7 @@ const Header = () => {
                 {/* <span className="text-sm font-medium"></span> */}
                 <motion.span variants={iconVariants}>
                   {/* <FiChevronDown /> */}
-                  <CircleChevronDown className="scale-90 " />
+                  <CircleChevronDown />
                 </motion.span>
               </button>
 
@@ -86,8 +86,8 @@ const Header = () => {
                     </LogoutLink>
                   </>
                 ) : (
-                  <LoginLink className="mx-auto ">
-                    <Button>Get Started</Button>{" "}
+                  <LoginLink>
+                    <Option setOpen={setOpen} text="Get Started" />
                   </LoginLink>
                 )}
               </motion.ul>
