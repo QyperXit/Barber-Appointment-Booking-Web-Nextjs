@@ -11,6 +11,7 @@ DoctorList.jsx
 
 # testing
 /coverage
+/tests
 
 # next.js
 /.next/
