@@ -10,18 +10,20 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Toaster } from "@/components/ui/sonner";
+import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "@/components/ui/use-toast";
+
 import { useUser } from "@clerk/nextjs";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { CalendarDays, Clock } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { toast } from "sonner";
 
 const BookAppointment = ({ doctor }) => {
   const [date, setDate] = useState(new Date());
   const [timeSlot, SetTimeSlot] = useState([]);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState();
   const [bookingList, setBookingList] = useState([]);
+  const { toast } = useToast();
 
   //gets user data from kinde
   const { user } = useUser();
@@ -117,13 +119,24 @@ const BookAppointment = ({ doctor }) => {
 
       if (isBookingTaken) {
         // If booking is already taken, show toast message
-        toast("This time slot is already booked.");
+        toast({
+          variant: "destructive",
+          title: "This time slot is already booked.",
+          description: "Try another slot",
+          action: <ToastAction altText="Try again">❕</ToastAction>,
+        });
       } else {
         // If booking is available, proceed with booking the appointment
         GlobalApi.bookApointment(data).then((res) => {
           if (res) {
             // GlobalApi.sendEmail(data).then((res) => {});
-            toast("Booking Confirmation Email sent!");
+            // toast("Booking Confirmation Email sent!");
+            toast({
+              // variant: "outline",
+              title: "Booking Confirmation!",
+              description: "Email sent!",
+              action: <ToastAction altText="Thank you">✅</ToastAction>,
+            });
           }
         });
       }

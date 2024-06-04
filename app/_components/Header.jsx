@@ -2,8 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { isSignedIn, SignOutButton, UserButton, useUser } from "@clerk/nextjs";
-// import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-// import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -28,7 +26,7 @@ const Header = () => {
   const { user, isSignedIn } = useUser();
 
   return (
-    <header classNamee="z-50 flex flex-wrap w-full py-3 mt-2 text-sm bg-transparent border-4 sm:justify-start sm:flex-nowrap sm:py-0">
+    <header className="z-50 flex flex-wrap w-full py-3 mt-2 text-sm bg-transparent border-4 sm:justify-start sm:flex-nowrap sm:py-0">
       <nav
         className="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 "
         aria-label="Global"

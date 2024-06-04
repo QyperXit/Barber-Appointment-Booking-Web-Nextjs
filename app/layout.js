@@ -1,6 +1,7 @@
+import { Toaster } from "@/components/ui/toaster";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
-import { Toaster } from "sonner";
+
 import Footer from "./_components/Footer";
 import Header from "./_components/Header";
 
