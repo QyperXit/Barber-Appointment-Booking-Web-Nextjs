@@ -2,12 +2,14 @@
 
 import GlobalApi from "@/app/_utils/GlobalApi";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { useUser } from "@clerk/nextjs";
+
 import React, { useEffect, useState } from "react";
 import { default as BookingList } from "./_components/BookingList";
 
 const MyBooking = () => {
-  const { user } = useKindeBrowserClient();
+  const { user } = useUser();
+
   const [bookingList, setBookigList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -19,7 +21,7 @@ const MyBooking = () => {
 
   const getUserBookingList = () => {
     setIsLoading(true);
-    GlobalApi.getUserBookingList(user?.email)
+    GlobalApi.getUserBookingList(user.emailAddresses[0]?.emailAddress)
       .then((res) => {
         setBookigList(res.data.data);
       })

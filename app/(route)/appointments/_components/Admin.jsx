@@ -1,7 +1,7 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { useUser } from "@clerk/nextjs";
 import moment from "moment/moment";
 import React, { useEffect, useState } from "react";
 import ScheduleList from "./ScheduleList";
@@ -9,7 +9,8 @@ import ScheduleList from "./ScheduleList";
 import GlobalApi from "@/app/_utils/GlobalApi";
 
 const Admin = () => {
-  const { user } = useKindeBrowserClient();
+  const { user } = useUser();
+
   const [bookingList, setBookingList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentDateBookings, setCurrentDateBookings] = useState([]);
