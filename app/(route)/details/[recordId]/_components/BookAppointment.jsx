@@ -11,7 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Toaster } from "@/components/ui/sonner";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { useUser } from "@clerk/nextjs";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { CalendarDays, Clock } from "lucide-react";
 import React, { useEffect, useState } from "react";
@@ -24,7 +24,7 @@ const BookAppointment = ({ doctor }) => {
   const [bookingList, setBookingList] = useState([]);
 
   //gets user data from kinde
-  const { user } = useKindeBrowserClient();
+  const { user } = useUser();
 
   useEffect(() => {
     getTime();
@@ -78,8 +78,8 @@ const BookAppointment = ({ doctor }) => {
   const saveBooking = () => {
     const data = {
       data: {
-        Username: user.given_name + " " + user.family_name,
-        Email: user.email,
+        Username: user.username,
+        Email: user.emailAddresses[0]?.emailAddress,
         Time: selectedTimeSlot,
         Date: date,
         doctor: doctor.id,

@@ -1,18 +1,18 @@
-// import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-
+import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import Admin from "./_components/Admin";
 
 const Appointments = async () => {
-  const { isAuthenticated, getPermission } = getKindeServerSession();
+  const user = await currentUser();
 
-  const isLoggedIn = await isAuthenticated();
-  if (!isLoggedIn) {
-    redirect("/api/auth/login");
+  if (!user) {
+    redirect("/");
   }
-  const requiredPermission = await getPermission("admin:true");
-  if (!requiredPermission.isGranted) {
+
+  const loggedInUserId = user.id;
+  const requiredUserId = process.env.NEXT_PUBLIC_ID;
+
+  if (loggedInUserId !== requiredUserId) {
     redirect("/");
   }
 

@@ -1,8 +1,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { isSignedIn, SignOutButton, UserButton, useUser } from "@clerk/nextjs";
+// import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+// import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -20,14 +21,14 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { CircleChevronDown } from "lucide-react";
+import { CalendarCheck, CircleChevronDown } from "lucide-react";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
-  const { user } = useKindeBrowserClient();
+  const { user, isSignedIn } = useUser();
 
   return (
-    <header className="z-50 flex flex-wrap w-full py-3 mt-2 text-sm bg-transparent border-4 sm:justify-start sm:flex-nowrap sm:py-0">
+    <header classNamee="z-50 flex flex-wrap w-full py-3 mt-2 text-sm bg-transparent border-4 sm:justify-start sm:flex-nowrap sm:py-0">
       <nav
         className="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 "
         aria-label="Global"
@@ -77,18 +78,21 @@ const Header = () => {
                         <Option setOpen={setOpen} text="My Booking" />
                       </Link>
                     )}
+                    <Link href={"/user-profile"}>
+                      <Option setOpen={setOpen} text="Account" />
+                    </Link>
                     <Link href={"/contact"}>
                       <Option setOpen={setOpen} text="Contact" />
                     </Link>
-
-                    <LogoutLink>
-                      <Option setOpen={setOpen} text="LogOut" />
-                    </LogoutLink>
+                    <SignOutButton
+                      className="flex items-center w-full p-2 pl-4 text-sm font-medium transition-colors rounded-md cursor-pointer whitespace-nowrap hover:bg-indigo-100 text-slate-700 hover:text-primary"
+                      onClick={() => setOpen(false)}
+                    />
                   </>
                 ) : (
-                  <LoginLink>
+                  <Link href={"sign-in"}>
                     <Option setOpen={setOpen} text="Get Started" />
-                  </LoginLink>
+                  </Link>
                 )}
               </motion.ul>
             </motion.div>
@@ -130,40 +134,31 @@ const Header = () => {
               className="flex items-center gap-x-5 font-medium text-white/[.8] hover:text-white sm:border-s sm:border-white/[.3] sm:my-6 sm:ps-6"
               href="#"
             >
-              <svg
-                className="flex-shrink-0 size-4"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-
+              {isSignedIn ? (
+                <UserButton />
+              ) : (
+                <svg
+                  className="flex-shrink-0 size-4 "
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              )}
               {user ? (
                 <Popover>
                   <PopoverTrigger>
-                    {user.picture ? (
-                      <Image
-                        src={user.picture}
-                        alt="profile-img"
-                        width={50}
-                        height={50}
-                        className="w-12 h-12 transition-transform ease-in-out rounded-full shadow-md hover:scale-90"
-                      />
-                    ) : (
-                      <div className="flex items-center justify-center w-12 h-12 font-semibold bg-gray-200 rounded-full shadow-sm">
-                        <span className="text-gray-600 text-[7px]">
-                          No Image
-                        </span>
-                      </div>
-                    )}
+                    {user.id !== process.env.NEXT_PUBLIC_ID ? (
+                      <CalendarCheck />
+                    ) : null}
                   </PopoverTrigger>
                   <PopoverContent className="w-44">
                     <ul className="flex flex-col gap-2">
@@ -175,17 +170,13 @@ const Header = () => {
                           My Booking
                         </Link>
                       )}
-
-                      <li className="p-2 rounded-md cursor-pointer hover:bg-slate-200">
-                        <LogoutLink>LogOut</LogoutLink>
-                      </li>
                     </ul>
                   </PopoverContent>
                 </Popover>
               ) : (
-                <LoginLink>
-                  <Button>Get Started</Button>{" "}
-                </LoginLink>
+                <Link href={"sign-in"}>
+                  <Button>Get Started</Button>
+                </Link>
               )}
             </div>
             {/*  */}
