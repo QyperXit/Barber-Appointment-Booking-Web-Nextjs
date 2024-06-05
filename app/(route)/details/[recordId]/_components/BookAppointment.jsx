@@ -15,7 +15,7 @@ import { useToast } from "@/components/ui/use-toast";
 
 import { useUser } from "@clerk/nextjs";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { CalendarDays, Clock } from "lucide-react";
+import { CalendarDays, Clock, PhoneCallIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 const BookAppointment = ({ doctor }) => {
@@ -212,15 +212,18 @@ const BookAppointment = ({ doctor }) => {
                     })}
                   </div>
                 </div>
-                <input
-                  type="text"
-                  className="w-32 p-1 border rounded max-sm:mt-4 placeholder:text-primary placeholder:text-xs"
-                  placeholder="Mobile Number"
-                  pattern="\d*"
-                  inputMode="tel"
-                  value={fone}
-                  onChange={(e) => setFone(e.target.value)}
-                />
+                <div className="flex items-center gap-3 animate-pulse ">
+                  <PhoneCallIcon className="items-center scale-75 text-primary" />
+                  <input
+                    type="text"
+                    className="p-1 border rounded w-36 max-sm:mt-4 placeholder:text-primary placeholder:text-xs"
+                    placeholder="Mobile Number"
+                    pattern="\d*"
+                    inputMode="tel"
+                    value={fone}
+                    onChange={(e) => setFone(e.target.value)}
+                  />
+                </div>
               </div>
             </div>
           </DialogDescription>
