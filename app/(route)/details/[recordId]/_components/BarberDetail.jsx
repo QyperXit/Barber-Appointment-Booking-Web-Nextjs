@@ -40,31 +40,39 @@ const BarberDetail = ({ doctor, isLoading }) => {
             </h2>
           )}
           <div className="flex gap-2">
-            <GraduationCap />
             {isLoading ? (
               <Skeleton className="w-1/3 h-4" />
             ) : (
-              <span>
-                {doctor.attributes?.Years_of_experience} of experience
-              </span>
+              <>
+                <h2 className="flex gap-2 text-gray-500 text-md">
+                  <GraduationCap />
+                  <span>
+                    {doctor.attributes?.Years_of_experience} of experience
+                  </span>
+                </h2>
+              </>
             )}
           </div>
           <div className="flex gap-2">
-            <MapPin />
             {isLoading ? (
               <Skeleton className="w-1/2 h-4" />
             ) : (
-              <span>{doctor.attributes.Address}</span>
+              <>
+                <h2 className="flex gap-2 text-gray-400 text-md">
+                  <MapPin />
+                  <span>{doctor.attributes.Address}</span>
+                </h2>
+              </>
             )}
           </div>
           {isLoading ? (
             <Skeleton className="w-1/4 h-4" />
           ) : (
-            <h2 className="text-[10px] font-bold bg-white p-1 px-2 text-black w-fit">
+            <h2 className="text-[10px] font-bold bg-white p-1 px-2 mt-2 text-black w-fit">
               {doctor.attributes?.catergories?.data[0]?.attributes?.Name}
             </h2>
           )}
-          <div className="flex gap-3">
+          {/* <div className="flex gap-3">
             {socialMedaList.map((item, index) => (
               <Image
                 width={30}
@@ -74,7 +82,7 @@ const BarberDetail = ({ doctor, isLoading }) => {
                 key={index}
               />
             ))}
-          </div>
+          </div> */}
           <BookAppointment doctor={doctor} />
         </div>
         {/* about */}

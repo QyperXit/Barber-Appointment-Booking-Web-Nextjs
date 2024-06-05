@@ -74,8 +74,9 @@ export default function Page() {
                 Eligendi nam dolorum aliquam, quibusdam aperiam voluptatum.
               </p>
             </div>
-
-            <SignIn />
+            <div className="mt-5 ">
+              <SignIn />
+            </div>
           </div>
         </main>
       </div>
