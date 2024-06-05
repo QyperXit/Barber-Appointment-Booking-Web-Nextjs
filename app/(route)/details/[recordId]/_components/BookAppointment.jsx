@@ -85,6 +85,7 @@ const BookAppointment = ({ doctor }) => {
         Time: selectedTimeSlot,
         Date: date,
         doctor: doctor.id,
+        Number: user.phoneNumbers[0].phoneNumber,
         // Note: note,
       },
     };
