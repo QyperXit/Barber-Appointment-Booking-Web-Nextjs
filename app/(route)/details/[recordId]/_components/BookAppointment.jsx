@@ -193,7 +193,7 @@ const BookAppointment = ({ doctor }) => {
                     <Clock className="w-5 h-5 text-primary" />
                     Select Time Slot
                   </h2>
-                  <div className="grid grid-cols-3 gap-2 p-5 border rounded-lg">
+                  <div className="grid grid-cols-3 gap-2 p-5 border rounded-lg max-sm:overflow-auto max-sm:h-[12em] ">
                     {timeSlot?.map((item, index) => {
                       return (
                         <h2
