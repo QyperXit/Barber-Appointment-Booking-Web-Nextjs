@@ -82,6 +82,7 @@ const ScheduleList = ({ bookingList, updateRecord, isLoading }) => {
                   onContinueClick={() => onDeleteBooking(item)}
                 />
               </h2>
+              {/* <h2>{item.attribut.Number}</h2> */}
               <h2 className=" text-[14px] text-gray-500">
                 {item.attributes.Email}
               </h2>
