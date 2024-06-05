@@ -174,7 +174,7 @@ const BookAppointment = ({ doctor }) => {
             <div>
               <div className="grid grid-cols-1 mt-5 md:grid-cols-2">
                 {/* Calender */}
-                <div className="flex flex-col items-baseline gap-3">
+                <div className="flex flex-col items-baseline gap-3 max-sm:overflow-auto max-sm:h-[16em]">
                   <h2 className="flex items-center gap-2 ">
                     <CalendarDays className="w-5 h-5 text-primary" />
                     Select Date
