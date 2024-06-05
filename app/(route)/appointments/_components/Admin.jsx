@@ -14,7 +14,6 @@ const Admin = () => {
   const [bookingList, setBookingList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentDateBookings, setCurrentDateBookings] = useState([]);
-  // console.log(bookingList[8]);
 
   useEffect(() => {
     user && getAppointments();
