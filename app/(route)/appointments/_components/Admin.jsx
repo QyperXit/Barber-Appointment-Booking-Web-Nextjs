@@ -43,6 +43,19 @@ const Admin = () => {
         (booking) =>
           moment(booking.attributes.Date).format("YYYY-MM-DD") === date
       );
+
+      bookingsForDate.sort((a, b) => {
+        const aTime = moment(
+          `${a.attributes.Date} ${a.attributes.Time}`,
+          "YYYY-MM-DD HH:mm"
+        );
+        const bTime = moment(
+          `${b.attributes.Date} ${b.attributes.Time}`,
+          "YYYY-MM-DD HH:mm"
+        );
+        return aTime.diff(bTime);
+      });
+
       currentWeekBookings.push(bookingsForDate);
     }
     setCurrentDateBookings(currentWeekBookings);

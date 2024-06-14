@@ -15,13 +15,14 @@ import { useToast } from "@/components/ui/use-toast";
 
 import { useUser } from "@clerk/nextjs";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { CalendarDays, Clock } from "lucide-react";
+import { CalendarDays, Clock, PhoneCallIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 const BookAppointment = ({ doctor }) => {
   const [date, setDate] = useState(new Date());
   const [timeSlot, SetTimeSlot] = useState([]);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState();
+  const [fone, setFone] = useState([]);
   const [bookingList, setBookingList] = useState([]);
   const { toast } = useToast();
 
@@ -85,6 +86,7 @@ const BookAppointment = ({ doctor }) => {
         Time: selectedTimeSlot,
         Date: date,
         doctor: doctor.id,
+        Number: fone,
         // Note: note,
       },
     };
@@ -210,6 +212,18 @@ const BookAppointment = ({ doctor }) => {
                     })}
                   </div>
                 </div>
+                <div className="flex items-center gap-3 animate-pulse ">
+                  <PhoneCallIcon className="items-center scale-75 text-primary" />
+                  <input
+                    type="text"
+                    className="p-1 border rounded w-36 max-sm:mt-4 placeholder:text-primary placeholder:text-xs"
+                    placeholder="Mobile Number"
+                    pattern="\d*"
+                    inputMode="tel"
+                    value={fone}
+                    onChange={(e) => setFone(e.target.value)}
+                  />
+                </div>
               </div>
             </div>
           </DialogDescription>
@@ -227,7 +241,7 @@ const BookAppointment = ({ doctor }) => {
               </Button>
               <Button
                 type="button"
-                disabled={!(date && selectedTimeSlot)}
+                disabled={!(date && selectedTimeSlot && fone.length === 11)}
                 onClick={() => saveBooking()}
               >
                 Submit
