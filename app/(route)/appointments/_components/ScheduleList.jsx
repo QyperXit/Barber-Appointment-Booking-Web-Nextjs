@@ -82,7 +82,13 @@ const ScheduleList = ({ bookingList, updateRecord, isLoading }) => {
                   onContinueClick={() => onDeleteBooking(item)}
                 />
               </h2>
-              {item.attributes.Number && <h2>+44 {item.attributes.Number}</h2>}
+              {item.attributes.Number && (
+                <h2>
+                  +44 {item.attributes.Number.slice(1, 4)}{" "}
+                  {item.attributes.Number.slice(3, 7)}{" "}
+                  {item.attributes.Number.slice(7, 10)}
+                </h2>
+              )}
               <h2 className=" text-[14px] text-gray-500">
                 {item.attributes.Email}
               </h2>
