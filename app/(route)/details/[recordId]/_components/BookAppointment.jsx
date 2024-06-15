@@ -212,15 +212,19 @@ const BookAppointment = ({ doctor }) => {
                     })}
                   </div>
                 </div>
-                <div className="flex items-center gap-3 animate-pulse ">
+                <div className="flex items-center gap-3 sm:mt-4 animate-pulse ">
                   <PhoneCallIcon className="items-center scale-75 text-primary" />
                   <input
                     type="text"
                     className="p-1 border rounded w-36 max-sm:mt-4 placeholder:text-primary placeholder:text-xs"
                     placeholder="Mobile Number"
-                    pattern="\d*"
+                    // pattern="\d*"
                     inputMode="tel"
+                    pattern="^\d{11}$"
+                    title="Please enter exactly 11 digits"
+                    maxLength="11"
                     value={fone}
+                    required
                     onChange={(e) => setFone(e.target.value)}
                   />
                 </div>
