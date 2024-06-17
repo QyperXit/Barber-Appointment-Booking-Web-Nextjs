@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
+import moment from "moment/moment";
 
 import { useUser } from "@clerk/nextjs";
 import { DialogClose } from "@radix-ui/react-dialog";
@@ -20,17 +21,17 @@ import React, { useEffect, useState } from "react";
 
 const BookAppointment = ({ doctor }) => {
   const [date, setDate] = useState(new Date());
-  const [timeSlot, SetTimeSlot] = useState([]);
+  const [timeSlot, setTimeSlot] = useState([]);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState();
-  const [fone, setFone] = useState([]);
-  const [bookingList, setBookingList] = useState([]);
-  const { toast } = useToast();
+  const [fone, setFone] = useState("");
+  const [bookedAppointments, setBookedAppointments] = useState([]);
 
-  //gets user data from kinde
+  const { toast } = useToast();
   const { user } = useUser();
 
   useEffect(() => {
     getTime();
+    fetchBookedAppointments();
   }, [date]);
 
   const getTime = () => {
@@ -75,7 +76,7 @@ const BookAppointment = ({ doctor }) => {
       }
     }
 
-    SetTimeSlot(timeList);
+    setTimeSlot(timeList);
   };
 
   const saveBooking = () => {
@@ -91,13 +92,10 @@ const BookAppointment = ({ doctor }) => {
       },
     };
 
-    // Fetch appointments from the backend
     GlobalApi.getAppointments().then((res) => {
       const existingAppointments = res.data;
 
-      // Check if the selected date and time slot already exist in appointments
       const isBookingTaken = existingAppointments.some((item) => {
-        // Extract the date portion from the existing appointment
         const existingDate = new Date(item.attributes.Date);
         const existingDateOnly = new Date(
           existingDate.getFullYear(),
@@ -105,14 +103,12 @@ const BookAppointment = ({ doctor }) => {
           existingDate.getDate()
         );
 
-        // Extract the date portion from the selected date
         const selectedDateOnly = new Date(
           date.getFullYear(),
           date.getMonth(),
           date.getDate()
         );
 
-        // Compare the date portions
         return (
           existingDateOnly.getTime() === selectedDateOnly.getTime() &&
           item.attributes.Time === selectedTimeSlot
@@ -120,7 +116,6 @@ const BookAppointment = ({ doctor }) => {
       });
 
       if (isBookingTaken) {
-        // If booking is already taken, show toast message
         toast({
           variant: "destructive",
           title: "This time slot is already booked.",
@@ -128,13 +123,9 @@ const BookAppointment = ({ doctor }) => {
           action: <ToastAction altText="Try again">❕</ToastAction>,
         });
       } else {
-        // If booking is available, proceed with booking the appointment
         GlobalApi.bookApointment(data).then((res) => {
           if (res) {
-            // GlobalApi.sendEmail(data).then((res) => {});
-            // toast("Booking Confirmation Email sent!");
             toast({
-              // variant: "outline",
               title: "Booking Confirmation!",
               description: "Email sent!",
               action: <ToastAction altText="Thank you">✅</ToastAction>,
@@ -145,10 +136,28 @@ const BookAppointment = ({ doctor }) => {
     });
   };
 
+  const fetchBookedAppointments = async () => {
+    try {
+      const res = await GlobalApi.getAppointments();
+      setBookedAppointments(res.data);
+      if (res.error) {
+        console.error("Error fetching booked appointments:", res.error);
+      }
+    } catch (error) {
+      console.error("Error fetching booked appointments:", error);
+    }
+  };
+
+  const allBookedAppointments = bookedAppointments.flatMap(
+    (appointment) => appointment.attributes
+  );
+  const formattedDate = moment(date).format("YYYY-MM-DD");
+  const bookedAppointmentsForDate = allBookedAppointments.filter(
+    (booking) => moment(booking.Date).format("YYYY-MM-DD") === formattedDate
+  );
+
   const isPastDay = (day) => {
-    // return day < new Date();
     const today = new Date();
-    // Set the time to midnight for both the current day and the provided day
     const todayMidnight = new Date(
       today.getFullYear(),
       today.getMonth(),
@@ -159,14 +168,12 @@ const BookAppointment = ({ doctor }) => {
       day.getMonth(),
       day.getDate()
     );
-    // Check if the provided day is before today's midnight time
     return providedDayMidnight < todayMidnight;
   };
 
   return (
     <Dialog>
       <DialogTrigger className="flex">
-        {" "}
         <Button className="mt-3 rounded-full w-fit">Book Appointment</Button>
       </DialogTrigger>
       <DialogContent>
@@ -175,9 +182,8 @@ const BookAppointment = ({ doctor }) => {
           <DialogDescription>
             <div>
               <div className="grid grid-cols-1 mt-5 md:grid-cols-2">
-                {/* Calender */}
-                <div className="flex flex-col items-baseline gap-3 max-xs:overflow-auto max-xs:h-[16em]  ">
-                  <h2 className="flex items-center gap-2 ">
+                <div className="flex flex-col items-baseline gap-3 max-xs:overflow-auto max-xs:h-[16em]">
+                  <h2 className="flex items-center gap-2">
                     <CalendarDays className="w-5 h-5 text-primary" />
                     Select Date
                   </h2>
@@ -189,22 +195,29 @@ const BookAppointment = ({ doctor }) => {
                     className="border rounded-md"
                   />
                 </div>
-                {/* timeslot */}
                 <div className="mt-3 md:mt-0">
-                  <h2 className="flex items-center gap-2 mb-3 ">
+                  <h2 className="flex items-center gap-2 mb-3">
                     <Clock className="w-5 h-5 text-primary" />
                     Select Time Slot
                   </h2>
-                  <div className="grid grid-cols-3 gap-2 p-5 border rounded-lg max-sm:overflow-auto max-sm:h-[12em] ">
+                  <div className="grid grid-cols-3 gap-2 p-5 border rounded-lg max-sm:overflow-auto max-sm:h-[12em]">
                     {timeSlot?.map((item, index) => {
+                      const isBooked = bookedAppointmentsForDate.some(
+                        (booking) => booking.Time === item.time
+                      );
                       return (
                         <h2
                           key={index}
-                          className={` p-1 md:p-2  border rounded-full text-center hover:bg-primary hover:text-white cursor-pointer ${
-                            item.time == selectedTimeSlot &&
-                            "bg-primary text-white"
+                          className={`p-1 md:p-2 border rounded-full text-center cursor-pointer ${
+                            isBooked
+                              ? "bg-red-500 text-white cursor-not-allowed"
+                              : item.time === selectedTimeSlot
+                              ? "bg-primary text-white"
+                              : "hover:bg-primary hover:text-white"
                           }`}
-                          onClick={() => setSelectedTimeSlot(item.time)}
+                          onClick={() =>
+                            !isBooked && setSelectedTimeSlot(item.time)
+                          }
                         >
                           {item.time}
                         </h2>
@@ -212,15 +225,18 @@ const BookAppointment = ({ doctor }) => {
                     })}
                   </div>
                 </div>
-                <div className="flex items-center gap-3 animate-pulse ">
+                <div className="flex items-center gap-3 sm:mt-4 animate-pulse">
                   <PhoneCallIcon className="items-center scale-75 text-primary" />
                   <input
                     type="text"
                     className="p-1 border rounded w-36 max-sm:mt-4 placeholder:text-primary placeholder:text-xs"
                     placeholder="Mobile Number"
-                    pattern="\d*"
                     inputMode="tel"
+                    pattern="^\d{11}$"
+                    title="Please enter exactly 11 digits"
+                    maxLength="11"
                     value={fone}
+                    required
                     onChange={(e) => setFone(e.target.value)}
                   />
                 </div>
@@ -230,10 +246,10 @@ const BookAppointment = ({ doctor }) => {
         </DialogHeader>
         <DialogFooter className="flex-col-reverse gap-3 sm:justify-end sm:flex">
           <DialogClose asChild>
-            <div className="flex gap-3 ">
+            <div className="flex gap-3">
               <Button
                 type="button"
-                className="text-gray-600 border "
+                className="text-gray-600 border"
                 variant="outline"
                 onClick={close}
               >
