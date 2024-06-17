@@ -1,5 +1,6 @@
 "use client";
 import GlobalApi from "@/app/_utils/GlobalApi";
+import { Loader } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import BarberDetail from "./_components/BarberDetail";
 import BarberSugesstions from "./_components/BarberSugesstions";
@@ -32,7 +33,11 @@ const Details = ({ params }) => {
         {/* Doc Details */}
         <div className="col-span-3 ">
           {isLoading ? (
-            <p className="text-white animate-pulse">Loading...</p>
+            <p className="flex gap-2 mb-4 text-white animate-pulse">
+              {" "}
+              <Loader className="text-white animate-spin" />
+              Loading...
+            </p>
           ) : (
             doctor && <BarberDetail doctor={doctor} isLoading={isLoading} />
           )}
