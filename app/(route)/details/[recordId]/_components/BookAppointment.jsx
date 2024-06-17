@@ -208,7 +208,7 @@ const BookAppointment = ({ doctor }) => {
                       return (
                         <h2
                           key={index}
-                          className={`p-1 md:p-2 border rounded-full text-center cursor-pointer ${
+                          className={`p-1 md:p-2 border rounded-full h-fit text-center cursor-pointer ${
                             isBooked
                               ? "bg-red-500 text-white cursor-not-allowed"
                               : item.time === selectedTimeSlot
@@ -225,11 +225,11 @@ const BookAppointment = ({ doctor }) => {
                     })}
                   </div>
                 </div>
-                <div className="flex items-center gap-3 sm:mt-4 animate-pulse">
-                  <PhoneCallIcon className="items-center scale-75 text-primary" />
+                <div className="flex items-center gap-3 mt-4 sm:mt-4 animate-pulse">
+                  <PhoneCallIcon className="scale-75 text-primary" />
                   <input
                     type="text"
-                    className="p-1 border rounded w-36 max-sm:mt-4 placeholder:text-primary placeholder:text-xs"
+                    className="p-1 border rounded w-36 placeholder:text-primary placeholder:text-xs"
                     placeholder="Mobile Number"
                     inputMode="tel"
                     pattern="^\d{11}$"
