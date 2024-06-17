@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { GraduationCap, MapPin } from "lucide-react";
+import { Briefcase, MapPin } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import BookAppointment from "./BookAppointment";
@@ -45,7 +45,7 @@ const BarberDetail = ({ doctor, isLoading }) => {
             ) : (
               <>
                 <h2 className="flex gap-2 text-gray-500 text-md">
-                  <GraduationCap />
+                  <Briefcase className="scale-95 " />
                   <span>
                     {doctor.attributes?.Years_of_experience} of experience
                   </span>
