@@ -19,6 +19,13 @@ const ScheduleList = ({ bookingList, updateRecord, isLoading }) => {
     });
   };
 
+  const isCurrentTime = (time) => {
+    const now = moment();
+    const appointmentTime = moment(time, "HH:mm");
+    const timeDiff = appointmentTime.diff(now, "minutes");
+    return timeDiff > 0 && timeDiff < 30; // Consider it current only if within the next 30 minutes
+  };
+
   if (isLoading) {
     return (
       <div className="flex flex-col gap-3 p-5 m-3 overflow-y-auto text-white rounded-lg h-lvh">
@@ -65,7 +72,10 @@ const ScheduleList = ({ bookingList, updateRecord, isLoading }) => {
         bookingList.map((item, index) => (
           <div
             key={index}
-            className="flex items-center w-full gap-5 p-3 border "
+            // className="flex items-center w-full gap-5 p-3 border "
+            className={`flex items-center w-full gap-5 p-3 border ${
+              isCurrentTime(item.attributes.Time) ? "bg-gray-700" : ""
+            }`}
           >
             <Image
               width={70}
