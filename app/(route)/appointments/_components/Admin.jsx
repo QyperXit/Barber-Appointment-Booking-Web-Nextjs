@@ -65,7 +65,7 @@ const Admin = () => {
 
   return (
     <div className="px-4 sm:px-10 mt-10 h-full max-w-[85rem] mx-auto">
-      <div className="flex justify-between">
+      <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold text-white w-fit">
           Upcoming Schedule
         </h2>
@@ -80,6 +80,7 @@ const Admin = () => {
           // isOpen={isBookingModalOpen}
           // onClose={() => setIsBookingModalOpen(false)}
           buttonText="Bookings"
+          className="mt-0"
         />
       </div>
       <hr className="my-5" />

@@ -19,7 +19,11 @@ import { DialogClose } from "@radix-ui/react-dialog";
 import { CalendarDays, Clock, PhoneCallIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
-const BookAppointment = ({ doctor, buttonText = "Book Appointment" }) => {
+const BookAppointment = ({
+  doctor,
+  buttonText = "Book Appointment",
+  className = "",
+}) => {
   const [date, setDate] = useState(new Date());
   const [timeSlot, setTimeSlot] = useState([]);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState();
@@ -174,7 +178,9 @@ const BookAppointment = ({ doctor, buttonText = "Book Appointment" }) => {
   return (
     <Dialog>
       <DialogTrigger className="flex">
-        <Button className="mt-3 rounded-full w-fit">{buttonText}</Button>
+        <Button className={`mt-3 rounded-full w-fit ${className}`}>
+          {buttonText}
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
