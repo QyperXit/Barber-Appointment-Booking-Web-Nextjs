@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useUser } from "@clerk/nextjs";
 import moment from "moment/moment";
@@ -63,7 +64,12 @@ const Admin = () => {
 
   return (
     <div className="px-4 sm:px-10 mt-10 h-full max-w-[85rem] mx-auto">
-      <h2 className="text-2xl font-bold text-white">Upcoming Schedule</h2>
+      <div className="flex justify-between">
+        <h2 className="text-2xl font-bold text-white w-fit">
+          Upcoming Schedule
+        </h2>
+        <Button className="z-20 font-semibold border w-fit">Bookings</Button>
+      </div>
       <hr className="my-5" />
       <Tabs defaultValue={`day${0}`} className="w-full mt-5">
         <TabsList>
