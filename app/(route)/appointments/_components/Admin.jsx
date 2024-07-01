@@ -80,7 +80,7 @@ const Admin = () => {
           // isOpen={isBookingModalOpen}
           // onClose={() => setIsBookingModalOpen(false)}
           buttonText="Bookings"
-          className="mt-0"
+          className="mt-0 rounded"
         />
       </div>
       <hr className="my-5" />
