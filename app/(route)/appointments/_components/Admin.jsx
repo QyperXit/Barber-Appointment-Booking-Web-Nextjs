@@ -8,6 +8,7 @@ import React, { useEffect, useState } from "react";
 import ScheduleList from "./ScheduleList";
 
 import GlobalApi from "@/app/_utils/GlobalApi";
+import BookAppointment from "../../details/[recordId]/_components/BookAppointment";
 
 const Admin = () => {
   const { user } = useUser();
@@ -68,7 +69,18 @@ const Admin = () => {
         <h2 className="text-2xl font-bold text-white w-fit">
           Upcoming Schedule
         </h2>
-        <Button className="z-20 font-semibold border w-fit">Bookings</Button>
+        {/* <Button
+          className="z-20 font-semibold border w-fit"
+          onClick={() => setIsBookingModalOpen(true)}
+        >
+          Bookings
+        </Button> */}
+        <BookAppointment
+          doctor={{}} // Pass the necessary doctor data here
+          // isOpen={isBookingModalOpen}
+          // onClose={() => setIsBookingModalOpen(false)}
+          buttonText="Bookings"
+        />
       </div>
       <hr className="my-5" />
       <Tabs defaultValue={`day${0}`} className="w-full mt-5">
