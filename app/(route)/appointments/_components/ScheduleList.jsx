@@ -23,7 +23,7 @@ const ScheduleList = ({ bookingList, updateRecord, isLoading }) => {
     const now = moment();
     const appointmentTime = moment(time, "HH:mm");
     const timeDiff = appointmentTime.diff(now, "minutes");
-    return timeDiff > 0 && timeDiff < 30; // Consider it current only if within the next 30 minutes
+    return timeDiff > 0 && timeDiff < 30;
   };
 
   if (isLoading) {
@@ -36,7 +36,6 @@ const ScheduleList = ({ bookingList, updateRecord, isLoading }) => {
             <Skeleton className="h-4 w-[300px]" />
           </div>
         </div>
-        {/* Add more Skeleton components as needed */}
         <div className="flex items-center space-x-4">
           <Skeleton className="w-12 h-12 rounded-full" />
           <div className="space-y-2">

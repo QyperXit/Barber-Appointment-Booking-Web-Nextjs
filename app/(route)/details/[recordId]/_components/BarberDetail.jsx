@@ -47,7 +47,7 @@ const BarberDetail = ({ doctor, isLoading }) => {
                 <h2 className="flex gap-2 text-gray-500 text-md">
                   <Briefcase className="scale-95 " />
                   <span>
-                    {doctor.attributes?.Years_of_experience} of experience
+                    {doctor.attributes?.Years_of_experience} years of experience
                   </span>
                 </h2>
               </>

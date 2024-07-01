@@ -19,7 +19,7 @@ const getDoctorByCategory = (category) =>
 const bookApointment = async (data) => {
   try {
     const response = await axiosClient.post("/appointments", data);
-    // Handle successful booking (e.g., display a confirmation message)
+
     return response.data; // Optional: return the response data if needed
   } catch (error) {
     console.error("Error booking appointment:", error);
@@ -27,9 +27,6 @@ const bookApointment = async (data) => {
   }
 };
 
-// console.log(bookApointment());
-
-const doctorId = 3; // Replace with the actual doctor ID
 const getDoctorById = async (id) => {
   try {
     const response = await axiosClient.get(`/doctors/${id}?populate=*`);
@@ -37,7 +34,6 @@ const getDoctorById = async (id) => {
     return response.data; // Return doctor data
   } catch (error) {
     console.error("Error fetching doctor:", error);
-    // Handle error (e.g., display an error message to the user)
   }
 };
 

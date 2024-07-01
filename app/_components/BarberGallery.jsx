@@ -2,9 +2,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 
-import React, { useEffect, useState } from "react";
-
-const BarberGallery = ({ doctor }) => {
+const BarberGallery = ({}) => {
   return (
     <div className="mx-auto mt-20 mb-10 md:max-w-4xl">
       <div className="grid grid-cols-1 gap-2 mx-auto place-items-center sm:grid-cols-4 ">

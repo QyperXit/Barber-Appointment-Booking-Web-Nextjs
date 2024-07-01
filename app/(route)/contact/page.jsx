@@ -31,7 +31,7 @@ const Contact = () => {
             <PhoneCallIcon className="mx-auto scale-150" />
             <h1 className="mt-3 text-2xl font-bold text-center">Phone</h1>
             <h2 className="mt-3 ">G|Barbers</h2>
-            <p>+44 752 772 967</p>
+            <p>+44 794 745 5588</p>
           </div>
         </div>
       </div>
