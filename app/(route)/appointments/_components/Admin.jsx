@@ -69,16 +69,9 @@ const Admin = () => {
         <h2 className="text-2xl font-bold text-white w-fit">
           Upcoming Schedule
         </h2>
-        {/* <Button
-          className="z-20 font-semibold border w-fit"
-          onClick={() => setIsBookingModalOpen(true)}
-        >
-          Bookings
-        </Button> */}
+
         <BookAppointment
-          doctor={{}} // Pass the necessary doctor data here
-          // isOpen={isBookingModalOpen}
-          // onClose={() => setIsBookingModalOpen(false)}
+          doctor={{}}
           buttonText="Bookings"
           className="mt-0 rounded"
         />
