@@ -3,7 +3,7 @@ const { default: axios } = require("axios");
 const API_KEY = process.env.NEXT_PUBLIC_STRAPI_API_KEY;
 
 const axiosClient = axios.create({
-  baseURL: "http://localhost:1337/api/", // Note the correct spelling of baseURL
+  baseURL: "http://localhost:1337/api/",
   headers: {
     Authorization: `Bearer ${API_KEY}`,
   },
@@ -20,10 +20,9 @@ const bookApointment = async (data) => {
   try {
     const response = await axiosClient.post("/appointments", data);
 
-    return response.data; // Optional: return the response data if needed
+    return response.data;
   } catch (error) {
     console.error("Error booking appointment:", error);
-    // Handle errors (e.g., display an error message to the user)
   }
 };
 
@@ -38,14 +37,16 @@ const getDoctorById = async (id) => {
 };
 
 // const sendEmail = (data) => axios.post("/api/sendEmail", data);
-// const sendEmail = async (data) => {
-//   try {
-//     const response = await axios.post("/api/sendEmail", data);
-//     console.log("Email sent successfully:", response.data); // Handle success
-//   } catch (error) {
-//     console.error("Error sending email:", error); // Handle errors
-//   }
-// };
+const sendEmail = async (data) => {
+  try {
+    const response = await axios.post("/api/sendEmail", data);
+    console.log("Email sent successfully:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error sending email:", error);
+    throw error; // Re-throw the error so it can be caught and handled by the caller
+  }
+};
 
 const getAppointments = async () => {
   try {
@@ -70,29 +71,13 @@ const getUserBookingList = (userEmail) => {
 const DeleteBooking = (id) => axiosClient.delete(`/appointments/${id}`);
 const GetIcons = (id) => axiosClient.get(`/icons/${id}/?populate=*`);
 
-// const checkExistingBookings = async () => {
-//   try {
-//     const response = await axios.get(
-//       `/appointments?filters[Time][$eq]=${time}&filters[Date][$eq]=${date}`
-//     );
-//     console.log(response);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
-
-// const checkExistingBookings = (Time) =>
-//   axiosClient.get(`/appointments?filters[Time][$eq]=${Time}`);
-
-// &filters[Date][$eq]=${Date}
-
 export default {
   getCatergory,
   getDoctorList,
   getDoctorByCategory,
   getDoctorById,
   bookApointment,
-  // sendEmail,
+  sendEmail,
   GetIcons,
   getUserBookingList,
   DeleteBooking,
