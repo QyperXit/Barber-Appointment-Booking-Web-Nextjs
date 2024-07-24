@@ -1,3 +1,5 @@
+import moment from "moment/moment";
+
 import {
   Body,
   Button,
@@ -16,7 +18,7 @@ const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "https://localhost:3000";
 
-export const EmailTemplate = ({ userFirstname = "User" }) => (
+export const EmailTemplate = ({ response }) => (
   <Html>
     <Head />
     <Preview>The best Barber shop in Town.</Preview>
@@ -29,16 +31,18 @@ export const EmailTemplate = ({ userFirstname = "User" }) => (
           alt="G|Barber's"
           style={logo}
         />
-        <Text style={paragraph}>Hi {userFirstname},</Text>
+        <Text style={paragraph}>Hi {response?.data?.Username},</Text>
         <Text style={paragraph}>
           Thank you for booking your Haircut appointment with G|barbers. We are
           excited to welcome you!
           <br />
           <br />
           <strong>Appointment Details</strong>: <br /> <br />
-          Date: <br />
-          Time: <br />
-          Barber: <br /> <br />
+          {/* {moment(item.attributes.Date).format("DD-MMM-YYYY")} */}
+          Date: {moment(response?.data?.Date).format("DD-MMM-YYYY")} <br />
+          Time: {response?.data?.Time}
+          <br />
+          Barber: Mark <br /> <br />
           <strong>Our address is</strong>:
           <br /> G|barbers
           <br /> 401 Warwick Road Tesley Birmingham B11 2JR
