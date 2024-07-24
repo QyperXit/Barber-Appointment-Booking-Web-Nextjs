@@ -16,7 +16,7 @@ import * as React from "react";
 
 const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
-  : "https://appointment-booking-backend-s6js.onrender.com/api";
+  : "https://barber-appointment-booking-web-nextjs.vercel.app";
 
 export const EmailTemplate = ({ response }) => (
   <Html>
@@ -25,7 +25,7 @@ export const EmailTemplate = ({ response }) => (
     <Body style={main}>
       <Container style={container}>
         <Img
-          src="https://appointment-booking-backend-s6js.onrender.com/api/barber.png"
+          src="https://barber-appointment-booking-web-nextjs.vercel.app/barber.png"
           width="50"
           height="50"
           alt="G|Barber's"
