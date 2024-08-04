@@ -18,7 +18,7 @@ const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "https://localhost:3000";
 
-export const EmailTemplate = ({ response }) => (
+export const BarberTemplate = ({ response }) => (
   <Html>
     <Head />
     <Preview>The best Barber shop in Town.</Preview>
@@ -31,18 +31,17 @@ export const EmailTemplate = ({ response }) => (
           alt="G|Barber's"
           style={logo}
         />
-        <Text style={paragraph}>Hi {response?.data?.Username},</Text>
+        <Text style={paragraph}>Hi Mark,</Text>
         <Text style={paragraph}>
-          Thank you for booking your Haircut appointment with G|barbers. We are
-          excited to welcome you!
+          We would like to inform you that a new appointment has been booked:
           <br />
           <br />
-          <strong>Appointment Details</strong>: <br /> <br />
-          {/* {moment(item.attributes.Date).format("DD-MMM-YYYY")} */}
+          <strong>Client Details</strong>: <br /> <br />
+          Name: {response?.data?.Username} <br />
+          Mobile: {response?.data?.Number} <br />
           Date: {moment(response?.data?.Date).format("DD-MMM-YYYY")} <br />
           Time: {response?.data?.Time}
-          <br />
-          Barber: Mark <br /> <br />
+          <br /> <br />
           <strong>Our address is</strong>:
           <br /> G|barbers
           <br /> 401 Warwick Road Tesley Birmingham B11 2JR
@@ -66,7 +65,7 @@ export const EmailTemplate = ({ response }) => (
   </Html>
 );
 
-export default EmailTemplate;
+export default BarberTemplate;
 
 const main = {
   backgroundColor: "#ffffff",

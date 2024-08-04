@@ -1,4 +1,5 @@
 import EmailTemplate from "@/emails";
+import BarberTemplate from "@/emails/barberEmail";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 // import { Email } from "./email";
@@ -6,7 +7,7 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(req) {
   const response = await req.json();
-  console.log(response.data.doctor.attributes);
+  // console.log(response.data.doctor.attributes);
 
   try {
     const data = await resend.emails.send({
@@ -19,7 +20,18 @@ export async function POST(req) {
       react: EmailTemplate({ response }),
     });
 
-    return NextResponse.json({ data });
+    try {
+      const anotherData = await resend.emails.send({
+        from: "gbarbers@shotsbyvidz.com",
+        to: ["chaun.online@gmail.com"], // The other email address
+        subject: "New Appointment Booked",
+        react: BarberTemplate({ response }), // Use the different template
+      });
+
+      return NextResponse.json({ data, anotherData });
+    } catch (anotherError) {
+      return NextResponse.json({ data, anotherError });
+    }
   } catch (error) {
     return NextResponse.json({ error });
   }
