@@ -18,7 +18,7 @@ const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "https://localhost:3000";
 
-export const BarberTemplate = ({ response }) => (
+export const CancellationTemplate = ({ response }) => (
   <Html>
     <Head />
     <Preview>The best Barber shop in Town.</Preview>
@@ -33,14 +33,18 @@ export const BarberTemplate = ({ response }) => (
         />
         <Text style={paragraph}>Hi Mark,</Text>
         <Text style={paragraph}>
-          We would like to inform you that a new appointment has been booked:
+          We would like to inform you that a appointment has been cancelled:
           <br />
           <br />
           <strong>Client Details</strong>: <br /> <br />
-          Name: {response?.data?.Username} <br />
-          Mobile: {response?.data?.Number} <br />
-          Date: {moment(response?.data?.Date).format("DD-MMM-YYYY")} <br />
-          Time: {response?.data?.Time}
+          Name: {response?.data?.data.attributes.Username} <br />
+          Mobile: 0{response?.data?.data.attributes.Number} <br />
+          Date:{" "}
+          {moment(response?.data?.data.attributes.Date).format(
+            "DD-MMM-YYYY"
+          )}{" "}
+          <br />
+          Time: {response?.data?.data.attributes.Time}
           <br /> <br />
           <strong>Our address is</strong>:
           <br /> G|barbers
@@ -49,7 +53,7 @@ export const BarberTemplate = ({ response }) => (
         <Section style={btnContainer}>
           <Button
             style={button}
-            href="https://barber-appointment-booking-web-nextjs.vercel.app/"
+            href="https://barber-appointment-booking-web-nextjs.vercel.app"
           >
             Get started
           </Button>
@@ -68,7 +72,7 @@ export const BarberTemplate = ({ response }) => (
   </Html>
 );
 
-export default BarberTemplate;
+export default CancellationTemplate;
 
 const main = {
   backgroundColor: "#ffffff",

@@ -48,7 +48,10 @@ export const EmailTemplate = ({ response }) => (
           <br /> 401 Warwick Road Tesley Birmingham B11 2JR
         </Text>
         <Section style={btnContainer}>
-          <Button style={button} href="https://getkoala.com">
+          <Button
+            style={button}
+            href="https://barber-appointment-booking-web-nextjs.vercel.app"
+          >
             Get started
           </Button>
         </Section>
