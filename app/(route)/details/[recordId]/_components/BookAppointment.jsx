@@ -42,20 +42,18 @@ const BookAppointment = ({
     const timeList = [];
     const currentTime = new Date();
     const endTime = new Date();
-    endTime.setHours(20); // Set the end time to 8:00 PM
+    endTime.setHours(20);
     endTime.setMinutes(30); // Set the end time to 8:30 PM
 
     const selectedDate = new Date(date);
-    const isNextDay = selectedDate > currentTime; // Check if selected date is after current date
+    const isNextDay = selectedDate > currentTime; // Checking if selected date is after current date
 
-    // If it's the next day or a future date, use the original time slots from 10:00 AM to 8:30 PM
     if (isNextDay) {
       for (let i = 10; i <= 20; i++) {
         timeList.push({ time: `${i.toString().padStart(2, "0")}:00` });
         timeList.push({ time: `${i.toString().padStart(2, "0")}:30` });
       }
     } else {
-      // Find the next available time slot, starting from the next hour rounded up to the nearest half-hour mark
       const nextAvailableTime = new Date(currentTime);
       nextAvailableTime.setMinutes(
         nextAvailableTime.getMinutes() +
@@ -64,7 +62,6 @@ const BookAppointment = ({
       nextAvailableTime.setSeconds(0);
       nextAvailableTime.setMilliseconds(0);
 
-      // Loop through each hour and minute until the end time, but only between 10:00 and 20:30
       for (
         let time = nextAvailableTime.getTime();
         time <= endTime.getTime() && new Date(time).getHours() >= 10;
@@ -95,6 +92,8 @@ const BookAppointment = ({
         // Note: note,
       },
     };
+
+    console.log(selectedTimeSlot);
 
     GlobalApi.getAppointments().then((res) => {
       const existingAppointments = res.data;
