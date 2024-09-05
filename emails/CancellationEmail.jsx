@@ -16,7 +16,7 @@ import * as React from "react";
 
 const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
-  : "https://localhost:3000";
+  : "https://barber-appointment-booking-web-nextjs.vercel.app";
 
 export const CancellationTemplate = ({ response }) => (
   <Html>
