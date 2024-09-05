@@ -25,7 +25,7 @@ export const BarberTemplate = ({ response }) => (
     <Body style={main}>
       <Container style={container}>
         <Img
-          src="http://localhost:3000/barber.png"
+          src="https://barber-appointment-booking-web-nextjs.vercel.app/barber.png"
           width="50"
           height="50"
           alt="G|Barber's"
