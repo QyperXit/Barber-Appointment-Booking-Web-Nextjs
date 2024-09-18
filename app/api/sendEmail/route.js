@@ -23,14 +23,14 @@ export async function POST(req) {
     if (!response?.data?.data?.id) {
       additionalEmailData = await resend.emails.send({
         from: "gbarbers@shotsbyvidz.com",
-        to: ["denisjazzy@yahoo.com"],
+        to: ["chaun.online@gmail.com"],
         subject: "New Appointment Booked",
         react: BarberTemplate({ response }),
       });
     } else if (response?.data?.data?.id) {
       additionalEmailData = await resend.emails.send({
         from: "gbarbers@shotsbyvidz.com",
-        to: ["denisjazzy@yahoo.com"],
+        to: ["chaun.online@gmail.com"],
         subject: "Appointment Cancelled",
         react: CancellationTemplate({ response }),
       });
