@@ -3,7 +3,7 @@ const { default: axios } = require("axios");
 const API_KEY = process.env.NEXT_PUBLIC_STRAPI_API_KEY;
 
 const axiosClient = axios.create({
-  baseURL: "https://appointment-booking-backend-s6js.onrender.com/api/",
+  baseURL: "http://localhost:1337/api/",
   headers: {
     Authorization: `Bearer ${API_KEY}`,
   },
@@ -33,6 +33,17 @@ const getDoctorById = async (id) => {
     return response.data; // Return doctor data
   } catch (error) {
     console.error("Error fetching doctor:", error);
+  }
+};
+
+// Function to fetch appointment details by ID
+const getAppointmentById = async (id) => {
+  try {
+    const response = await axiosClient.get(`/appointments/${id}?populate=*`);
+    return response.data; // Return the appointment data including the ID
+  } catch (error) {
+    console.error("Error fetching appointment:", error);
+    throw error; // Re-throw the error to handle it elsewhere
   }
 };
 
@@ -68,6 +79,19 @@ const getUserBookingList = (userEmail) => {
   return axiosClient.get(`/appointments?${params}`);
 };
 
+const updateAppointmentStatus = async (id, status) => {
+  try {
+    const response = await axiosClient.put(`/appointments/${id}`, {
+      // data: { status: status },
+      data: { status },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error updating appointment status:", error);
+    throw error;
+  }
+};
+
 const DeleteBooking = (id) => axiosClient.delete(`/appointments/${id}`);
 const GetIcons = (id) => axiosClient.get(`/icons/${id}/?populate=*`);
 
@@ -82,5 +106,7 @@ export default {
   getUserBookingList,
   DeleteBooking,
   getAppointments,
+  updateAppointmentStatus,
+  getAppointmentById,
   // checkExistingBookings,
 };

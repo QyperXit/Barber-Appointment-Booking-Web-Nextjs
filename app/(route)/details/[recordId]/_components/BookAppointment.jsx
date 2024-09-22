@@ -89,6 +89,7 @@ const BookAppointment = ({
         Date: date,
         doctor: doctor.id,
         Number: fone,
+        status: "pending",
         // Note: note,
       },
     };
@@ -128,13 +129,18 @@ const BookAppointment = ({
       } else {
         GlobalApi.bookApointment(data).then((res) => {
           if (res) {
-            GlobalApi.sendEmail(data).then((resp) => {
-              console.log(resp);
-            });
-            toast({
-              title: "Booking Confirmation!",
-              description: "Email sent!",
-              action: <ToastAction altText="Thank you">✅</ToastAction>,
+            GlobalApi.getAppointmentById(res.data.id).then((resp) => {
+              const bookingId = resp.data.id;
+              console.log("Booking ID:", bookingId);
+
+              // Now you can use bookingId here
+              GlobalApi.sendEmail({ ...data, bookingId }).then((resp) => {});
+
+              toast({
+                title: "Booking Confirmation!",
+                description: "Email sent!",
+                action: <ToastAction altText="Thank you">✅</ToastAction>,
+              });
             });
           }
         });
@@ -259,7 +265,7 @@ const BookAppointment = ({
                 type="button"
                 className="text-gray-600 border"
                 variant="outline"
-                onClick={close}
+                // onClick={close}
               >
                 Close
               </Button>
