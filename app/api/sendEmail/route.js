@@ -1,60 +1,54 @@
 import EmailTemplate from "@/emails";
 import BarberConfirmationTemplate from "@/emails/BarberConfirmationTemplate";
-import BarberTemplate from "@/emails/barberEmail";
-import CancellationTemplate from "@/emails/CancellationEmail";
-
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req) {
-  const response = await req.json();
-  // console.log(response);
-
   try {
+    const response = await req.json();
     const bookingId = response?.data?.data?.id || null;
     const otherId = response?.bookingId || null;
+    const emailData = response;
+
     console.log(
       "Before sending email - bookingId:",
       bookingId,
       "otherId:",
-      otherId
+      otherId,
+      "test",
+      emailData.data
     );
 
-    const data = await resend.emails.send({
-      from: "gbarbers@shotsbyvidz.com",
-      to: [response.data.Email],
-      subject: "Appointment Booking Confirmation",
-      // react: EmailTemplate({ response }),
-      react: BarberConfirmationTemplate({
-        response,
-        bookingId,
-        otherId,
-      }),
-    });
+    let emailResponse;
 
-    let additionalEmailData = null;
-
-    if (!response?.data?.data?.id) {
-      additionalEmailData = await resend.emails.send({
-        // from: "gbarbers@shotsbyvidz.com",
-        to: ["chaun.online@gmail.com"],
-        subject: "New Appointment Booked",
-        react: BarberTemplate({ response }),
+    if (emailData.data.status === "confirmed") {
+      emailResponse = await resend.emails.send({
+        from: "gbarbers@shotsbyvidz.com",
+        to: [response.data.Email],
+        subject: "Appointment Booking Confirmation",
+        react: EmailTemplate({ response }),
       });
-    } else if (response?.data?.data?.id) {
-      additionalEmailData = await resend.emails.send({
-        // from: "gbarbers@shotsbyvidz.com",
-        to: ["chaun.online@gmail.com"],
-        subject: "Appointment Cancelled",
-        react: CancellationTemplate({ response }),
-        // react: BarberConfirmationTemplate({ response }),
+    } else {
+      emailResponse = await resend.emails.send({
+        from: "gbarbers@shotsbyvidz.com",
+        to: [response.data.Email],
+        subject: "Appointment Booking Confirmation",
+        react: BarberConfirmationTemplate({
+          response,
+          bookingId,
+          otherId,
+        }),
       });
     }
 
-    return NextResponse.json({ data, additionalEmailData });
+    return NextResponse.json({ success: true, data: emailResponse });
   } catch (error) {
-    return NextResponse.json({ error });
+    console.error("Error sending email:", error);
+    return NextResponse.json(
+      { success: false, error: error.message },
+      { status: 500 }
+    );
   }
 }

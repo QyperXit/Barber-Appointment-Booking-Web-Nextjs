@@ -30,6 +30,24 @@ const ConfirmAppointment = () => {
       } else {
         // Confirming the appointment
         await GlobalApi.updateAppointmentStatus(id, action);
+
+        const appointment = await GlobalApi.getAppointmentById(id);
+
+        // Prepare the email data for the client using the format you've specified
+        const emailData = {
+          data: {
+            Email: appointment?.data?.attributes?.Email,
+            Username: appointment?.data?.attributes?.Username,
+            Time: appointment?.data?.attributes?.Time,
+            doctor: appointment?.data?.attributes?.doctor,
+            Date: appointment?.data?.attributes?.Date,
+            Number: appointment?.data?.attributes?.Number,
+            status: "confirmed",
+            id: id,
+          },
+        };
+
+        await GlobalApi.sendEmail(emailData);
         setMessage("Appointment confirmed successfully.");
       }
       // Redirect after a short delay

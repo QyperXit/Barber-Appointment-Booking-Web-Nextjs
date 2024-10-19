@@ -94,8 +94,6 @@ const BookAppointment = ({
       },
     };
 
-    console.log(selectedTimeSlot);
-
     GlobalApi.getAppointments().then((res) => {
       const existingAppointments = res.data;
 

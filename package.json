@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "email": "email dev"
+    "email": "email dev",
+    "update-browserslist": "npx update-browserslist-db@latest"
   },
   "dependencies": {
     "@clerk/nextjs": "^5.1.3",
