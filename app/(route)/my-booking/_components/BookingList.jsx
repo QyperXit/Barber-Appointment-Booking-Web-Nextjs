@@ -12,7 +12,7 @@ const BookingList = ({ bookingList, expired, updateRecord, isLoading }) => {
   const onDeleteBooking = (item) => {
     GlobalApi.DeleteBooking(item.id).then((res) => {
       if (res) {
-        GlobalApi.sendEmail(res).then((resp) => {
+        GlobalApi.sendEmail({ ...res, delete: true }).then((resp) => {
           console.log(item);
         });
 

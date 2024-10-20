@@ -1,5 +1,6 @@
 import EmailTemplate from "@/emails";
 import BarberConfirmationTemplate from "@/emails/BarberConfirmationTemplate";
+import CancellationTemplate from "@/emails/CancellationEmail";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
@@ -18,7 +19,9 @@ export async function POST(req) {
       "otherId:",
       otherId,
       "test",
-      emailData.data
+      emailData.data,
+      "test",
+      emailData
     );
 
     let emailResponse;
@@ -30,7 +33,14 @@ export async function POST(req) {
         subject: "Appointment Booking Confirmation",
         react: EmailTemplate({ response }),
       });
-    } else {
+    } else if (emailData.delete) {
+      emailResponse = await resend.emails.send({
+        from: "gbarbers@shotsbyvidz.com",
+        to: ["chaun.online@gmail.com"],
+        subject: "Appointment Cancelled",
+        react: CancellationTemplate({ response }),
+      });
+    } else if (!emailData.delete) {
       emailResponse = await resend.emails.send({
         from: "gbarbers@shotsbyvidz.com",
         to: [response.data.Email],
