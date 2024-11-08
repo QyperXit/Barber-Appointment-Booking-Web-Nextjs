@@ -73,10 +73,22 @@ const BookingList = ({ bookingList, expired, updateRecord, isLoading }) => {
                       />
                     )}
                   </h2>
-                  <h2 className="flex gap-2 text-gray-500">
-                    <MapPin className="w-5 h-5 text-primary" />{" "}
-                    {item.attributes.doctor.data.attributes.Address}
-                  </h2>
+                  <div className="flex items-center justify-between">
+                    {" "}
+                    <h2 className="flex gap-2 text-gray-500">
+                      <MapPin className="w-5 h-5 text-primary" />{" "}
+                      {item.attributes.doctor.data.attributes.Address}
+                    </h2>
+                    <div className="text-sm font-semibold text-gray-400 ">
+                      {" "}
+                      {item.attributes.doctor.data.attributes.status ===
+                      "confirmed" ? (
+                        <span className="text-green-400">Confirmed 🟢</span>
+                      ) : (
+                        <span className="text-yellow-400">Pending 🟠</span>
+                      )}
+                    </div>
+                  </div>
                   <h2 className="flex gap-2">
                     <Calendar className="w-5 h-5 text-primary" /> Appoint On:{" "}
                     {moment(item.attributes.Date).format("DD-MMM-YYYY")}

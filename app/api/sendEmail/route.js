@@ -29,21 +29,22 @@ export async function POST(req) {
     if (emailData.data.status === "confirmed") {
       emailResponse = await resend.emails.send({
         from: "gbarbers@shotsbyvidz.com",
-        to: [response.data.Email],
+        // to: [response.data.Email],
         subject: "Appointment Booking Confirmation",
         react: EmailTemplate({ response }),
       });
     } else if (emailData.delete) {
       emailResponse = await resend.emails.send({
         from: "gbarbers@shotsbyvidz.com",
-        to: ["chaun.online@gmail.com"],
+        // to: ["chaun.online@gmail.com"],
         subject: "Appointment Cancelled",
         react: CancellationTemplate({ response }),
       });
     } else if (!emailData.delete) {
       emailResponse = await resend.emails.send({
         from: "gbarbers@shotsbyvidz.com",
-        to: [response.data.Email],
+        // to: [response.data.Email],
+        to: ["chaun.online@gmail.com"],
         subject: "Appointment Booking Confirmation",
         react: BarberConfirmationTemplate({
           response,
