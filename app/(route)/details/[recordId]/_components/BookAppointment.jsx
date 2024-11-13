@@ -18,6 +18,7 @@ import { useUser } from "@clerk/nextjs";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { CalendarDays, Clock, PhoneCallIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import Note from "@/app/(route)/details/[recordId]/_components/Note";
 
 const BookAppointment = ({
   doctor,
@@ -29,6 +30,7 @@ const BookAppointment = ({
   const [selectedTimeSlot, setSelectedTimeSlot] = useState();
   const [fone, setFone] = useState("");
   const [bookedAppointments, setBookedAppointments] = useState([]);
+  const [note, setNote] = useState("");
 
   const { toast } = useToast();
   const { user } = useUser();
@@ -90,7 +92,7 @@ const BookAppointment = ({
         doctor: doctor.id,
         Number: fone,
         status: "pending",
-        // Note: note,
+        Note: note,
       },
     };
 
@@ -251,6 +253,7 @@ const BookAppointment = ({
                     required
                     onChange={(e) => setFone(e.target.value)}
                   />
+                  <Note setNote={setNote} note={note} />
                 </div>
               </div>
             </div>

@@ -36,13 +36,26 @@ const BarberConfirmationTemplate = ({ response, bookingId, otherId }) => (
           <Text style={paragraph}>Hi Mark,</Text>
           <Text style={paragraph}>
             A new appointment is pending your confirmation:
-            <br />
-            <br />
-            <strong>Client Details</strong>: <br /> <br />
-            Name: {response?.data?.Username} <br />
-            Mobile: {response?.data?.Number} <br />
-            Date: {moment(response?.data?.Date).format("DD-MMM-YYYY")} <br />
+            <br/>
+            <br/>
+            <strong>Client Details</strong>: <br/> <br/>
+            Name: {response?.data?.Username} <br/>
+            Mobile: {response?.data?.Number} <br/>
+            Date: {moment(response?.data?.Date).format("DD-MMM-YYYY")} <br/>
             Time: {response?.data?.Time}
+            <br/> <br/>
+            <strong>Note:</strong> <br />
+            <Text
+              style={Object.assign({}, paragraph, {
+                fontStyle: "italic",
+                backgroundColor: "#f5f5f5",
+                padding: "0.5em",
+              })}
+            >
+              {response?.data?.Note}
+            </Text>
+
+
           </Text>
           <Section style={btnContainer}>
             {/* <Text style={paragraph}>
@@ -51,13 +64,19 @@ const BarberConfirmationTemplate = ({ response, bookingId, otherId }) => (
             </Text> */}
 
             <Button
-              style={button}
+              style={Object.assign({}, button, {
+                backgroundColor: "#0070f3",
+                color: "white",
+              })}
               href={`${process.env.NEXT_PUBLIC_BASE_URL}/confirmAppointment?id=${otherId}&action=confirmed`}
             >
               Confirm Appointment
             </Button>
             <Button
-              style={Object.assign({}, button, { backgroundColor: "#FF0000" })}
+              style={Object.assign({}, button, {
+                backgroundColor: "#e53e3e",
+                color: "white",
+              })}
               href={`${process.env.NEXT_PUBLIC_BASE_URL}/confirmAppointment?id=${otherId}&action=rejected`}
             >
               Reject Appointment
