@@ -16,7 +16,7 @@ import moment from "moment/moment";
 
 import { useUser } from "@clerk/nextjs";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { CalendarDays, Clock, PhoneCallIcon } from "lucide-react";
+import {CalendarDays, Clock, MessageCircleCode, PhoneCallIcon, Send} from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Note from "@/app/(route)/details/[recordId]/_components/Note";
 
@@ -253,7 +253,8 @@ const BookAppointment = ({
                     required
                     onChange={(e) => setFone(e.target.value)}
                   />
-                  <Note setNote={setNote} note={note} />
+
+                  <Note  setNote={setNote} note={note} />
                 </div>
               </div>
             </div>
@@ -272,7 +273,7 @@ const BookAppointment = ({
               </Button>
               <Button
                 type="button"
-                disabled={!(date && selectedTimeSlot && fone.length === 11)}
+                disabled={!(date && selectedTimeSlot && fone.length === 11 && note)}
                 onClick={() => saveBooking()}
               >
                 Submit
