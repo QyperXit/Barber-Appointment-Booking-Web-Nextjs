@@ -23,7 +23,7 @@ const BookingList = ({ bookingList, expired, updateRecord, isLoading }) => {
   };
 
   const limitedBookingList = bookingList.slice(0, 5);
-
+  console.log("limitedBookingList", limitedBookingList);
   if (isLoading) {
     return (
       <div className="flex flex-col gap-3 p-5 m-3 overflow-y-auto text-white rounded-lg h-lvh">
@@ -81,8 +81,7 @@ const BookingList = ({ bookingList, expired, updateRecord, isLoading }) => {
                     </h2>
                     <div className="text-sm font-semibold text-gray-400 ">
                       {" "}
-                      {item.attributes.doctor.data.attributes.status ===
-                      "confirmed" ? (
+                      {item.attributes.status === "confirmed" ? (
                         <span className="text-green-400">Confirmed 🟢</span>
                       ) : (
                         <span className="text-yellow-400">Pending 🟠</span>
