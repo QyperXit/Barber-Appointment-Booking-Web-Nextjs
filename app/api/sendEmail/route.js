@@ -30,6 +30,7 @@ export async function POST(req) {
       emailResponse = await resend.emails.send({
         from: "gbarbers@shotsbyvidz.com",
         // to: [response.data.Email],
+        to: ["chaun.online@gmail.com"],
         subject: "Appointment Booking Confirmation",
         react: EmailTemplate({ response }),
       });
