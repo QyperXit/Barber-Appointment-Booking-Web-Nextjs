@@ -14,7 +14,7 @@ import {Send} from "lucide-react";
 
 const Note = ({note, setNote}) => {
     const [open, setOpen] = useState(false);
-    const close = () => setOpen(false);
+    // const close = () => setOpen(false);
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
