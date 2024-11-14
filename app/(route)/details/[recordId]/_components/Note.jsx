@@ -23,7 +23,7 @@ const Note = ({note, setNote}) => {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Leave a note for your barber</DialogTitle>
+                    <DialogTitle>Leave a note for your Barber</DialogTitle>
                     <DialogDescription>
                         Leave a message for your barber so they know who you are
                     </DialogDescription>
