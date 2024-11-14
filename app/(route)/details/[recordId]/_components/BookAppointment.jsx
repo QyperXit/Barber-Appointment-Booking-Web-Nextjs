@@ -19,7 +19,7 @@ import { useBookingForm } from "./hooks/useBookingForm";
 import timeSlotService from "./services/timeSlotService";
 
 const BookAppointment = ({
-                           doctor,
+                           barber,
                            buttonText = "Book Appointment",
                            className = "",
                          }) => {
@@ -37,7 +37,7 @@ const BookAppointment = ({
     handleSubmit,
     getBookedAppointmentsForDate,
     isValidForm,
-  } = useBookingForm(doctor, user);
+  } = useBookingForm(barber, user);
 
   const bookedAppointmentsForDate = getBookedAppointmentsForDate();
 

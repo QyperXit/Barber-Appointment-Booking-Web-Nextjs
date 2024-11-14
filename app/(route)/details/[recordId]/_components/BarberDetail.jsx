@@ -1,17 +1,16 @@
-import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Briefcase, MapPin } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import BookAppointment from "./BookAppointment";
 
-const BarberDetail = ({ doctor, isLoading }) => {
-  const socialMedaList = [
-    { id: 1, icon: "/youtube.png", url: "" },
-    { id: 2, icon: "/facebook.png", url: "" },
-    { id: 3, icon: "/linkedin.png", url: "" },
-    { id: 4, icon: "/x.png", url: "" },
-  ];
+const BarberDetail = ({ barber, isLoading }) => {
+  // const socialMedaList = [
+  //   { id: 1, icon: "/youtube.png", url: "" },
+  //   { id: 2, icon: "/facebook.png", url: "" },
+  //   { id: 3, icon: "/linkedin.png", url: "" },
+  //   { id: 4, icon: "/x.png", url: "" },
+  // ];
 
   return (
     <>
@@ -22,7 +21,7 @@ const BarberDetail = ({ doctor, isLoading }) => {
             <Skeleton className="h-[280px] w-full" />
           ) : (
             <Image
-              src={doctor.attributes?.Image?.data?.attributes?.url}
+              src={barber.attributes?.Image?.data?.attributes?.url}
               width={200}
               height={200}
               alt="barber-image"
@@ -36,7 +35,7 @@ const BarberDetail = ({ doctor, isLoading }) => {
             <Skeleton className="w-1/2 h-6" />
           ) : (
             <h2 className="text-2xl font-bold text-white ">
-              {doctor.attributes?.Name}
+              {barber.attributes?.Name}
             </h2>
           )}
           <div className="flex gap-2">
@@ -47,7 +46,7 @@ const BarberDetail = ({ doctor, isLoading }) => {
                 <h2 className="flex gap-2 text-gray-500 text-md">
                   <Briefcase className="scale-95 " />
                   <span>
-                    {doctor.attributes?.Years_of_experience} years of experience
+                    {barber.attributes?.Years_of_experience} years of experience
                   </span>
                 </h2>
               </>
@@ -60,7 +59,7 @@ const BarberDetail = ({ doctor, isLoading }) => {
               <>
                 <h2 className="flex gap-2 text-gray-400 text-md">
                   <MapPin />
-                  <span>{doctor.attributes.Address}</span>
+                  <span>{barber.attributes.Address}</span>
                 </h2>
               </>
             )}
@@ -69,7 +68,7 @@ const BarberDetail = ({ doctor, isLoading }) => {
             <Skeleton className="w-1/4 h-4" />
           ) : (
             <h2 className="text-[10px] font-bold bg-white p-1 px-2 mt-2 text-black w-fit">
-              {doctor.attributes?.catergories?.data[0]?.attributes?.Name}
+              {barber.attributes?.catergories?.data[0]?.attributes?.Name}
             </h2>
           )}
           {/* <div className="flex gap-3">
@@ -83,7 +82,7 @@ const BarberDetail = ({ doctor, isLoading }) => {
               />
             ))}
           </div> */}
-          <BookAppointment doctor={doctor} />
+          <BookAppointment barber={barber} />
         </div>
         {/* about */}
       </div>
@@ -93,7 +92,7 @@ const BarberDetail = ({ doctor, isLoading }) => {
           <Skeleton className="w-full h-12" />
         ) : (
           <p className="mt-2 tracking-wider text-gray-400 ">
-            {doctor.attributes.About}
+            {barber.attributes.About}
           </p>
         )}
       </div>

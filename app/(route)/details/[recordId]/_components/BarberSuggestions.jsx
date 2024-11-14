@@ -3,23 +3,23 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-const BarberSugesstions = ({ doctor }) => {
-  const [doctorList, setDoctorList] = useState([]);
+const BarberSuggestions = ({  }) => {
+  const [barberList, setBarberList] = useState([]);
   useEffect(() => {
-    getDoctorsList();
+    getBarbersList();
   }, []);
 
-  const getDoctorsList = () => {
-    GlobalApi.getDoctorList().then((res) => {
-      setDoctorList(res.data.data);
+  const getBarbersList = () => {
+    GlobalApi.getBarberList().then((res) => {
+      setBarberList(res.data.data);
     });
   };
 
   return (
     <div className="p-5 mt-5 border-4 xl:ml-5 lg:py-[3.80rem] ">
-      <h2 className=" font-bold text-[18px] text-white">Sugesstions</h2>
+      <h2 className=" font-bold text-[18px] text-white">Suggestions</h2>
 
-      {doctorList.slice(0, 3).map((item, index) => (
+      {barberList.slice(0, 3).map((item) => (
         <Link
           href={"/details/" + item.id}
           className="flex items-center gap-5 p-5 mt-5 rounded-lg cursor-pointer hover:bg-slate-600 "
@@ -51,4 +51,4 @@ const BarberSugesstions = ({ doctor }) => {
   );
 };
 
-export default BarberSugesstions;
+export default BarberSuggestions;

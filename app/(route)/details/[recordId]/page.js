@@ -3,10 +3,10 @@ import GlobalApi from "@/app/_utils/GlobalApi";
 import { Loader } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import BarberDetail from "./_components/BarberDetail";
-import BarberSugesstions from "./_components/BarberSugesstions";
+import BarberSuggestions from "./_components/BarberSuggestions";
 
 const Details = ({ params }) => {
-  const [doctor, setDoctor] = useState();
+  const [barber, setBarber] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -17,10 +17,10 @@ const Details = ({ params }) => {
     setIsLoading(true);
     GlobalApi.getDoctorById(params.recordId)
       .then((res) => {
-        setDoctor(res.data);
+        setBarber(res.data);
       })
       .catch((error) => {
-        console.error("Error fetching doctor data:", error);
+        console.error("Error fetching barber data:", error);
       })
       .finally(() => {
         setIsLoading(false);
@@ -39,12 +39,12 @@ const Details = ({ params }) => {
               Loading...
             </p>
           ) : (
-            doctor && <BarberDetail doctor={doctor} isLoading={isLoading} />
+            barber && <BarberDetail barber={barber} isLoading={isLoading} />
           )}
         </div>
         {/* doc sugesstions */}
         {/* <div></div> */}
-        <div>{<BarberSugesstions />}</div>
+        <div>{<BarberSuggestions />}</div>
       </div>
     </div>
   );
