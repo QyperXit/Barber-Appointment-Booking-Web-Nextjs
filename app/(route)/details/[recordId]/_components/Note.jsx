@@ -25,7 +25,7 @@ const Note = ({note, setNote}) => {
                 <DialogHeader>
                     <DialogTitle>Leave a note for your barber</DialogTitle>
                     <DialogDescription>
-                        Leave a message for your barber so they know what you need
+                        Leave a message for your barber so they know who you are
                     </DialogDescription>
                 </DialogHeader>
                 <div className="grid gap-4 py-2">
