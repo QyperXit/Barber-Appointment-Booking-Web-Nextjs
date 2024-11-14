@@ -1,4 +1,4 @@
-import GlobalApi from "@/app/_utils/GlobalApi";
+// components/BookAppointment.jsx
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -10,161 +10,131 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Toaster } from "@/components/ui/sonner";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { useUser } from "@clerk/nextjs";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { CalendarDays, Clock } from "lucide-react";
-import React, { useEffect, useState } from "react";
-import { toast } from "sonner";
+import { CalendarDays, Clock, PhoneCallIcon } from "lucide-react";
+import React from "react";
+import Note from "@/app/(route)/details/[recordId]/_components/Note";
+import { useBookingForm } from "./hooks/useBookingForm";
+import timeSlotService from "./services/timeSlotService";
 
-const BookAppointment = ({ doctor }) => {
-  const [date, setDate] = useState(new Date());
-  const [timeSlot, SetTimeSlot] = useState([]);
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState();
-  //gets user data from kinde
-  const { user } = useKindeBrowserClient();
+const BookAppointment = ({
+                           barber,
+                           buttonText = "Book Appointment",
+                           className = "",
+                         }) => {
+  const { user } = useUser();
+  const {
+    date,
+    setDate,
+    timeSlot,
+    selectedTimeSlot,
+    setSelectedTimeSlot,
+    fone,
+    setFone,
+    note,
+    setNote,
+    handleSubmit,
+    getBookedAppointmentsForDate,
+    isValidForm,
+  } = useBookingForm(barber, user);
 
-  useEffect(() => {
-    getTime();
-  }, []);
-
-  const getTime = () => {
-    const timeList = [];
-    for (let i = 10; i <= 12; i++) {
-      timeList.push({
-        time: i + ":00 AM",
-      });
-      timeList.push({
-        time: i + ":30 AM",
-      });
-    }
-
-    for (let i = 1; i <= 8; i++) {
-      timeList.push({
-        time: i + ":00 PM",
-      });
-      timeList.push({
-        time: i + ":30 PM",
-      });
-    }
-    SetTimeSlot(timeList);
-  };
-
-  const saveBooking = () => {
-    const data = {
-      data: {
-        Username: user.given_name + " " + user.family_name,
-        Email: user.email,
-        Time: selectedTimeSlot,
-        Date: date,
-        doctor: doctor.id,
-        // Note: note,
-      },
-    };
-
-    GlobalApi.bookApointment(data).then((res) => {
-      console.log(res);
-      if (res) {
-        // GlobalApi.sendEmail(data).then((res) => {});
-        toast("Booking Confirmation Email sent!");
-      }
-    });
-  };
-
-  const isPastDay = (day) => {
-    // return day < new Date();
-    const today = new Date();
-    // Set the time to midnight for both the current day and the provided day
-    const todayMidnight = new Date(
-      today.getFullYear(),
-      today.getMonth(),
-      today.getDate()
-    );
-    const providedDayMidnight = new Date(
-      day.getFullYear(),
-      day.getMonth(),
-      day.getDate()
-    );
-    // Check if the provided day is before today's midnight time
-    return providedDayMidnight < todayMidnight;
-  };
+  const bookedAppointmentsForDate = getBookedAppointmentsForDate();
 
   return (
-    <Dialog>
-      <DialogTrigger className="flex">
-        {" "}
-        <Button className="mt-3 rounded-full w-fit">Book Appointment</Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Book Appointment</DialogTitle>
-          <DialogDescription>
-            <div>
+      <Dialog>
+        <DialogTrigger className="flex">
+          <Button className={`mt-3 rounded-full w-fit ${className}`}>
+            {buttonText}
+          </Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Book Appointment</DialogTitle>
+            <DialogDescription>
               <div className="grid grid-cols-1 mt-5 md:grid-cols-2">
-                {/* Calender */}
-                <div className="flex flex-col items-baseline gap-3">
-                  <h2 className="flex items-center gap-2 ">
+                <div className="flex flex-col items-baseline gap-3 max-xs:overflow-auto max-xs:h-[16em]">
+                  <h2 className="flex items-center gap-2">
                     <CalendarDays className="w-5 h-5 text-primary" />
                     Select Date
                   </h2>
                   <Calendar
-                    mode="single"
-                    selected={date}
-                    onSelect={setDate}
-                    disabled={isPastDay}
-                    className="border rounded-md"
+                      mode="single"
+                      selected={date}
+                      onSelect={setDate}
+                      disabled={timeSlotService.isPastDay}
+                      className="border rounded-md"
                   />
                 </div>
-                {/* timeslot */}
                 <div className="mt-3 md:mt-0">
-                  <h2 className="flex items-center gap-2 mb-3 ">
+                  <h2 className="flex items-center gap-2 mb-3">
                     <Clock className="w-5 h-5 text-primary" />
                     Select Time Slot
                   </h2>
-                  <div className="grid grid-cols-3 gap-2 p-5 border rounded-lg">
+                  <div className="grid grid-cols-3 gap-2 p-5 border rounded-lg max-sm:overflow-auto max-sm:h-[12em]">
                     {timeSlot?.map((item, index) => {
+                      const isBooked = bookedAppointmentsForDate.some(
+                          (booking) => booking.Time === item.time
+                      );
                       return (
-                        <h2
-                          key={item.id}
-                          className={` p-2 border rounded-full text-center hover:bg-primary hover:text-white cursor-pointer ${
-                            item.time == selectedTimeSlot &&
-                            "bg-primary text-white"
-                          }`}
-                          onClick={() => setSelectedTimeSlot(item.time)}
-                        >
-                          {item.time}
-                        </h2>
+                          <h2
+                              key={index}
+                              className={`p-1 md:p-2 border rounded-full h-fit text-center cursor-pointer ${
+                                  isBooked
+                                      ? "bg-red-500 text-white cursor-not-allowed"
+                                      : item.time === selectedTimeSlot
+                                          ? "bg-primary text-white"
+                                          : "hover:bg-primary hover:text-white"
+                              }`}
+                              onClick={() => !isBooked && setSelectedTimeSlot(item.time)}
+                          >
+                            {item.time}
+                          </h2>
                       );
                     })}
                   </div>
                 </div>
+                <div className="flex items-center gap-3 mt-4 sm:mt-4 animate-pulse">
+                  <PhoneCallIcon className="scale-75 text-primary" />
+                  <input
+                      type="text"
+                      className="p-1 border rounded w-36 placeholder:text-primary placeholder:text-xs"
+                      placeholder="Mobile Number"
+                      inputMode="tel"
+                      pattern="^\d{11}$"
+                      title="Please enter exactly 11 digits"
+                      maxLength="11"
+                      value={fone}
+                      required
+                      onChange={(e) => setFone(e.target.value)}
+                  />
+                  <Note setNote={setNote} note={note} />
+                </div>
               </div>
-            </div>
-          </DialogDescription>
-        </DialogHeader>
-        <DialogFooter className="flex-col-reverse gap-3 sm:justify-end sm:flex">
-          <DialogClose asChild>
-            <div className="flex gap-3 ">
-              <Button
-                type="button"
-                className="text-gray-600 border "
-                variant="outline"
-                onClick={close}
-              >
-                Close
-              </Button>
-              <Button
-                type="button"
-                disabled={!(date && selectedTimeSlot)}
-                onClick={() => saveBooking()}
-              >
-                Submit
-              </Button>
-            </div>
-          </DialogClose>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="flex-col-reverse gap-3 sm:justify-end sm:flex">
+            <DialogClose asChild>
+              <div className="flex gap-3">
+                <Button
+                    type="button"
+                    className="text-gray-600 border"
+                    variant="outline"
+                >
+                  Close
+                </Button>
+                <Button
+                    type="button"
+                    disabled={!isValidForm}
+                    onClick={handleSubmit}
+                >
+                  Submit
+                </Button>
+              </div>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
   );
 };
 

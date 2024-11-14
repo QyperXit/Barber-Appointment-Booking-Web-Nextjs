@@ -1,24 +1,22 @@
 "use client";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
+// import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import BarberList from "./_components/BarberList";
-import CatergorySearch from "./_components/CatergorySearch";
-import DoctorList from "./_components/DoctorList";
+import BarberGallery from "./_components/BarberGallery";
 import Hero from "./_components/Hero";
 import GlobalApi from "./_utils/GlobalApi";
 
 export default function Home() {
-  const [doctorList, setDoctorList] = useState([]);
+  const [barberList, setBarberList] = useState([]);
 
   useEffect(() => {
-    getDoctorList();
+    getBarberList();
   }, []);
 
-  const getDoctorList = () => {
-    GlobalApi.getDoctorList().then((res) => {
-      setDoctorList(res.data.data);
+  const getBarberList = () => {
+    GlobalApi.getBarberList().then((res) => {
+      setBarberList(res.data.data);
     });
   };
 
@@ -46,9 +44,8 @@ export default function Home() {
           variants={pageVariants}
         >
           <Hero />
-          {/* <CatergorySearch /> */}
-          {/* <DoctorList doctorList={doctorList} /> */}
-          <BarberList doctorList={doctorList} />
+
+          <BarberGallery barberList={barberList} />
         </motion.div>
       </AnimatePresence>
     </>

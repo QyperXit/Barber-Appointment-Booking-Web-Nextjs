@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+CatergorySearch.jsx
+DoctorList.jsx
+
 # dependencies
 /node_modules
 /.pnp
@@ -8,6 +11,7 @@
 
 # testing
 /coverage
+/tests
 
 # next.js
 /.next/

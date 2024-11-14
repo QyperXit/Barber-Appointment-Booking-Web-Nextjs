@@ -83,3 +83,37 @@ body {
   height: 100vh;
   background: black;
 }
+
+.active {
+  @apply text-white bg-gray-700;
+}
+
+/* For WebKit-based browsers (Chrome, Safari, Opera) */
+::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color of the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the thumb (draggable part) */
+  border-radius: 12px; /* Rounded corners of the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color of the thumb on hover */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin; /* Adjusts the scrollbar width */
+  scrollbar-color: #0eadd9 #f1f1f1; /* Thumb color and track color */
+}
+
+/* For Internet Explorer/Edge */
+body {
+  scrollbar-face-color: #888; /* Color of the scrollbar thumb */
+  scrollbar-track-color: #f1f1f1; /* Color of the scrollbar track */
+}

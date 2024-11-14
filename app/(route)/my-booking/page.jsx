@@ -2,13 +2,16 @@
 
 import GlobalApi from "@/app/_utils/GlobalApi";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { useUser } from "@clerk/nextjs";
+
 import React, { useEffect, useState } from "react";
 import { default as BookingList } from "./_components/BookingList";
 
 const MyBooking = () => {
-  const { user } = useKindeBrowserClient();
+  const { user } = useUser();
+
   const [bookingList, setBookigList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -17,9 +20,14 @@ const MyBooking = () => {
   }, [user]);
 
   const getUserBookingList = () => {
-    GlobalApi.getUserBookingList(user?.email).then((res) => {
-      setBookigList(res.data.data);
-    });
+    setIsLoading(true);
+    GlobalApi.getUserBookingList(user.emailAddresses[0]?.emailAddress)
+      .then((res) => {
+        setBookigList(res.data.data);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   /**
@@ -53,6 +61,7 @@ const MyBooking = () => {
             bookingList={filterUserBooking("upcoming")}
             updateRecord={() => getUserBookingList()}
             expired={false}
+            isLoading={isLoading}
           />
         </TabsContent>
         <TabsContent value="expired">
@@ -60,6 +69,7 @@ const MyBooking = () => {
             bookingList={filterUserBooking("expired")}
             updateRecord={() => getUserBookingList()}
             expired={true}
+            isLoading={isLoading}
           />
         </TabsContent>
       </Tabs>
