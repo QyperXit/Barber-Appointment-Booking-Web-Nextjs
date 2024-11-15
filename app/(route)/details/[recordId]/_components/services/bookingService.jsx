@@ -14,7 +14,7 @@ export class BookingService {
 
     async createBooking(bookingData) {
         try {
-            const response = await GlobalApi.bookApointment(bookingData);
+            const response = await GlobalApi.bookAppointment(bookingData);
             if (response) {
                 const bookingDetails = await GlobalApi.getAppointmentById(response.data.id);
                 await GlobalApi.sendEmail({ ...bookingData, bookingId: bookingDetails.data.id });

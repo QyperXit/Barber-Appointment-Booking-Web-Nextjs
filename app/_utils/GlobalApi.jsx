@@ -3,7 +3,7 @@ const { default: axios } = require("axios");
 const API_KEY = process.env.NEXT_PUBLIC_STRAPI_API_KEY;
 
 const axiosClient = axios.create({
-  baseURL: "https://appointment-booking-backend-s6js.onrender.com/api/",
+  baseURL: "http://localhost:1337/api/",
   headers: {
     Authorization: `Bearer ${API_KEY}`,
   },
@@ -11,12 +11,12 @@ const axiosClient = axios.create({
 
 const getCatergory = () => axiosClient.get("/catergories?populate=*");
 const getBarberList = () => axiosClient.get("/doctors?populate=*");
-const getDoctorByCategory = (category) =>
+const getBarberByCategory = (category) =>
   axiosClient.get(
     `/doctors?filters[catergories][Name][$in]=${category}&populate=*`
   );
 
-const bookApointment = async (data) => {
+const bookAppointment = async (data) => {
   try {
     const response = await axiosClient.post("/appointments", data);
 
@@ -26,7 +26,7 @@ const bookApointment = async (data) => {
   }
 };
 
-const getDoctorById = async (id) => {
+const getBarberById = async (id) => {
   try {
     const response = await axiosClient.get(`/doctors/${id}?populate=*`);
 
@@ -98,9 +98,9 @@ const GetIcons = (id) => axiosClient.get(`/icons/${id}/?populate=*`);
 export default {
   getCatergory,
   getBarberList,
-  getDoctorByCategory,
-  getDoctorById,
-  bookApointment,
+  getBarberByCategory,
+  getBarberById,
+  bookAppointment,
   sendEmail,
   GetIcons,
   getUserBookingList,
