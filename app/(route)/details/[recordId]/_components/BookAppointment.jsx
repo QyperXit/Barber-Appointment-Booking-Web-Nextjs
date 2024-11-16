@@ -43,7 +43,7 @@ const BookAppointment = ({
 
   return (
       <Dialog>
-        <DialogTrigger className="flex">
+        <DialogTrigger className="flex" asChild>
           <Button className={`mt-3 rounded-full w-fit ${className}`}>
             {buttonText}
           </Button>
@@ -51,7 +51,7 @@ const BookAppointment = ({
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Book Appointment</DialogTitle>
-            <DialogDescription>
+            <DialogDescription asChild>
               <div className="grid grid-cols-1 mt-5 md:grid-cols-2">
                 <div className="flex flex-col items-baseline gap-3 max-xs:overflow-auto max-xs:h-[16em]">
                   <h2 className="flex items-center gap-2">

@@ -15,7 +15,7 @@ import React from "react";
 const CancelAppointment = ({ onContinueClick }) => {
   return (
     <AlertDialog>
-      <AlertDialogTrigger>
+      <AlertDialogTrigger asChild>
         <Button variant="outline" className=" text-primary border-primary">
           Cancel <span className="hidden sm:block">&nbsp;Appointment</span>
         </Button>
