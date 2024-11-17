@@ -13,16 +13,6 @@ export async function POST(req) {
     const otherId = response?.bookingId || null;
     const emailData = response;
 
-    console.log(
-      "Before sending email - bookingId:",
-      bookingId,
-      "otherId:",
-      otherId,
-      "test",
-      emailData.data,
-      "test",
-      emailData
-    );
 
     let emailResponse;
 

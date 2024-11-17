@@ -51,7 +51,7 @@ const getAppointmentById = async (id) => {
 const sendEmail = async (data) => {
   try {
     const response = await axios.post("/api/sendEmail", data);
-    console.log("Email sent successfully:", response.data);
+    // console.log("Email sent successfully:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error sending email:", error);
