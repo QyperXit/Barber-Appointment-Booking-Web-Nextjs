@@ -10,12 +10,12 @@ const Details = ({ params }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getDoctorById();
+    getBarberById();
   }, []);
 
-  const getDoctorById = () => {
+  const getBarberById = () => {
     setIsLoading(true);
-    GlobalApi.getDoctorById(params.recordId)
+    GlobalApi.getBarberById(params.recordId)
       .then((res) => {
         setBarber(res.data);
       })

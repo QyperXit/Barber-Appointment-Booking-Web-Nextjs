@@ -1,6 +1,8 @@
 // hooks/useBookingForm.js
 import { useState, useEffect } from 'react';
 import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
+
 import bookingService from '../services/bookingService';
 import timeSlotService from '../services/timeSlotService';
 import moment from 'moment';
@@ -63,6 +65,7 @@ export const useBookingForm = (doctor, user) => {
                     variant: "destructive",
                     title: "This time slot is already booked.",
                     description: "Try another slot",
+                    action: <ToastAction altText="Try again">❕</ToastAction>,
                 });
                 return;
             }
@@ -71,6 +74,7 @@ export const useBookingForm = (doctor, user) => {
             toast({
                 title: "Booking Confirmation!",
                 description: "Email sent!",
+                action: <ToastAction altText="Thank you">✅</ToastAction>,
             });
         } catch (error) {
             toast({

@@ -1,9 +1,10 @@
 const { default: axios } = require("axios");
 
 const API_KEY = process.env.NEXT_PUBLIC_STRAPI_API_KEY;
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const axiosClient = axios.create({
-  baseURL: "https://appointment-booking-backend-9o85.onrender.com/api/",
+  baseURL: BASE_URL,
   headers: {
     Authorization: `Bearer ${API_KEY}`,
   },
@@ -11,12 +12,12 @@ const axiosClient = axios.create({
 
 const getCatergory = () => axiosClient.get("/catergories?populate=*");
 const getBarberList = () => axiosClient.get("/doctors?populate=*");
-const getDoctorByCategory = (category) =>
+const getBarberByCategory = (category) =>
     axiosClient.get(
         `/doctors?filters[catergories][Name][$in]=${category}&populate=*`
     );
 
-const bookApointment = async (data) => {
+const bookAppointment = async (data) => {
   try {
     const response = await axiosClient.post("/appointments", data);
 
@@ -26,24 +27,23 @@ const bookApointment = async (data) => {
   }
 };
 
-const getDoctorById = async (id) => {
+const getBarberById = async (id) => {
   try {
     const response = await axiosClient.get(`/doctors/${id}?populate=*`);
 
-    return response.data; // Return doctor data
+    return response.data;
   } catch (error) {
     console.error("Error fetching doctor:", error);
   }
 };
 
-// Function to fetch appointment details by ID
 const getAppointmentById = async (id) => {
   try {
     const response = await axiosClient.get(`/appointments/${id}?populate=*`);
-    return response.data; // Return the appointment data including the ID
+    return response.data;
   } catch (error) {
     console.error("Error fetching appointment:", error);
-    throw error; // Re-throw the error to handle it elsewhere
+    throw error;
   }
 };
 
@@ -55,7 +55,7 @@ const sendEmail = async (data) => {
     return response.data;
   } catch (error) {
     console.error("Error sending email:", error);
-    throw error; // Re-throw the error so it can be caught and handled by the caller
+    throw error;
   }
 };
 
@@ -82,7 +82,6 @@ const getUserBookingList = (userEmail) => {
 const updateAppointmentStatus = async (id, status) => {
   try {
     const response = await axiosClient.put(`/appointments/${id}`, {
-      // data: { status: status },
       data: { status },
     });
     return response.data;
@@ -98,9 +97,9 @@ const GetIcons = (id) => axiosClient.get(`/icons/${id}/?populate=*`);
 export default {
   getCatergory,
   getBarberList,
-  getDoctorByCategory,
-  getDoctorById,
-  bookApointment,
+  getBarberByCategory,
+  getBarberById,
+  bookAppointment,
   sendEmail,
   GetIcons,
   getUserBookingList,
