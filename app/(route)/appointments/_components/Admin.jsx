@@ -5,7 +5,7 @@ import moment from "moment/moment";
 import React from "react";
 import ScheduleList from "./ScheduleList";
 import BookAppointment from "../../details/[recordId]/_components/BookAppointment";
-import { useBookings } from "./_hooks/useBookings";
+import { useBookings } from "./_hooks/useBookings.jsx";
 
 const Admin = () => {
   const { user } = useUser();
