@@ -1,8 +1,8 @@
 "use client";
 
-import { useAppointmentParams } from './_hooks/useAppointmentParams.jsx';
-import { AppointmentService } from './_services/appointmentService.jsx';
-import { AppointmentProvider, useAppointment } from './_components/AppointmentContext.jsx';
+import { useAppointmentParams } from './_hooks/useAppointmentParams';
+import { AppointmentService } from './_services/appointmentService';
+import { AppointmentProvider, useAppointment } from './_components/AppointmentContext';
 
 const AppointmentCard = () => {
   const { id } = useAppointmentParams();
