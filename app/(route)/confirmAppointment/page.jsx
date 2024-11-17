@@ -25,7 +25,7 @@ const AppointmentCard = () => {
       }
 
       setTimeout(() => {
-        window.location.href = "/my-booking";
+        window.location.href = "/appointments";
       }, 2000);
     } catch (error) {
       console.error("Error updating appointment status:", error);
