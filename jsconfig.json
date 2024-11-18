@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
     "paths": {
-      "@hooks/*": ["app/(route)/appointments/_hooks/*"],
-      "@services/*": ["app/(route)/appointments/_services/*"],
-      "@components/*": ["app/(route)/appointments/_components/*"],
+      "@hooks/*": ["app/(route)/appointments/_components/_hooks/*"],
+      "@services/*": ["app/(route)/confirmAppointment/_hooks/*"],
+      "@components/*": ["app/(route)/confirmAppointment/_services*"],
+
       "@/*": ["./*"]
     }
   }
