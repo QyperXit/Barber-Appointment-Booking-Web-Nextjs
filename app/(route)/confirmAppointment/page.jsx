@@ -1,6 +1,8 @@
 "use client";
 
-import { useAppointmentParams } from './_hooks/useAppointmentParams';
+// import { useAppointmentParams } from './_hooks/useAppointmentParams'
+import { useAppointmentParams } from '../confirmAppointment/_hooks/useAppointmentParams';
+
 import { AppointmentService } from './_services/appointmentService';
 import { AppointmentProvider, useAppointment } from './_components/AppointmentContext';
 
