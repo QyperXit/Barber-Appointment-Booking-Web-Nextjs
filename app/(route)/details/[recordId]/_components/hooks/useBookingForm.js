@@ -1,4 +1,3 @@
-// hooks/useBookingForm.js
 import { useState, useEffect } from 'react';
 import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
