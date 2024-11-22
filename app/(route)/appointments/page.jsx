@@ -2,21 +2,40 @@ import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import Admin from "./_components/Admin";
 
-const Appointments = async () => {
+const UNAUTHORIZED_REDIRECT = "/";
+
+export const runtime = "edge"; // Optional: Enable edge runtime for better performance
+
+async function isAuthorizedAdmin(userId) {
+  const adminId = process.env.NEXT_PUBLIC_ADMIN_ID;
+
+  if (!adminId) {
+    console.error("Admin ID environment variable is not configured");
+    return false;
+  }
+
+  return userId === adminId;
+}
+
+export default async function AppointmentsPage() {
+  // Get user and handle authentication
   const user = await currentUser();
 
   if (!user) {
-    redirect("/");
+    redirect(UNAUTHORIZED_REDIRECT);
   }
 
-  const loggedInUserId = user.id;
-  const requiredUserId = process.env.NEXT_PUBLIC_ID;
+  // Check admin authorization
+  const isAdmin = await isAuthorizedAdmin(user.id);
 
-  if (loggedInUserId !== requiredUserId) {
-    redirect("/");
+  if (!isAdmin) {
+    redirect(UNAUTHORIZED_REDIRECT);
   }
 
-  return <Admin />;
-};
 
-export default Appointments;
+  return (
+      <div className="min-h-screen">
+        <Admin />
+      </div>
+  );
+}
