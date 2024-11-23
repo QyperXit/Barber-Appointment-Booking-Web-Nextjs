@@ -50,7 +50,7 @@ const InvitationForm = () => {
             )}
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2">
+                    <label htmlFor="email" className="block text-sm font-medium mb-2 text-white">
                         Email Address
                     </label>
                     <input
@@ -65,7 +65,7 @@ const InvitationForm = () => {
                 </div>
                 <button
                     type="submit"
-                    className="w-full bg-blue-500 text-white p-2 rounded-md disabled:opacity-50"
+                    className="w-full bg-primary  hover:bg-primary/90 text-white font-medium p-2 rounded-md disabled:opacity-50"
                     disabled={loading}
                 >
                     {loading ? (

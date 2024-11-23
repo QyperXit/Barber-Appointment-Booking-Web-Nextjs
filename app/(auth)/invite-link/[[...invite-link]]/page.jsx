@@ -10,7 +10,6 @@ export default function Page() {
     const searchParams = useSearchParams();
     const { isLoaded, signUp, setActive } = useSignUp();
     const [username, setUserName] = useState('');
-    // const [lastName, setLastName] = React.useState('')
     const [password, setPassword] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState('');
@@ -24,7 +23,7 @@ export default function Page() {
     }, [user, router]);
 
     if (!token) {
-        return <p className="text-red-500">No invitation token found.</p>;
+        return <p className="text-red-500 text-2xl font-bold mb-6 mx-auto">No invitation token found.</p>;
     }
 
     const handleSubmit = async (e) => {
@@ -46,7 +45,6 @@ export default function Page() {
                 strategy: 'ticket',
                 ticket: token,
                 username,
-                // lastName,
                 password
             });
 
@@ -71,9 +69,11 @@ export default function Page() {
     }
 
     return (
-        <div className="max-w-md mx-auto mt-8 p-6 bg-gray-800 rounded-lg">
-            <h1 className="text-2xl font-bold mb-6 text-white">Sign up</h1>
-
+        <div className="max-w-md mx-auto mt-8 p-6 border-4">
+            <h1 className="text-2xl font-bold mb-6 text-white">Create your account</h1>
+            <p className="text-gray-600 mb-6">
+                Welcome! Please fill in the details to get started.
+            </p>
             {error && (
                 <div className="mb-4 p-3 bg-red-500 text-white rounded">
                     {error}
@@ -82,8 +82,8 @@ export default function Page() {
 
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
-                    <label htmlFor="firstName" className="block text-white">
-                        First name
+                    <label htmlFor="username" className="block text-sm font-medium mb-2 text-white">
+                        Username
                     </label>
                     <input
                         id="username"
@@ -91,28 +91,12 @@ export default function Page() {
                         name="username"
                         value={username}
                         onChange={(e) => setUserName(e.target.value)}
-                        className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        className="w-full p-2 rounded border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                         disabled={isSubmitting}
                     />
                 </div>
-                {/*<div className="space-y-2">*/}
-                {/*    <label htmlFor="firstName" className="block text-white">*/}
-                {/*        Last name*/}
-                {/*    </label>*/}
-                {/*    <input*/}
-                {/*        id="lastName"*/}
-                {/*        type="text"*/}
-                {/*        name="lastName"*/}
-                {/*        value={lastName}*/}
-                {/*        onChange={(e) => setLastName(e.target.value)}*/}
-                {/*        className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"*/}
-                {/*        disabled={isSubmitting}*/}
-                {/*    />*/}
-                {/*</div>*/}
-
-
                 <div className="space-y-2">
-                    <label htmlFor="password" className="block text-white">
+                    <label htmlFor="password" className="block text-sm font-medium mb-2 text-white">
                         Password
                     </label>
                     <input
@@ -121,7 +105,7 @@ export default function Page() {
                         name="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        className="w-full p-2 rounded border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                         disabled={isSubmitting}
                         minLength={8}
                     />
@@ -129,7 +113,7 @@ export default function Page() {
 
                 <button
                     type="submit"
-                    className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full py-2 px-4 bg-primary  hover:bg-primary/90 text-white font-semibold rounded disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={isSubmitting || !isLoaded}
                 >
                     {isSubmitting ? 'Signing up...' : 'Sign up'}
