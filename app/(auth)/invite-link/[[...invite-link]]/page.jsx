@@ -18,9 +18,11 @@ export default function Page() {
 
     useEffect(() => {
         if (user?.id) {
-            router.push('/');
+            // router.push('/');
+            window.location.href = '/';
+            return;
         }
-    }, [user, router]);
+    }, [user]);
 
     if (!token) {
         return <p className="text-red-500 text-2xl font-bold mb-6 mx-auto">No invitation token found.</p>;
@@ -36,11 +38,10 @@ export default function Page() {
                 throw new Error('Sign-up not loaded yet.');
             }
 
-            if (!username || !password ) {
+            if (!username || !password) {
                 throw new Error('Please fill in all fields.');
             }
 
-            // Here's the key change - using first_name instead of firstName
             const signUpAttempt = await signUp.create({
                 strategy: 'ticket',
                 ticket: token,
@@ -52,7 +53,18 @@ export default function Page() {
 
             if (signUpAttempt.status === 'complete') {
                 await setActive({ session: signUpAttempt.createdSessionId });
-                router.push('/');
+
+                try {
+                    await router.push('/');
+
+                    // If router.push doesn't work, force a page reload after a short delay
+                    setTimeout(() => {
+                        window.location.href = '/';
+                    }, 100);
+                } catch (navError) {
+                    // If all else fails, force reload
+                    window.location.href = '/';
+                }
             } else {
                 throw new Error('Sign-up incomplete. Please try again.');
             }

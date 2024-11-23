@@ -44,7 +44,8 @@ const InvitationForm = () => {
                 Send an invitation email to a new client.
             </p>
             {message && (
-                <p className={`text-sm mb-4 ${message.includes('successfully') ? 'text-green-500' : 'text-red-500'}`}>
+                <p className={`text-sm mb-4 font-medium animate-in slide-in-from-right overflow-hidden text-ellipsis
+                 whitespace-nowrap ${message.includes('successfully') ? 'text-green-500' : 'text-red-500'}`}>
                     {message}
                 </p>
             )}
