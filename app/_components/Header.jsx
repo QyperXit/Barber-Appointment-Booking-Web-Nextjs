@@ -1,16 +1,12 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { isSignedIn, SignOutButton, UserButton, useUser } from "@clerk/nextjs";
+import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import React, {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useRef,
+
   useState,
 } from "react";
 
@@ -62,36 +58,44 @@ const Header = () => {
                 className="flex flex-col gap-2 p-2 rounded-lg bg-white shadow-xl absolute top-[120%] left-[50%] w-40 overflow-hidden"
               >
                 {user ? (
-                  <>
-                    <Link href={"/"}>
-                      <Option setOpen={setOpen} href="/" text="Home" />
-                    </Link>
+                    <>
+                      <Link href={"/"}>
+                        <Option setOpen={setOpen} href="/" text="Home" />
+                      </Link>
 
-                    {user && user.id === process.env.NEXT_PUBLIC_ID ? (
-                      <Link href={"/appointments"}>
-                        <Option setOpen={setOpen} text="My Schedule" />
+                      {user && user.id === process.env.NEXT_PUBLIC_ID ? (
+                          <>
+                            <Link href={"/appointments"}>
+                              <Option setOpen={setOpen} text="My Schedule" />
+                            </Link>
+
+                            <Link href={"/invite"}>
+                              <Option setOpen={setOpen} text="Invite" />
+                            </Link>
+                          </>
+                      ) : (
+                          <Link href={"/my-booking"}>
+                            <Option setOpen={setOpen} text="My Booking" />
+                          </Link>
+                      )}
+
+                      <Link href={"/user-profile"}>
+                        <Option setOpen={setOpen} text="Account" />
                       </Link>
-                    ) : (
-                      <Link href={"/my-booking"}>
-                        <Option setOpen={setOpen} text="My Booking" />
+                      <Link href={"/contact"}>
+                        <Option setOpen={setOpen} text="Contact" />
                       </Link>
-                    )}
-                    <Link href={"/user-profile"}>
-                      <Option setOpen={setOpen} text="Account" />
-                    </Link>
-                    <Link href={"/contact"}>
-                      <Option setOpen={setOpen} text="Contact" />
-                    </Link>
-                    <SignOutButton
-                      className="flex items-center w-full p-2 pl-4 text-sm font-medium transition-colors rounded-md cursor-pointer whitespace-nowrap hover:bg-indigo-100 text-slate-700 hover:text-primary"
-                      onClick={() => setOpen(false)}
-                    />
-                  </>
+                      <SignOutButton
+                          className="flex items-center w-full p-2 pl-4 text-sm font-medium transition-colors rounded-md cursor-pointer whitespace-nowrap hover:bg-indigo-100 text-slate-700 hover:text-primary"
+                          onClick={() => setOpen(false)}
+                      />
+                    </>
                 ) : (
-                  <Link href={"sign-in"}>
-                    <Option setOpen={setOpen} text="Get Started" />
-                  </Link>
+                    <Link href={"sign-in"}>
+                      <Option setOpen={setOpen} text="Get Started" />
+                    </Link>
                 )}
+
               </motion.ul>
             </motion.div>
           </div>
