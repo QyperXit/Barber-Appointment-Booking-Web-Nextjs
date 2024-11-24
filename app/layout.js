@@ -3,7 +3,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 
 import Footer from "./_components/Footer";
-import Header from "./_components/Header";
+import Header from "./_components/Header/index";
 
 import "./globals.css";
 
