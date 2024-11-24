@@ -11,7 +11,7 @@ export async function POST(request) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ email_address,
-                redirect_url: 'http://localhost:3000/invite-link' })
+                redirect_url: `${process.env.NEXT_PUBLIC_REDIRECT_URL}` })
         })
 
         // Directly return Clerk's response
