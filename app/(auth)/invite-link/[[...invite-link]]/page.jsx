@@ -20,7 +20,6 @@ export default function Page() {
         if (user?.id) {
             // router.push('/');
             window.location.href = '/';
-            return;
         }
     }, [user]);
 
