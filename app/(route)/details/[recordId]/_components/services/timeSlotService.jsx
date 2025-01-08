@@ -24,6 +24,12 @@ export class TimeSlotService {
         nextAvailableTime.setSeconds(0);
         nextAvailableTime.setMilliseconds(0);
 
+        if (nextAvailableTime.getHours() < 10) {
+            // Start at 10:00 if the current time is before business hours
+            nextAvailableTime.setHours(10);
+            nextAvailableTime.setMinutes(0);
+        }
+
         for (
             let time = nextAvailableTime.getTime();
             time <= endTime.getTime() && new Date(time).getHours() >= 10;
@@ -40,6 +46,7 @@ export class TimeSlotService {
 
         return timeList;
     }
+
 
     isPastDay(day) {
         const today = new Date();
