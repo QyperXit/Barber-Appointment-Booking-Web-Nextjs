@@ -1,66 +1,128 @@
 // services/timeSlotService.js
 export class TimeSlotService {
+    // Business hours constants
+    static BUSINESS_START_HOUR = 10;
+    static BUSINESS_END_HOUR = 20;
+    static BUSINESS_END_MINUTE = 30;
+    static SLOT_INTERVAL_MS = 30 * 60 * 1000;
+
+    constructor() {
+        // Bind context for methods that might be called externally
+        this.isPastDay = this.isPastDay.bind(this);
+    }
+
     generateTimeSlots(selectedDate) {
-        const timeList = [];
-        const currentTime = new Date();
-        const endTime = new Date();
-        endTime.setHours(20);
-        endTime.setMinutes(30);
+        this.validateDate(selectedDate);
 
-        const isNextDay = selectedDate > currentTime;
-
-        if (isNextDay) {
-            for (let i = 10; i <= 20; i++) {
-                timeList.push({ time: `${i.toString().padStart(2, "0")}:00` });
-                timeList.push({ time: `${i.toString().padStart(2, "0")}:30` });
-            }
-            return timeList;
+        if (this.isPastDay(selectedDate)) {
+            return [];
         }
 
-        const nextAvailableTime = new Date(currentTime);
-        nextAvailableTime.setMinutes(
-            nextAvailableTime.getMinutes() + (30 - (nextAvailableTime.getMinutes() % 30))
-        );
-        nextAvailableTime.setSeconds(0);
-        nextAvailableTime.setMilliseconds(0);
+        const isFutureDate = this.isFutureDay(selectedDate);
+        const currentDate = new Date();
 
-        if (nextAvailableTime.getHours() < 10) {
-            // Start at 10:00 if the current time is before business hours
-            nextAvailableTime.setHours(10);
-            nextAvailableTime.setMinutes(0);
+        if (isFutureDate) {
+            return this.generateFullDaySlots(selectedDate);
         }
 
-        for (
-            let time = nextAvailableTime.getTime();
-            time <= endTime.getTime() && new Date(time).getHours() >= 10;
-            time += 30 * 60 * 1000
-        ) {
-            const formattedTime = new Date(time);
-            timeList.push({
-                time: formattedTime.toLocaleTimeString([], {
-                    hour: "numeric",
-                    minute: "2-digit",
-                }),
+        return this.generateCurrentDaySlots(currentDate);
+    }
+
+    validateDate(date) {
+        if (!(date instanceof Date) || isNaN(date.getTime())) {
+            throw new Error('Invalid date provided');
+        }
+    }
+
+    isFutureDay(date) {
+        const todayMidnight = this.getMidnight(new Date());
+        const dateMidnight = this.getMidnight(date);
+        return dateMidnight > todayMidnight;
+    }
+
+    getMidnight(date) {
+        const d = new Date(date);
+        d.setHours(0, 0, 0, 0);
+        return d;
+    }
+
+    generateFullDaySlots(date) {
+        const start = this.getBusinessStart(date);
+        const end = this.getBusinessEnd(date);
+        return this.generateSlotsBetween(start, end);
+    }
+
+    generateCurrentDaySlots(currentDate) {
+        const start = this.calculateNextAvailableSlot(currentDate);
+        const end = this.getBusinessEnd(currentDate);
+
+        if (start >= end) {
+            return [];
+        }
+
+        return this.generateSlotsBetween(start, end);
+    }
+
+    calculateNextAvailableSlot(fromTime) {
+        const nextSlot = new Date(fromTime);
+
+        // Round up to nearest 30 minutes
+        const minutes = nextSlot.getMinutes();
+        const remainder = minutes % 30;
+        if (remainder !== 0) {
+            nextSlot.setMinutes(minutes + (30 - remainder));
+        } else {
+            nextSlot.setMinutes(minutes + 30);
+        }
+
+        nextSlot.setSeconds(0, 0);
+
+        // Ensure we don't start before business hours
+        const businessStart = this.getBusinessStart(nextSlot);
+        return nextSlot < businessStart ? businessStart : nextSlot;
+    }
+
+    getBusinessStart(date) {
+        return this.setTime(date, TimeSlotService.BUSINESS_START_HOUR, 0);
+    }
+
+    getBusinessEnd(date) {
+        return this.setTime(date, TimeSlotService.BUSINESS_END_HOUR, TimeSlotService.BUSINESS_END_MINUTE);
+    }
+
+    setTime(date, hours, minutes) {
+        const d = new Date(date);
+        d.setHours(hours, minutes, 0, 0);
+        return d;
+    }
+
+    generateSlotsBetween(start, end) {
+        const slots = [];
+        let current = new Date(start);
+
+        while (current <= end) {
+            slots.push({
+                time: this.formatTime(current)
             });
+            current = new Date(current.getTime() + TimeSlotService.SLOT_INTERVAL_MS);
         }
 
-        return timeList;
+        return slots;
+    }
+
+    formatTime(date) {
+        return date.toLocaleTimeString('en-GB', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        });
     }
 
 
     isPastDay(day) {
-        const today = new Date();
-        const todayMidnight = new Date(
-            today.getFullYear(),
-            today.getMonth(),
-            today.getDate()
-        );
-        const providedDayMidnight = new Date(
-            day.getFullYear(),
-            day.getMonth(),
-            day.getDate()
-        );
-        return providedDayMidnight < todayMidnight;
+        const todayMidnight = this.getMidnight(new Date());
+        const dayMidnight = this.getMidnight(day);
+        return dayMidnight < todayMidnight;
     }
 }
 
