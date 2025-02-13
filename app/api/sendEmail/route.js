@@ -13,7 +13,6 @@ export async function POST(req) {
     const otherId = response?.bookingId || null;
     const emailData = response;
 
-
     let emailResponse;
 
     if (emailData.data.status === "confirmed") {
@@ -27,6 +26,7 @@ export async function POST(req) {
     } else if (emailData.delete) {
       emailResponse = await resend.emails.send({
         from: "gbarbers@shotsbyvidz.com",
+        to: [response.data.Email],
         // to: ["chaun.online@gmail.com"],
         subject: "Appointment Cancelled",
         react: CancellationTemplate({ response }),
@@ -34,8 +34,8 @@ export async function POST(req) {
     } else if (!emailData.delete) {
       emailResponse = await resend.emails.send({
         from: "gbarbers@shotsbyvidz.com",
-        // to: [response.data.Email],
-        to: ["chaun.online@gmail.com"],
+        to: [response.data.Email],
+        // to: ["chaun.online@gmail.com"],
         subject: "Appointment Booking Confirmation",
         react: BarberConfirmationTemplate({
           response,
