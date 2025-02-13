@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const admin_email = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
 
 export async function POST(req) {
   try {
@@ -13,29 +14,27 @@ export async function POST(req) {
     const otherId = response?.bookingId || null;
     const emailData = response;
 
+
     let emailResponse;
 
     if (emailData.data.status === "confirmed") {
       emailResponse = await resend.emails.send({
         from: "gbarbers@shotsbyvidz.com",
-        to: [response.data.Email],
-        // to: ["chaun.online@gmail.com"],
+        to: [emailData.data.Email],
         subject: "Appointment Booking Confirmation",
         react: EmailTemplate({ response }),
       });
     } else if (emailData.delete) {
       emailResponse = await resend.emails.send({
         from: "gbarbers@shotsbyvidz.com",
-        to: [response.data.Email],
-        // to: ["chaun.online@gmail.com"],
+        to: admin_email,
         subject: "Appointment Cancelled",
         react: CancellationTemplate({ response }),
       });
     } else if (!emailData.delete) {
       emailResponse = await resend.emails.send({
         from: "gbarbers@shotsbyvidz.com",
-        to: [response.data.Email],
-        // to: ["chaun.online@gmail.com"],
+        to: admin_email,
         subject: "Appointment Booking Confirmation",
         react: BarberConfirmationTemplate({
           response,

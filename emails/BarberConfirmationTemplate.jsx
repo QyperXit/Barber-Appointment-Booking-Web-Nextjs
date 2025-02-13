@@ -39,7 +39,7 @@ const BarberConfirmationTemplate = ({ response, bookingId, otherId }) => (
             <br/>
             <br/>
             <strong>Client Details</strong>: <br/> <br/>
-            Name: {response?.data?.Username} <br/>
+            Name: {response?.data?.Username ? response?.data?.Username[0].toUpperCase() + response?.data?.Username.slice(1) : ""} <br/>
             Mobile: {response?.data?.Number} <br/>
             Date: {moment(response?.data?.Date).format("DD-MMM-YYYY")} <br/>
             Time: {response?.data?.Time}
