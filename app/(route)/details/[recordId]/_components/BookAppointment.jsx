@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { useUser } from "@clerk/nextjs";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { CalendarDays, Clock, PhoneCallIcon } from "lucide-react";
+import { CalendarDays, Clock, PhoneCallIcon, Loader2 } from "lucide-react";
 import React from "react";
 import Note from "@/app/(route)/details/[recordId]/_components/Note";
 import { useBookingForm } from "./hooks/useBookingForm";
@@ -24,6 +24,10 @@ const BookAppointment = ({
                            className = "",
                          }) => {
   const { user } = useUser();
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [isSubmitting, setIsSubmitting] = React.useState(false); // Loading state
+
+
   const {
     date,
     setDate,
@@ -41,9 +45,22 @@ const BookAppointment = ({
 
   const bookedAppointmentsForDate = getBookedAppointmentsForDate();
 
+
+  const handleFormSubmit = async () => {
+    setIsSubmitting(true);
+    try {
+      await handleSubmit();
+      setIsOpen(false);
+    } catch (error) {
+      console.error("Submission failed:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-      <Dialog>
-        <DialogTrigger className="flex" asChild>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogTrigger asChild>
           <Button className={`mt-3 rounded-full w-fit ${className}`}>
             {buttonText}
           </Button>
@@ -113,25 +130,35 @@ const BookAppointment = ({
               </div>
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter className="flex-col-reverse gap-3 sm:justify-end sm:flex">
-            <DialogClose asChild>
-              <div className="flex gap-3">
+          <DialogFooter className="sm:justify-start">
+            <div className="flex gap-3 w-full">
+              <DialogClose asChild>
                 <Button
                     type="button"
-                    className="text-gray-600 border"
                     variant="outline"
+                    className="flex-1 text-gray-600 border"
                 >
-                  Close
+                  Cancel
                 </Button>
-                <Button
-                    type="button"
-                    disabled={!isValidForm}
-                    onClick={handleSubmit}
-                >
-                  Submit
-                </Button>
-              </div>
-            </DialogClose>
+              </DialogClose>
+              <Button
+                  type="button"
+                  disabled={!isValidForm || isSubmitting}
+                  onClick={handleFormSubmit}
+                  className={`flex-1 ${
+                      isSubmitting ? "bg-green-600 hover:bg-green-700" : ""
+                  }`}
+              >
+                {isSubmitting ? (
+                    <div className="flex items-center gap-2">
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Submitting...
+                    </div>
+                ) : (
+                    "Submit"
+                )}
+              </Button>
+            </div>
           </DialogFooter>
         </DialogContent>
       </Dialog>

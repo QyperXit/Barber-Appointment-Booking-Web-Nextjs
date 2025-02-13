@@ -22,10 +22,13 @@ const CancelAppointment = ({ onContinueClick }) => {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle>Confirm Cancellation</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            Appointment and remove your data from our servers.
+            Please{" "}
+            <span className="text-red-600 font-bold">
+            contact your barber
+          </span>{" "}
+            to inform him about your cancellation. This action will only update your appointment status.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
